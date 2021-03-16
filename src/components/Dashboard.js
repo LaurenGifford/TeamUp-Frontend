@@ -17,14 +17,27 @@ function Dashboard({currentUser, myProjects}) {
     ))
 
     return (
-        <>I'm a Dashboard
-            <Details currentUser={currentUser} />
-            <Upcoming currentUser={currentUser}/>
-            <Item.Group >Projects Here
-                {renderProjects}
-            </Item.Group>
-            <Suggested />
-        </>
+        <Grid celled='internally'>
+            <Grid.Row>
+                <Grid.Column width={3} >
+                    <Details currentUser={currentUser} />
+                </Grid.Column>
+                <Grid.Column width={15}>
+                    <Suggested tasks={currentUser.tasks}/>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column width={3}>
+                    <Upcoming currentUser={currentUser}/>
+                </Grid.Column>
+                <Grid.Column>
+                    <Item.Group width={10}>
+                        <h2>Projects</h2>
+                        {renderProjects}
+                    </Item.Group>
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
     )
 }
 

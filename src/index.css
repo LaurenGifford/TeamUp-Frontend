@@ -53,4 +53,9 @@ header button {
 
 ul {
   list-style: none;
+  align-items: left;
+}
+
+#project-page {
+  justify-content: center;
 }

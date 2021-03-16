@@ -1,3 +1,4 @@
+import {List} from "semantic-ui-react"
 import Task from "./Task"
 
 
@@ -13,11 +14,10 @@ function Upcoming({currentUser}) {
     ))
 
     return (
-        <div>Upcoming Tasks
-        <ul>
-            {renderTasks}
-        </ul>
-    </div>
+        <div>
+            <h4>Upcoming Tasks</h4>
+            <List items={renderTasks} />
+        </div>
     )
 }
 

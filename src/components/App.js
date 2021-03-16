@@ -2,7 +2,7 @@
 // import './App.css';
 
 import React, {useState, useEffect} from "react"
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 import Header from "./Header"
 import Login from "./Login"
 import SignUp from "./Signup"
@@ -10,6 +10,7 @@ import Calendar from "./Calendar"
 import ProjectPage from "./ProjectPage"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
+
 
 
 export function useDocumentTitle(title) {
@@ -20,8 +21,10 @@ export function useDocumentTitle(title) {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  const [projectId, setProjectId] = useState(1)
+  // const [projects, setProjects] = useState([])
   const [myProjects, setMyProjects] = useState([])
+  const match = useRouteMatch()
+  let params = useParams()
 
   useDocumentTitle("TeamUp!")
 
@@ -30,68 +33,50 @@ function App() {
     .then(r => r.json())
     .then(data => {
       setCurrentUser(data)
-      console.log(data)
-      // setTimeout(getProjects, 1000)
+      setMyProjects(data.projects)
     })
   }, [])
 
+  console.log(params, match)
 
-  useEffect(() => {
-    if (!!currentUser){ 
-    fetch(`http://localhost:3000/projects`)
-    .then(r => r.json())
-    .then(projects => { console.log(projects)
-      const filteredProjects = projects.filter(project => {
-        console.log(project, currentUser)
-        return project.team.id === currentUser.team.id
-      })
-      setMyProjects(filteredProjects)
-    })}
-  }, [])
-
-
-  // function getProjects(){
-  //   currentUser &&
-  //   fetch(`http://localhost:3000/projects`)
-  //   .then(r => r.json())
-  //   .then(projects => { console.log(projects)
-  //     const filteredProjects = projects.filter(project => {
-  //       console.log(project, currentUser)
-  //       return project.team.id === currentUser.team.id
-  //     })
-  //     setMyProjects(filteredProjects)
-  //   })
-  // }
-
+  // path={`${match.url}/:projectId`}
 
   return (
     <>
-      <Header projectId={projectId} setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+      <Header setCurrentUser={setCurrentUser} currentUser={currentUser}/>
         <main>
           <Switch>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="login">
-              <Login />
-            </Route>
-            {currentUser ? <>
+            {currentUser && <>
             <Route path="/home">
               <Dashboard 
               currentUser={currentUser} 
               myProjects={myProjects}
               />
             </Route>
-            <Route path="/projects">
-              <Projects myProjects={myProjects}/>
-            </Route>
-            <Route path="/projects/:projectId">
-              <ProjectPage />
+            <Route path={`projects/:projectId`} render={({match}) => (
+              <ProjectPage project={myProjects.find(p => p.id === match.params.projectId)}/>
+
+            )}
+
+            />
+            {/* <Route path={`projects/:projectId`}>
+
+              <ProjectPage projects={myProjects}/>
+            </Route> */}
+            <Route exact path="/projects">
+              <Projects team={currentUser.team} />
             </Route>
             <Route path="/calendar">
               <Calendar />
-            </Route>  </> :
-            <h2>Loading</h2>
+            </Route> 
+             {/* </> : <> */}
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            </>
             }
           </Switch>
         </main>
