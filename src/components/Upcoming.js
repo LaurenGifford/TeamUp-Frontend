@@ -17,6 +17,7 @@ function Upcoming({currentUser}) {
         <div>
             <h4>Upcoming Tasks</h4>
             <List items={renderTasks} />
+            {/* semantic checkbox to mark as complete */}
         </div>
     )
 }

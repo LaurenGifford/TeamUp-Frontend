@@ -4,7 +4,7 @@ function Header({setCurrentUser, currentUser}) {
     const history = useHistory()
 
     function handleLogout() {
-        setCurrentUser(2)
+        setCurrentUser(null)
         history.push('/login')
     }
 
@@ -12,7 +12,7 @@ function Header({setCurrentUser, currentUser}) {
     return (
         // semantic menu
         <header className="header">
-            <h1>TeamUp!</h1>
+            <h1 id="app-header" className="header-element">TeamUp!</h1>
             {!currentUser ? <>
                 <NavLink className="header-element" to="/signup">Signup</NavLink>
                 <NavLink className="header-element" to="/login">Login</NavLink>

@@ -1,5 +1,6 @@
 import React, {useState} from "react"
-import {Form} from 'semantic-ui-react'
+import {Form, Transition} from 'semantic-ui-react'
+import {AiOutlineArrowDown} from "react-icons/ai"
 
 function AddProj({team, onProjectAdd}) {
     const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ function AddProj({team, onProjectAdd}) {
         notes: "",
         team_id: parseInt(team.id),
     })
+    const [showForm, setShowForm] = useState(false)
 
     function handleChange(e) {
         setFormData({
@@ -45,38 +47,42 @@ function AddProj({team, onProjectAdd}) {
 
     return (
         <div className="new-project">
-            <Form onSubmit={handleSubmit} autoComplete="off">
-            <h2>ADD PROJECT</h2>
-            <Form.Group widths="equal">
-            <Form.Input fluid
-                label="Title"
-                placeholder="Title"
-                type="text"
-                name="title"
-                value={title}
-                onChange={handleChange}
-            />
-            <Form.Input width={5}
-                label="Priority"
-                placeholder="Priority"
-                type="number"
-                name="priority"
-                min="1"
-                max="10"
-                value={priority}
-                onChange={handleChange}
-            />
-            </Form.Group>
-            <Form.Input 
-                label="Notes"
-                placeholder="Notes"
-                type="textarea"
-                name="notes"
-                value={notes}
-                onChange={handleChange}
-                />
-            <Form.Button content="Submit" />
-        </Form>
+            <h3 onClick={() => setShowForm(!showForm)} >
+                ADD PROJECT <AiOutlineArrowDown/>
+            </h3>
+            <Transition visible={showForm} animation='fade' duration={600}>
+                <Form onSubmit={handleSubmit} autoComplete="off">
+                    <Form.Group widths="equal">
+                    <Form.Input fluid
+                        label="Title"
+                        placeholder="Title"
+                        type="text"
+                        name="title"
+                        value={title}
+                        onChange={handleChange}
+                    />
+                    <Form.Input width={5}
+                        label="Priority"
+                        placeholder="Priority"
+                        type="number"
+                        name="priority"
+                        min="1"
+                        max="10"
+                        value={priority}
+                        onChange={handleChange}
+                    />
+                    </Form.Group>
+                    <Form.Input 
+                        label="Notes"
+                        placeholder="Notes"
+                        type="textarea"
+                        name="notes"
+                        value={notes}
+                        onChange={handleChange}
+                        />
+                    <Form.Button content="Submit" />
+                </Form>
+            </Transition>
         </div>
     )
 }

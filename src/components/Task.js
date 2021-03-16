@@ -1,18 +1,18 @@
 function Task({task}) {
     const {title, description, due_date, status} = task
 
-    const showTeammates = task.teammates.map(tm => (
-        <small>
-            {tm.name} | {tm.points}
-        </small>
-    ))
+    // const showTeammates = task.teammates.map(tm => (
+    //     <small>
+    //         {tm.name} | {tm.points}
+    //     </small>
+    // ))
 
     return (
         <li>
             {title}
-            {task.teammates ? 
+            {/* {task.teammates ? 
             {showTeammates} : 
-            <p>No teammates for this task</p>}
+            <p>No teammates for this task</p>} */}
         </li>
     )
 }

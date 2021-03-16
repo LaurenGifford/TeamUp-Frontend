@@ -1,3 +1,11 @@
+:root {
+  --lt-blue: aliceblue;
+  --dk-blue: dodgerblue;
+  /* --gray: rgb(22, 22, 22);;
+  --cream: rgb(242, 243, 243, 0.6); */
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,10 +24,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5rem;
-  margin-bottom: 2rem;
+  height: 70px;
+  margin-bottom: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid aliceblue;
+  border-bottom: 1px solid var(--dk-blue);
+  background-color: aliceblue;
+}
+
+.app-header {
+  font-size: 50px;
+  font-weight: bolder;
 }
 
 /* header a,
@@ -43,7 +57,7 @@ header button {
   border: 1px solid var(--blue);
   /* border: none; */
   margin: 1rem;
-  padding: 1rem;
+  padding-bottom: .5rem;
   text-decoration: none;
   color: var(--cream);
   cursor: pointer;
@@ -58,4 +72,8 @@ ul {
 
 #project-page {
   justify-content: center;
+}
+
+.new-project h3{
+  cursor: pointer;
 }

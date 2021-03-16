@@ -43,7 +43,7 @@ function Projects({team}) {
                             {renderProjects}
                         </Item.Group>
                     </Grid.Column>
-                    <Grid.Column width={6}>
+                    <Grid.Column width={5}>
                         <AddProj onProjectAdd={handleAddProject} team={team} />
                     </Grid.Column>
                 </Grid.Row>

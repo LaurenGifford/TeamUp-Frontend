@@ -46,7 +46,7 @@ function App() {
       <Header setCurrentUser={setCurrentUser} currentUser={currentUser}/>
         <main>
           <Switch>
-            {currentUser && <>
+            {!!currentUser && <>
             <Route path="/home">
               <Dashboard 
               currentUser={currentUser} 
@@ -55,9 +55,7 @@ function App() {
             </Route>
             <Route path={`projects/:projectId`} render={({match}) => (
               <ProjectPage project={myProjects.find(p => p.id === match.params.projectId)}/>
-
             )}
-
             />
             {/* <Route path={`projects/:projectId`}>
 
