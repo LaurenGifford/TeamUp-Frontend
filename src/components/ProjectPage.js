@@ -1,37 +1,27 @@
 import {useState, useEffect} from "react"
 import {useParams} from "react-router-dom"
-import {Item, Rail, Segment, Grid} from "semantic-ui-react"
+import {Item, Rail, Segment, Grid, Card} from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import Unassigned from "./Unassigned"
 import AddTask from "./AddTask"
 import TeamTasks from "./TeamTasks"
 
-function ProjectPage({projects}) {
+function ProjectPage({}) {
 
     let {projectId} = useParams()
     const allProjects = useSelector((state) => state.projects)
-    // const [project, setProject] = useState({})
-    // const project = allProjects[projectId]
-    const project = allProjects.find(p => p.id === projectId)
-    console.log(projectId, project, allProjects)
+    const project = allProjects.find(p => p.id === parseInt(projectId))
     
-    // debugger
-    // const [members, setMembers] = project.team.teammates
-    const [tasks, setTasks] = useState([])
+    const tasks = useSelector(state => state.tasks)
 
-    
-    useEffect(() => {
-        fetch(`http://localhost:3000/tasks`)
-        .then(r => r.json())
-        .then(data => setTasks(data))
-    }, [])
+    console.log(tasks)
 
     
     const renderTeamTasks = project.team.teammates.map(member => (
         <TeamTasks
             key={member.id}
             member={member} 
-            tasks={tasks}
+            tasks={project.tasks}
         />
         ))
 
@@ -40,13 +30,25 @@ function ProjectPage({projects}) {
         }
 
     return (
-        <div id="project-page">Here some project information
-        {project}
-            <Unassigned tasks={tasks}/>
-            {renderTeamTasks}
-            <AddTask project={project} onTaskAdd={handleAddTask} />
-        
-        
+        <div id="project-page">
+            <h1>{project.title}</h1>
+            <Grid celled>
+                <Grid.Row >
+                    <Grid.Column width={4}>
+                        <Unassigned tasks={project.tasks}/>
+                    </Grid.Column>
+                    <Grid.Column width={8}>
+                        <h2>Team</h2>
+                        <Card.Group>
+                            {renderTeamTasks}
+                        </Card.Group>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <AddTask project={project} onTaskAdd={handleAddTask} />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+
         </div>
     )
 }

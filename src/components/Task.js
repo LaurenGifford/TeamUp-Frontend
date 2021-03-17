@@ -1,3 +1,6 @@
+import {AiOutlineEdit} from "react-icons/ai"
+
+
 function Task({task}) {
     const {title, description, due_date, status} = task
 
@@ -9,7 +12,7 @@ function Task({task}) {
 
     return (
         <li>
-            {title}
+            <AiOutlineEdit/> {title} 
             {/* {task.teammates ? 
             {showTeammates} : 
             <p>No teammates for this task</p>} */}

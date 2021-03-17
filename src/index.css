@@ -70,6 +70,10 @@ ul {
   align-items: left;
 }
 
+li {
+  list-style: none;
+}
+
 #projects-page {
   justify-content: center;
 }

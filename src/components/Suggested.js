@@ -13,6 +13,27 @@ function Suggested({tasks}) {
 //     console.log(priorities)
 // }
 
+    function getStatusScore() {
+        let statusScores = tasks.forEach(task => {
+            let score
+            if (task.status === "not started") {
+                return score += 10
+            }
+            if (task.status === "in progress") {
+                return score += 4
+            }
+            if (task.status === "stuck") {
+                return score += 7
+            }
+            else {score += 0}
+            debugger
+            return score
+        })
+        return statusScores
+    }
+
+    getStatusScore()
+
     return (
         // semantic rail
         <div>

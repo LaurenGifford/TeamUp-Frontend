@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { Switch, Route} from "react-router-dom";
+import { Switch, Route, useRouteMatch} from "react-router-dom";
+import {getTasks} from "../api/tasks"
+import {showTasks} from "../redux/tasksSlice"
+import {getProjects} from "../api/projects"
+import {showProjects} from "../redux/ProjectsSlice"
 import Header from "./Header"
 import Login from "./Login"
 import SignUp from "./Signup"
 import Calendar from "./Calendar"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
+import ProjectPage from "./ProjectPage"
 
 
 
@@ -18,7 +23,8 @@ export function useDocumentTitle(title) {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  const [myProjects, setMyProjects] = useState([])
+  const dispatch = useDispatch();
+  const match = useRouteMatch()
 
 
   useDocumentTitle("TeamUp!")
@@ -28,9 +34,23 @@ function App() {
     .then(r => r.json())
     .then(data => {
       setCurrentUser(data)
-      setMyProjects(data.projects)
     })
   }, [])
+
+  useEffect(() => {
+    getTasks()
+    .then(data => {
+        dispatch(showTasks(data))
+    })
+}, [])
+
+  useEffect(() => {
+    getProjects()
+    .then(data => {
+        dispatch(showProjects(data))
+    })
+  }, [])
+
 
 
   return (
@@ -42,11 +62,10 @@ function App() {
             <Route path="/home">
               <Dashboard 
               currentUser={currentUser} 
-              myProjects={myProjects}
               />
             </Route>
             <Route path="/projects">
-              <Projects team={currentUser.team} />
+              <Projects currentUser={currentUser}/>
             </Route>
             <Route path="/calendar">
               <Calendar />
@@ -61,6 +80,11 @@ function App() {
             </>
             }
           </Switch>
+          {/* <Switch >
+            <Route path={`${match.url}/:projectId`}>
+                <ProjectPage />
+            </Route>
+            </Switch> */}
         </main>
     </>
   );

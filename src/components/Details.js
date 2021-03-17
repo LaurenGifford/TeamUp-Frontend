@@ -5,7 +5,7 @@ function Details({currentUser}) {
     const {name, points, team, tasks} = currentUser
     
     return (
-        <aside>Teammate Details
+        <aside>
             <Header as='h3' dividing>{name} | 
                 <small>{points}</small>
             </Header>

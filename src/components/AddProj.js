@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import {Form, Transition} from 'semantic-ui-react'
+import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineArrowDown} from "react-icons/ai"
+import {addToProjects} from "../redux/ProjectsSlice"
 
 function AddProj({team, onProjectAdd}) {
     const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ function AddProj({team, onProjectAdd}) {
         team_id: parseInt(team.id),
     })
     const [showForm, setShowForm] = useState(false)
+    const dispatch = useDispatch()
 
     function handleChange(e) {
         setFormData({
@@ -34,7 +37,7 @@ function AddProj({team, onProjectAdd}) {
             body: JSON.stringify(formattedData)
         })
         .then(r => r.json())
-        .then(data => onProjectAdd(data))
+        .then(data => dispatch(addToProjects(data)))
         setFormData({
             title: "",
             priority: "",
