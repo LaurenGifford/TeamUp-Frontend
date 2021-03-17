@@ -1,20 +1,25 @@
 import {useState, useEffect} from "react"
-import {useRouteMatch, useParams } from "react-router-dom";
+import {Switch, Route, useRouteMatch} from "react-router-dom";
 import {Item, Rail, Segment, Grid} from "semantic-ui-react"
+import { useDispatch, useSelector } from "react-redux";
+import {getProjects} from "../api/projects"
+import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
 import AddProj from "./AddProj"
+import ProjectPage from "./ProjectPage"
 
 function Projects({team}) {
-    const [allProjects, setAllProjects] = useState([])
-
+    // const [allProjects, setAllProjects] = useState([])
+    const allProjects = useSelector((state) => state.projects)
     const match = useRouteMatch()
-    let params = useParams()
-    console.log(params, match)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch(`http://localhost:3000/projects`)
-        .then(r => r.json())
-        .then(data => setAllProjects(data))
+        getProjects()
+        .then(data => {
+            dispatch(showProjects(data))
+            console.log(data)
+        })
     }, [])
 
     const renderProjects = allProjects.map(project => (
@@ -25,11 +30,18 @@ function Projects({team}) {
     ))
 
     function handleAddProject(project) {
-        console.log(project)
-        setAllProjects([...allProjects, project])
+        dispatch(addToProjects(project))
+        // setAllProjects([...allProjects, project])
     }
+    console.log(allProjects)
 
     return (
+        <>
+            <Switch>
+            <Route path={`${match.url}/:projectId`}>
+                <ProjectPage projects={allProjects} />
+            </Route>
+            </Switch>
         <div id="projects-page">
             <Grid columns={2} divided divided="vertically">
                 <Grid.Row>
@@ -49,6 +61,7 @@ function Projects({team}) {
                 </Grid.Row>
             </Grid>
         </div>
+        </>
     )
 }
 

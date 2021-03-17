@@ -1,13 +1,10 @@
-// import logo from './logo.svg';
-// import './App.css';
-
 import React, {useState, useEffect} from "react"
-import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, Route} from "react-router-dom";
 import Header from "./Header"
 import Login from "./Login"
 import SignUp from "./Signup"
 import Calendar from "./Calendar"
-import ProjectPage from "./ProjectPage"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
 
@@ -21,10 +18,8 @@ export function useDocumentTitle(title) {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
-  // const [projects, setProjects] = useState([])
   const [myProjects, setMyProjects] = useState([])
-  const match = useRouteMatch()
-  let params = useParams()
+
 
   useDocumentTitle("TeamUp!")
 
@@ -37,9 +32,6 @@ function App() {
     })
   }, [])
 
-  console.log(params, match)
-
-  // path={`${match.url}/:projectId`}
 
   return (
     <>
@@ -53,15 +45,7 @@ function App() {
               myProjects={myProjects}
               />
             </Route>
-            <Route path={`projects/:projectId`} render={({match}) => (
-              <ProjectPage project={myProjects.find(p => p.id === match.params.projectId)}/>
-            )}
-            />
-            {/* <Route path={`projects/:projectId`}>
-
-              <ProjectPage projects={myProjects}/>
-            </Route> */}
-            <Route exact path="/projects">
+            <Route path="/projects">
               <Projects team={currentUser.team} />
             </Route>
             <Route path="/calendar">
