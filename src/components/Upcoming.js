@@ -6,21 +6,19 @@ import {useSelector } from "react-redux";
 
 function Upcoming() {
     const currentUser = useSelector(state => state.user)
-    const tasks = useSelector(state => state.tasks)
-    const tms = tasks.map(task => task.teammates)
-    const {name, points, team_id} = currentUser
+    // const tasks = useSelector(state => state.tasks)
+    // const tms = tasks.map(task => task.teammates)
+    const {id, name, points, team_id, tasks} = currentUser
 
-    const renderTasks = tasks.filter(task => {
-        // debugger
-
-        return task
-    })
-    .map(task => (
+    // debugger
+    const renderTasks = tasks.map(task => (
         <Task 
             key={task.id}
             task={task}
+            userId = {id}
+            points={points}
             upcoming={true} 
-            completed={task.status === "complete" ? true : false}
+            completed={task.status === "completed" ? true : false}
         />
     ))
 
@@ -28,7 +26,6 @@ function Upcoming() {
         <div>
             <h4>Current Tasks</h4>
             <List items={renderTasks} />
-            {/* semantic checkbox to mark as complete */}
         </div>
     )
 }

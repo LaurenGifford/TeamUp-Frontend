@@ -8,7 +8,7 @@ function Suggested({tasks}) {
     const editedTasks = taskScores(tasks).sort((task1, task2) => task2.score - task1.score)
     const suggested = editedTasks[0]
     // setDoIt(suggested[0])
-    console.log(suggested)
+    // console.log(suggested)
     
     function taskScores(tasks){
         let edited = []
@@ -55,7 +55,10 @@ function Suggested({tasks}) {
             <Rail size='large' internal position='right'>
                 <Segment >
                     <h4>Suggested Task</h4>
-                    <Task task={suggested} upcoming={false} />
+                    <Task 
+                    task={suggested} 
+                    upcoming={false} 
+                    completed={suggested.status === "completed" ? true : false}/>
                 </Segment>
             </Rail>
         </div>

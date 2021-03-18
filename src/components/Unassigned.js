@@ -13,6 +13,7 @@ function Unassigned({tasks}) {
             key={task.id}
             task={task}
             upcoming={false}
+            completed={task.status === "completed" ? true : false}
         />
     ))
 

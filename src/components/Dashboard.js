@@ -10,7 +10,14 @@ function Dashboard() {
     const currentUser = useSelector(state => state.user)
     const {name, points, team_id, tasks, projects} = currentUser
 
-    const renderProjects = projects.map(project => (
+
+    const setProjects = [...new Set(projects.map(proj => proj.id))]
+    .map(id => {
+        return projects.find(proj => proj.id === id)
+    })
+
+
+    const renderProjects = setProjects.map(project => (
         <ProjTasks 
             key={project.id}
             project={project}
