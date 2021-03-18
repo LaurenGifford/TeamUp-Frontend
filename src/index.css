@@ -81,3 +81,7 @@ li {
 .new-project h3{
   cursor: pointer;
 }
+
+.completed {
+  text-decoration: line-through;
+}

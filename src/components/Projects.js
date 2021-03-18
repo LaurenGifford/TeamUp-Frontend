@@ -7,8 +7,9 @@ import ProjTasks from "./ProjTasks"
 import AddProj from "./AddProj"
 import ProjectPage from "./ProjectPage"
 
-function Projects({currentUser}) {
+function Projects() {
     const allProjects = useSelector((state) => state.projects)
+    const currentUser = useSelector(state => state.user)
     const match = useRouteMatch()
     const dispatch = useDispatch();
 
@@ -17,7 +18,6 @@ function Projects({currentUser}) {
             key={project.id}
             project={project}
             home={false}
-            currentUser={currentUser}
         />
     ))
 

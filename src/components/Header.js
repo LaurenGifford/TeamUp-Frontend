@@ -1,6 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
 
-function Header({setCurrentUser, currentUser}) {
+function Header({setCurrentUser}) {
+    const currentUser = useSelector(state => state.user)
     const history = useHistory()
 
     function handleLogout() {

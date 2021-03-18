@@ -12,6 +12,7 @@ function Unassigned({tasks}) {
         <Task 
             key={task.id}
             task={task}
+            upcoming={false}
         />
     ))
 

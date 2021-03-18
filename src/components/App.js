@@ -5,6 +5,8 @@ import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
 import {getProjects} from "../api/projects"
 import {showProjects} from "../redux/ProjectsSlice"
+import { getUser } from "../api/user";
+import {showUser} from "../redux/userSlice"
 import Header from "./Header"
 import Login from "./Login"
 import SignUp from "./Signup"
@@ -22,7 +24,7 @@ export function useDocumentTitle(title) {
 }
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const currentUser = useSelector(state => state.user)
   const dispatch = useDispatch();
   const match = useRouteMatch()
 
@@ -30,10 +32,9 @@ function App() {
   useDocumentTitle("TeamUp!")
 
   useEffect(() => {
-    fetch(`http://localhost:3000/teammates/1`)
-    .then(r => r.json())
+    getUser(1)
     .then(data => {
-      setCurrentUser(data)
+      dispatch(showUser(data))
     })
   }, [])
 
@@ -55,17 +56,15 @@ function App() {
 
   return (
     <>
-      <Header setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+      <Header/>
         <main>
           <Switch>
             {!!currentUser && <>
             <Route path="/home">
-              <Dashboard 
-              currentUser={currentUser} 
-              />
+              <Dashboard />
             </Route>
             <Route path="/projects">
-              <Projects currentUser={currentUser}/>
+              <Projects/>
             </Route>
             <Route path="/calendar">
               <Calendar />

@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import Task from "./Task"
 
-function ProjTasks({project, home, currentUser}) {
+function ProjTasks({project, home}) {
     const [isHome, setIsHome]  = useState(home)
+    const currentUser = useSelector(state => state.user)
     const {tasks} = currentUser
     const {id, title, notes, priority} = project
     let projectId = project.id
@@ -19,6 +20,7 @@ function ProjTasks({project, home, currentUser}) {
         <Task 
             key={task.id}
             task={task}
+            upcoming={false}
         />
     ))
 

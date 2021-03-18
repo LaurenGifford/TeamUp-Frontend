@@ -1,7 +1,9 @@
+import {useSelector } from "react-redux";
 import {Header} from 'semantic-ui-react'
 
 
-function Details({currentUser}) {
+function Details() {
+    const currentUser = useSelector(state => state.user)
     const {name, points, team, tasks} = currentUser
     
     return (

@@ -6,7 +6,8 @@ import Upcoming from "./Upcoming"
 import Suggested from "./Suggested"
 import ProjTasks from "./ProjTasks"
 
-function Dashboard({currentUser}) {
+function Dashboard() {
+    const currentUser = useSelector(state => state.user)
     const {name, points, team_id, tasks, projects} = currentUser
 
     const renderProjects = projects.map(project => (
@@ -14,7 +15,6 @@ function Dashboard({currentUser}) {
             key={project.id}
             project={project}
             home={true}
-            currentUser={currentUser}
             tasks={tasks}
         />
     ))

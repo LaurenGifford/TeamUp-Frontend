@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
 import {Form, Transition} from 'semantic-ui-react'
 import {AiOutlineArrowDown} from "react-icons/ai"
-import DatePicker from "react-multi-date-picker";
-// import mobiscroll from "@mobiscroll/react";
+// import DatePicker from "react-multi-date-picker";
+// import {Datepicker} from "@mobiscroll/react";
 // import "@mobiscroll/react/dist/css/mobiscroll.min.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function AddTask({project, onTaskAdd}) {
     const [showForm, setShowForm] = useState(false)
@@ -29,15 +32,22 @@ function AddTask({project, onTaskAdd}) {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(formData, dateValue)
+
+        const formattedData = {
+            ...formData,
+            due_date: dateValue,
+        }
+
         // onTaskAdd()
         fetch(`http://localhost:3000/tasks`, {
             method: "POST",
             headers: {
                 "Content-Type" : 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formattedData)
         })
         .then(r => r.json())
+        // .then(data => console.log(data))
         .then(data => dispatch(addToTasks(data)))
         setFormData({
             title: "",
@@ -46,6 +56,10 @@ function AddTask({project, onTaskAdd}) {
             status: "not started",
             project_id: parseInt(project.id),
         })
+    }
+
+    function handleChangeRaw(val) {
+        console.log(val, dateValue)
     }
 
     const {title, description, due_date} = formData
@@ -90,9 +104,13 @@ function AddTask({project, onTaskAdd}) {
                         label='Due Date'>
                         {/* control={<DatePicker value={dateValue} onChange={setDateValue} />} */}
                         </Form.Field>
-                        <DatePicker value={dateValue} onChange={() => {
-                            console.log(dateValue)
-                            setDateValue()}} />
+                        <DatePicker 
+                        selected={dateValue} 
+                        isClearable
+                        closeOnScroll={true}
+                        onChange={(date) => setDateValue(date)} 
+                        onChangeRaw={event => handleChangeRaw(event.target.value)}
+                        />
                     <Form.Button content="Submit" />
                 </Form>
             </Transition>
