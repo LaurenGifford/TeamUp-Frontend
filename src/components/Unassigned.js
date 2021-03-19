@@ -1,14 +1,23 @@
 import {List} from "semantic-ui-react"
+import { useSelector } from "react-redux";
 import Task from "./Task"
 
-function Unassigned({tasks}) {
+function Unassigned({projectId}) {
+    const tasks = useSelector(state => state.tasks)
+    const currentUser = useSelector(state => state.user)
+    const projectTasks = tasks.filter(task => task.project.id === projectId)
 
-    const renderTasks = tasks.filter(task => {
-        if (task.teammates.length === 0) {
+    const renderTasks = projectTasks.filter(task => {
+        const tmIds = task.teammates.map(tm => tm.id)
+        if (task.teammates.length === 0){
             return task
         }
-    })
-    .map(task => (
+        else if (tmIds.includes(currentUser.id)) {
+            return null
+         }
+        else { return null}
+        })
+        .map(task => (
         <Task 
             key={task.id}
             task={task}

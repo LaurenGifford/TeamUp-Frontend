@@ -7,9 +7,10 @@ import ProjTasks from "./ProjTasks"
 import AddProj from "./AddProj"
 import ProjectPage from "./ProjectPage"
 
-function Projects() {
+function Projects({singleSelected, setSingleSelected}) {
     const allProjects = useSelector((state) => state.projects)
     const currentUser = useSelector(state => state.user)
+    // const [singleSelected, setSingleSelected] = useState(false)
     const match = useRouteMatch()
     const dispatch = useDispatch();
 
@@ -18,41 +19,46 @@ function Projects() {
             key={project.id}
             project={project}
             home={false}
+            setSingleSelected={setSingleSelected}
         />
     ))
 
     function handleAddProject(project) {
         dispatch(addToProjects(project))
     }
-    console.log(allProjects)
+
+    function ProjectsList() {
+        return (
+            <Grid columns={2} divided divided="vertically">
+            <Grid.Row>
+                <Grid.Column width={10}>
+                <h2>Team Projects</h2>
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column width={10}>
+                    <Item.Group width={10}>
+                        {renderProjects}
+                    </Item.Group>
+                </Grid.Column>
+                <Grid.Column width={5}>
+                    <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
+                </Grid.Column>
+            </Grid.Row>
+        </Grid>
+        )
+    }
 
     return (
-        <>
-            <Switch>
-            <Route path={`${match.url}/:projectId`}>
-                <ProjectPage />
-            </Route>
-            </Switch>
+
         <div id="projects-page">
-            <Grid columns={2} divided divided="vertically">
-                <Grid.Row>
-                    <Grid.Column width={10}>
-                    <h2>Team Projects</h2>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column width={10}>
-                        <Item.Group width={10}>
-                            {renderProjects}
-                        </Item.Group>
-                    </Grid.Column>
-                    <Grid.Column width={5}>
-                        <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <Switch>
+                <Route path={`${match.url}/:projectId`}>
+                    <ProjectPage />
+                </Route>
+            </Switch>
+            {!singleSelected && <ProjectsList />}
         </div>
-        </>
     )
 }
 

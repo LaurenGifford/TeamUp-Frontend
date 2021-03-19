@@ -10,6 +10,8 @@ function Upcoming() {
     // const tms = tasks.map(task => task.teammates)
     const {id, name, points, team_id, tasks} = currentUser
 
+    
+
     // debugger
     const renderTasks = tasks.map(task => (
         <Task 

@@ -7,16 +7,16 @@ const userSlice = createSlice({
         showUser(state, action) {
             return action.payload
         },
-        // editUserTask(state, action) {
-        //     let index = state.tasks.findIndex((task) => (task.id === action.payload.id))
-        //     state.tasks[index] = action.payload
-        //     console.log(current(state))
-        // },
+        editUserTask(state, action) {
+            let index = state.tasks.findIndex((task) => (task.id === action.payload.id))
+            state.tasks[index] = action.payload
+            console.log(current(state))
+        },
         editUser(state, action) {
-            return action.payload
+            state.points = action.payload
         }
     }
 })
 
-export const {showUser, editUser} = userSlice.actions
+export const {showUser, editUser, editUserTask} = userSlice.actions
 export default userSlice.reducer

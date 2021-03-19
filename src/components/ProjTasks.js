@@ -4,18 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import Task from "./Task"
 
-function ProjTasks({project, home}) {
+function ProjTasks({project, home, setSingleSelected}) {
     const [isHome, setIsHome]  = useState(home)
     const currentUser = useSelector(state => state.user)
     const {tasks} = currentUser
     const {id, title, notes, priority} = project
-    let projectId = project.id
+    let projectId = id
 
 
 
-    const renderTasks = tasks.filter(task => {
-        return task.project.id === id
-    })
+    const renderTasks = tasks.filter(task => task.project.id === id)
     .map(task => (
         <Task 
             key={task.id}
@@ -30,7 +28,11 @@ function ProjTasks({project, home}) {
         <Card >
             <Card.Content >
                 <Card.Header >
-                <Link to={`/projects/${projectId}`}>{title}</Link>
+                <Link 
+                    to={`/projects/${projectId}`} 
+                    onClick={() => setSingleSelected(true)} >
+                    {title}
+                </Link>
                 </Card.Header>
                 <Card.Meta>Priority {priority} </Card.Meta>
                 <Card.Description>

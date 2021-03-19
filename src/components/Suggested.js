@@ -43,7 +43,7 @@ function Suggested({tasks}) {
     }
         
     function getDateScore(task) {
-        console.log(task.due_date)
+        // console.log(task.due_date)
         // debugger
         // convert dueDate new Date().toUTCString()
     }

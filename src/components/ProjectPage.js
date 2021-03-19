@@ -6,22 +6,21 @@ import Unassigned from "./Unassigned"
 import AddTask from "./AddTask"
 import TeamTasks from "./TeamTasks"
 
-function ProjectPage({}) {
+function ProjectPage() {
 
     let {projectId} = useParams()
     const allProjects = useSelector((state) => state.projects)
-    const project = allProjects.find(p => p.id === parseInt(projectId))
-    
     const tasks = useSelector(state => state.tasks)
-
-    console.log(tasks)
+    const project = allProjects.find(p => p.id === parseInt(projectId))
+    const projectTasks = tasks.filter(task => task.project.id === parseInt(projectId))
+    // console.log(tasks)
 
     
     const renderTeamTasks = project.team.teammates.map(member => (
         <TeamTasks
             key={member.id}
             member={member} 
-            tasks={project.tasks}
+            tasks={projectTasks}
         />
         ))
 
@@ -35,7 +34,7 @@ function ProjectPage({}) {
             <Grid celled>
                 <Grid.Row >
                     <Grid.Column width={4}>
-                        <Unassigned tasks={project.tasks}/>
+                        <Unassigned projectId={parseInt(projectId)} />
                     </Grid.Column>
                     <Grid.Column width={8}>
                         <h2>Team</h2>

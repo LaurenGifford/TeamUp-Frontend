@@ -25,6 +25,7 @@ export function useDocumentTitle(title) {
 
 function App() {
   const currentUser = useSelector(state => state.user)
+  const [singleSelected, setSingleSelected] = useState(false)
   const dispatch = useDispatch();
   const match = useRouteMatch()
 
@@ -56,7 +57,7 @@ function App() {
 
   return (
     <>
-      <Header/>
+      <Header setSingleSelected={setSingleSelected}/>
         <main>
           <Switch>
             {!!currentUser && <>
@@ -64,7 +65,7 @@ function App() {
               <Dashboard />
             </Route>
             <Route path="/projects">
-              <Projects/>
+              <Projects singleSelected={singleSelected} setSingleSelected={setSingleSelected}/>
             </Route>
             <Route path="/calendar">
               <Calendar />

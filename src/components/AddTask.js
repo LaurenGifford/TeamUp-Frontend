@@ -1,11 +1,9 @@
 import React, {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
+import {addTaskToProject} from "../redux/ProjectsSlice"
 import {Form, Transition} from 'semantic-ui-react'
 import {AiOutlineArrowDown} from "react-icons/ai"
-// import DatePicker from "react-multi-date-picker";
-// import {Datepicker} from "@mobiscroll/react";
-// import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -31,14 +29,12 @@ function AddTask({project, onTaskAdd}) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(formData, dateValue)
 
         const formattedData = {
             ...formData,
             due_date: dateValue,
         }
 
-        // onTaskAdd()
         fetch(`http://localhost:3000/tasks`, {
             method: "POST",
             headers: {
@@ -47,8 +43,10 @@ function AddTask({project, onTaskAdd}) {
             body: JSON.stringify(formattedData)
         })
         .then(r => r.json())
-        // .then(data => console.log(data))
-        .then(data => dispatch(addToTasks(data)))
+        .then(data => {
+            dispatch(addToTasks(data))
+        })
+        
         setFormData({
             title: "",
             description: "",
