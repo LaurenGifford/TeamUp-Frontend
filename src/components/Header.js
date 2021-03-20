@@ -20,7 +20,8 @@ function Header({setCurrentUser, setSingleSelected}) {
                 <NavLink className="header-element" to="/login">Login</NavLink>
             </> : <>
                 <NavLink className="header-element" to="/home">Home</NavLink>
-                <NavLink className="header-element" to="/projects" onClick={() => setSingleSelected(false)}>
+                <NavLink className="header-element" to="/projects" 
+                    onClick={() => setSingleSelected(false)}>
                     Projects
                 </NavLink>
                 <NavLink className="header-element" to="/calendar">Calendar</NavLink>

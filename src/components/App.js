@@ -60,17 +60,20 @@ function App() {
       <Header setSingleSelected={setSingleSelected}/>
         <main>
           <Switch>
-            {!!currentUser && <>
+            <Route exact path="/">
+              <h1>Welcome to TeamUp!</h1>
+            </Route>
+            {!!currentUser ? <>
             <Route path="/home">
-              <Dashboard />
+              <Dashboard setSingleSelected={setSingleSelected} />
             </Route>
             <Route path="/projects">
               <Projects singleSelected={singleSelected} setSingleSelected={setSingleSelected}/>
             </Route>
             <Route path="/calendar">
               <Calendar />
-            </Route> 
-             {/* </> : <> */}
+            </Route>
+            </> : <>
             <Route path="/signup">
               <SignUp />
             </Route>
@@ -80,11 +83,6 @@ function App() {
             </>
             }
           </Switch>
-          {/* <Switch >
-            <Route path={`${match.url}/:projectId`}>
-                <ProjectPage />
-            </Route>
-            </Switch> */}
         </main>
     </>
   );

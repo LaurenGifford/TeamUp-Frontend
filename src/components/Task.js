@@ -1,14 +1,15 @@
 import {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import {editUser, editUserTask} from "../redux/userSlice"
+import {editUser, editUserTask, deleteUserTask} from "../redux/userSlice"
 import {addToTasks, editTask} from "../redux/tasksSlice"
-import {AiOutlineEdit} from "react-icons/ai"
-import {Checkbox, Popup, Button, Header} from 'semantic-ui-react'
+import {MdDescription} from "react-icons/md"
+import {Checkbox, Popup, Button, Header, Icon, Confirm} from 'semantic-ui-react'
 
 
 function Task({task, upcoming, completed}) {
     const [complete, setComplete] = useState(completed)
-    const {id, title, description, due_date, status, teammates} = task
+    const [confirmOpen, setConfirmOpen] = useState(false)
+    const {id, title, description, due_date, teammates, ur_tasks} = task
     const tmIds = task.teammates.map(tm => tm.id)
     const currentUser = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -50,7 +51,7 @@ function Task({task, upcoming, completed}) {
             headers: {
                 "Content-Type" : 'application/json'
             },
-            body: JSON.stringify({status: "completed"})
+            body: JSON.stringify({completed: true})
         })
         .then(r => r.json())
         .then(data => {
@@ -73,6 +74,18 @@ function Task({task, upcoming, completed}) {
             dispatch(editUser(data.points))
         })
     }
+
+    function handleDelete() {
+        setConfirmOpen(false)
+        const urTask = ur_tasks.find(ur => ur.task_id === id)
+        console.log(urTask)
+        fetch(`http://localhost:3000/ur_tasks/${urTask.id}`, {
+            method: "DELETE"
+        })
+        dispatch(deleteUserTask(urTask.task_id))
+    }
+
+    const handleCancel = () => setConfirmOpen(false)
     
     function VolunteerButton() {
         if (teammates.length > 2){
@@ -86,32 +99,64 @@ function Task({task, upcoming, completed}) {
             } 
     }
 
+    function CheckboxOrIcon() {
+        if (!complete && upcoming) {
+            return (
+                <Checkbox onChange={handleComplete} />
+                )
+        }
+        if (complete && upcoming){
+            return (
+                <Checkbox onChange={handleComplete} defaultChecked />
+            )
+        }
+        if (!upcoming) {
+            return (
+                <MdDescription/>
+            )
+        }
+    }
+
     return (
-        <Popup trigger={
-            <li>
-                <span> {!complete ?
-                    <> 
-                    {!!upcoming ? 
-                    <Checkbox onChange={handleComplete} 
-                    /> : <AiOutlineEdit/>}
-                    <strong className={complete ? "completed" : undefined}>  {title} </strong>
-                    </> :
-                    <strong className={complete ? "completed" : undefined}>  {title} </strong>
-                    }
+        <li>
+            <Popup trigger={
+                <span>
+                    <CheckboxOrIcon />
+                    <strong className={complete ? "completed" : undefined}> {title} </strong>
                 </span> 
-            </li>
             }
-            on={['hover', 'click']}
-            flowing
-            hoverable
+                on={['hover', 'click']}
+                flowing
+                hoverable
+                mouseEnterDelay={300}
+                offset={[0, 50]}
+                position='right center'
             >
-            <Header as='h3' content={title} subheader={due_date}></Header>
-            <Popup.Content >
-                <p>{status}</p>
-                <p>{description}</p>
-                <VolunteerButton />
-            </Popup.Content>
-        </Popup>
+                <Header as='h3' content={title} subheader={due_date}></Header>
+                <Popup.Content >
+                    <p>{completed}</p>
+                    <p>{description}</p>
+                    <VolunteerButton />
+                </Popup.Content>
+            </Popup>
+            {upcoming &&
+            <span >
+            <Button icon onClick={() => setConfirmOpen(true)} size='mini'>
+                <Icon name='delete' />
+            </Button>
+            <Confirm 
+                header='Wait!'
+                content='Are you sure you want to delete this task from your current tasks?'
+                open={confirmOpen}
+                cancelButton='Never mind'
+                confirmButton="Yes Please"
+                onCancel={handleCancel}
+                onConfirm={handleDelete}
+                size='small'
+            />
+            </span>
+            }
+        </li>
 
     )
 }
