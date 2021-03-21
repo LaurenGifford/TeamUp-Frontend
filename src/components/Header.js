@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
+import {showUser} from "../redux/userSlice"
 
 function Header({setCurrentUser, setSingleSelected}) {
     const currentUser = useSelector(state => state.user)
     const history = useHistory()
+    const dispatch = useDispatch()
 
     function handleLogout() {
         localStorage.removeItem("token");
-        setCurrentUser(null)
+        dispatch(showUser(null))
         history.push('/login')
     }
 

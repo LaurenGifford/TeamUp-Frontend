@@ -1,6 +1,7 @@
 
 import React, {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
+import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
@@ -9,6 +10,7 @@ import {Form} from 'semantic-ui-react'
 
 function Login() {
   const dispatch = useDispatch()
+  const history = useHistory()
     const [formData, setFormData] = useState({
         name: "",
         password: ""
@@ -38,6 +40,7 @@ function Login() {
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
+          history.push("/home")
         });
     }
 
