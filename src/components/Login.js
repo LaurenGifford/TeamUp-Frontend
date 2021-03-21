@@ -13,32 +13,34 @@ function Login() {
         password: ""
     })
 
-    function handleLogin(user) {
-      dispatch(showUser(user))
-    }
+    // function handleLogin(teammate) {
+    //   dispatch(showUser(teammate))
+    // }
 
-    function handleGoogleLogin(response) {
-      // we'll get a tokenId back from Google on successful login that we'll send to our server to find/create a user
-      if (response.tokenId) {
-        fetch("http://localhost:3000/google_login", {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${response.tokenId}`,
-          },
-        })
-          .then((r) => r.json())
-          .then((data) => {
-            console.log(data);
-            const { user, token } = data;
-            // then set that user in state in our App component
-            handleLogin(user);
-            // also save the id to localStorage
-            localStorage.token = token;
-          });
-      }
-    };
+    // function handleGoogleLogin(response) {
+    //   // we'll get a tokenId back from Google on successful login that we'll send to our server to find/create a user
+    //   if (response.tokenId) {
+    //     console.log(tokenId)
+    //     fetch("http://localhost:3000/google_login", {
+    //       method: "POST",
+    //       credentials: "include",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${response.tokenId}`,
+    //       },
+    //     })
+    //       .then((r) => r.json())
+    //       .then((data) => {
+    //         console.log(data);
+    //         const { teammate, token } = data;
+    //         // then set that user in state in our App component
+    //         dispatch(showUser(teammate))
+    //         // also save the id to localStorage
+    //         // localStorage.setItem(token, token);
+    //         localStorage.token = token;
+    //       });
+    //   }
+    // };
 
     function handleChange(e) {
         setFormData({
@@ -59,10 +61,10 @@ function Login() {
         .then((r) => r.json())
         .then((data) => {
           console.log(data);
-          const { user, token } = data;
+          const { teammate, token } = data;
   
           // save the user in state in App
-          handleLogin(user);
+          dispatch(showUser(teammate))
   
           // also save the id to localStorage
           localStorage.token = token;
@@ -108,8 +110,8 @@ function Login() {
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
             buttonText="Login"
-            onSuccess={handleGoogleLogin}
-            onFailure={handleGoogleLogin}
+            // onSuccess={handleGoogleLogin}
+            // onFailure={handleGoogleLogin}
             cookiePolicy={"single_host_origin"}
             isSignedIn={true}
           />

@@ -40,27 +40,27 @@ function App() {
   //   })
   // }, [])
 
-  useEffect(() => {
-    fetch("http://localhost:3000/autologin", {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    })
-      .then((r) => {
-        if (!r.ok) throw Error("Not logged in!");
-        return r.json();
-      })
-      .then((user) => dispatch(showUser(user)))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/autologin", {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //   })
+  //     .then((r) => {
+  //       if (!r.ok) throw Error("Not logged in!");
+  //       return r.json();
+  //     })
+  //     .then((user) => dispatch(showUser(user)))
+  //     .catch((err) => console.error(err));
+  // }, []);
 
-  useEffect(() => {
-    if (currentUser) {
-      history.push("/home");
-    } else {
-      history.push("/");
-    }
-  }, [currentUser, history]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     history.push("/home");
+  //   } else {
+  //     history.push("/");
+  //   }
+  // }, [currentUser, history]);
 
   useEffect(() => {
     getTasks()
@@ -83,7 +83,10 @@ function App() {
       <Header setSingleSelected={setSingleSelected}/>
         <main>
           <Switch>
-            {!!currentUser && <>
+            <Route exact path="/">
+              <h1>Welcome to TeamUp!</h1>
+            </Route>
+            {!!currentUser ? <>
             <Route path="/home">
               <Dashboard />
             </Route>
@@ -93,7 +96,7 @@ function App() {
             <Route path="/calendar">
               <Calendar />
             </Route> 
-             {/* </> : <> */}
+             </> : <>
             <Route path="/signup">
               <SignUp />
             </Route>
