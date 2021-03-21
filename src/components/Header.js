@@ -6,7 +6,6 @@ function Header({setCurrentUser, setSingleSelected}) {
     const history = useHistory()
 
     function handleLogout() {
-        localStorage.removeItem("token");
         setCurrentUser(null)
         history.push('/login')
     }

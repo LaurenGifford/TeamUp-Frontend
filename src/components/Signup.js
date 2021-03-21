@@ -1,15 +1,8 @@
 import React, {useState, useEffect} from "react"
 import {Form, Label} from 'semantic-ui-react'
-import { useDispatch, useSelector } from "react-redux";
-import {useHistory} from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
-import { getUser } from "../api/user";
-import {showUser} from "../redux/userSlice"
 
 
 function Signup() {
-  const dispatch = useDispatch()
-  const history = useHistory()
     const [formData, setFormData] = useState({
         name: "",
         password: "",
@@ -39,26 +32,11 @@ function Signup() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        console.log(formattedData)
         const formattedData = {
           ...formData,
           team_id: parseInt(team_id)
         }
-
-      fetch("http://localhost:3000/teammates", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formattedData),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        const { teammate, token } = data;
-        dispatch(showUser(teammate));
-        localStorage.token = token;
-      });
-      history.push("/home");
-
     }
 
     const { name, password, team_id } = formData;
