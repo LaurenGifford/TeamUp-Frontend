@@ -15,7 +15,7 @@ function AddTask({project, onTaskAdd}) {
         title: "",
         description: "",
         due_date: "",
-        status: "not started",
+        completed: false,
         project_id: parseInt(project.id),
     })
     const dispatch = useDispatch()
@@ -51,7 +51,7 @@ function AddTask({project, onTaskAdd}) {
             title: "",
             description: "",
             due_date: "",
-            status: "not started",
+            completed: false,
             project_id: parseInt(project.id),
         })
     }
@@ -78,17 +78,6 @@ function AddTask({project, onTaskAdd}) {
                         value={title}
                         onChange={handleChange}
                     />
-
-                    {/* <Form.Input width={5}
-                        label="Priority"
-                        placeholder="Priority"
-                        type="number"
-                        name="priority"
-                        min="1"
-                        max="10"
-                        value={priority}
-                        onChange={handleChange}
-                    /> */}
                     </Form.Group>
                     <Form.Input 
                         label="Description"

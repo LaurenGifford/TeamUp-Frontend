@@ -29,15 +29,16 @@ function Projects({singleSelected, setSingleSelected}) {
 
     function ProjectsList() {
         return (
-            <Grid columns={2} divided divided="vertically">
+            <Grid columns={2} relaxed='very' divided divided="vertically" padded>
             <Grid.Row>
                 <Grid.Column width={10}>
                 <h2>Team Projects</h2>
+                <i>All Projects currently assigned to your team.</i>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column width={10}>
-                    <Item.Group width={10}>
+                    <Item.Group >
                         {renderProjects}
                     </Item.Group>
                 </Grid.Column>

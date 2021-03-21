@@ -20,14 +20,16 @@ function Upcoming() {
             userId = {id}
             points={points}
             upcoming={true} 
-            completed={task.status === "completed" ? true : false}
+            completed={task.completed}
         />
     ))
 
     return (
         <div>
             <h4>Current Tasks</h4>
+            {tasks &&
             <List items={renderTasks} />
+            }
         </div>
     )
 }

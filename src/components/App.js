@@ -88,7 +88,7 @@ function App() {
             </Route>
             {!!currentUser ? <>
             <Route path="/home">
-              <Dashboard />
+              <Dashboard setSingleSelected={setSingleSelected} />
             </Route>
             <Route path="/projects">
               <Projects singleSelected={singleSelected} setSingleSelected={setSingleSelected}/>
@@ -106,11 +106,6 @@ function App() {
             </>
             }
           </Switch>
-          {/* <Switch >
-            <Route path={`${match.url}/:projectId`}>
-                <ProjectPage />
-            </Route>
-            </Switch> */}
         </main>
     </>
   );

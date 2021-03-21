@@ -19,7 +19,8 @@ function ProjTasks({project, home, setSingleSelected}) {
             key={task.id}
             task={task}
             upcoming={false}
-            completed={task.status === "completed" ? true : false}
+            completed={task.completed}
+            // completed={task.status === "completed" ? true : false}
         />
     ))
 
