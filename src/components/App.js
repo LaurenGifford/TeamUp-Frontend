@@ -27,17 +27,31 @@ function App() {
   const currentUser = useSelector(state => state.user)
   const [singleSelected, setSingleSelected] = useState(false)
   const dispatch = useDispatch();
+  const history = useHistory()
   const match = useRouteMatch()
-
 
   useDocumentTitle("TeamUp!")
 
-  useEffect(() => {
-    getUser(1)
-    .then(data => {
-      dispatch(showUser(data))
-    })
-  }, [])
+  // useEffect(() => {
+  //   getUser(1)
+  //   .then(data => {
+  //     dispatch(showUser(data))
+  //   })
+  // }, [])
+
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/autologin", {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //   })
+  //     .then((r) => {
+  //       if (!r.ok) throw Error("Not logged in!");
+  //       return r.json();
+  //     })
+  //     .then((user) => dispatch(showUser(user)))
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   useEffect(() => {
     getTasks()
