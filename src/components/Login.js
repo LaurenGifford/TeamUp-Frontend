@@ -1,5 +1,9 @@
+
 import React, {useState} from "react"
+import { useDispatch, useSelector } from "react-redux";
 import { GoogleLogin } from "react-google-login";
+import { getUser } from "../api/user";
+import {showUser} from "../redux/userSlice"
 import {Form} from 'semantic-ui-react'
 
 
@@ -19,9 +23,44 @@ function Login() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault()
-        console.log(formData)
+      e.preventDefault();
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+          const { teammate, token } = data;
+          dispatch(showUser(teammate))
+          localStorage.token = token;
+        });
     }
+
+        // function handleGoogleLogin(response) {
+    //   // we'll get a tokenId back from Google on successful login that we'll send to our server to find/create a user
+    //   if (response.tokenId) {
+    //     console.log(tokenId)
+    //     fetch("http://localhost:3000/google_login", {
+    //       method: "POST",
+    //       credentials: "include",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${response.tokenId}`,
+    //       },
+    //     })
+    //       .then((r) => r.json())
+    //       .then((data) => {
+    //         console.log(data);
+    //         const { teammate, token } = data;
+    //         dispatch(showUser(teammate))
+    //         localStorage.token = token;
+    //       });
+    //   }
+    // };
 
     const { name, password,} = formData;
 
@@ -57,6 +96,17 @@ function Login() {
             </p>
           ))} */}
         </Form>
+        <hr />
+        <div>
+          <GoogleLogin
+            clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+            buttonText="Login"
+            // onSuccess={handleGoogleLogin}
+            // onFailure={handleGoogleLogin}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
+          />
+        </div>
       </div>
     )
 }
