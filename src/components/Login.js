@@ -8,6 +8,7 @@ import {Form} from 'semantic-ui-react'
 
 
 function Login() {
+  const dispatch = useDispatch()
     const [formData, setFormData] = useState({
         name: "",
         password: ""

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { Switch, Route, useRouteMatch} from "react-router-dom";
+import { Switch, Route, useRouteMatch, useHistory} from "react-router-dom";
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
 import {getProjects} from "../api/projects"

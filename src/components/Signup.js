@@ -56,8 +56,8 @@ function Signup() {
       const { teammate, token } = data;
       dispatch(showUser(teammate));
       localStorage.token = token;
+      // history.push("/home");
     });
-    history.push("/home");
 
   }
 
