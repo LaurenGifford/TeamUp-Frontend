@@ -32,17 +32,23 @@ function Dashboard() {
                     <Details currentUser={currentUser} />
                 </Grid.Column>
                 <Grid.Column width={15}>
-                    <Suggested tasks={tasks}/>
+                    {tasks ? 
+                    <Suggested tasks={tasks}/> : 
+                    <p>No Tasks to Show!</p> }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column width={3}>
-                    <Upcoming currentUser={currentUser}/>
+                    {tasks ? 
+                    <Upcoming currentUser={currentUser}/>  : 
+                    <p>No Tasks to Show!</p> }
                 </Grid.Column>
                 <Grid.Column width={10}>
                     <h2>Projects</h2>
                     <Card.Group >
-                        {renderProjects}
+                        {tasks ? 
+                        {renderProjects}  : 
+                        <p>Go to the projects page to see your team's projects!</p> }
                     </Card.Group>
                 </Grid.Column>
             </Grid.Row>
