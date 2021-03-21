@@ -6,7 +6,7 @@ import Upcoming from "./Upcoming"
 import Suggested from "./Suggested"
 import ProjTasks from "./ProjTasks"
 
-function Dashboard() {
+function Dashboard({setSingleSelected}) {
     const currentUser = useSelector(state => state.user)
     const {name, points, team_id, tasks, projects} = currentUser
 
@@ -21,6 +21,7 @@ function Dashboard() {
             project={project}
             home={true}
             tasks={tasks}
+            setSingleSelected={setSingleSelected}
         />
     ))
 
@@ -28,7 +29,7 @@ function Dashboard() {
     return (
         <Grid celled='internally'>
             <Grid.Row>
-                <Grid.Column width={3} >
+                <Grid.Column width={11} >
                     <Details currentUser={currentUser} />
                 </Grid.Column>
                 <Grid.Column width={15}>
@@ -44,7 +45,8 @@ function Dashboard() {
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
                 <Grid.Column width={10}>
-                    <h2>Projects</h2>
+                    <h2>My Projects</h2>
+                    <i>These are projects you are currently assigned to.</i>
                     <Card.Group >
                         {tasks ? 
                         {renderProjects}  : 

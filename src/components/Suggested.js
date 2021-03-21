@@ -5,7 +5,10 @@ import Task from "./Task"
 function Suggested({tasks}) {
     const [doIt, setDoIt] = useState({})
 
-    const editedTasks = taskScores(tasks).sort((task1, task2) => task2.score - task1.score)
+    const editedTasks = taskScores(tasks)
+    .filter(task => !task.completed)
+    .sort((task1, task2) => task2.score - task1.score)
+
     const suggested = editedTasks[0]
     // setDoIt(suggested[0])
     // console.log(suggested)
@@ -14,9 +17,7 @@ function Suggested({tasks}) {
         let edited = []
         let i = 0
         while ( i < tasks.length) {
-            let thisScore = getStatusScore(tasks[i]) * (tasks[i].priority * tasks[i].teammates.length)
-            // console.log(tasks[i], thisScore);
-            getDateScore(tasks[i]);
+            let thisScore = getDateScore(tasks[i]) * tasks[i].priority
             // debugger
             edited.push({...tasks[i], score: thisScore});
             i++
@@ -26,24 +27,19 @@ function Suggested({tasks}) {
         
         // console.log(taskScores(tasks))
         
-    function getStatusScore(task) {
-        let score = 0
-        if (task.status === "not started") {
-            return score += 10
-        }
-        if (task.status === "in progress") {
-            return score += 4
-        }
-        if (task.status === "stuck") {
-            return score += 7
-        }
-        else {score = 0}
-        // debugger
-        return score
-    }
+    // function getStatusScore(task) {
+    //     let score = 0
+    //     if (task.completed) {
+    //         return score += 0
+    //     }
+    //     if (!task.completed) {
+    //         return score += 10
+    //     }
+    //     return score
+    // }
         
     function getDateScore(task) {
-        // console.log(task.due_date)
+        console.log(task.due_date, new Date().toUTCString())
         // debugger
         // convert dueDate new Date().toUTCString()
     }
@@ -52,15 +48,16 @@ function Suggested({tasks}) {
     return (
         // semantic rail
         <div>
-            <Rail size='large' internal position='right'>
-                <Segment >
+            {/* <Rail size='small' internal position='right'> */}
+                <Segment raised compact>
                     <h4>Suggested Task</h4>
+                    <i>It's coming up and high priority!</i>
                     <Task 
                     task={suggested} 
                     upcoming={false} 
-                    completed={suggested.status === "completed" ? true : false}/>
+                    completed={suggested.completed}/>
                 </Segment>
-            </Rail>
+            {/* </Rail> */}
         </div>
     )
 }

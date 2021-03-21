@@ -1,5 +1,5 @@
 import {useSelector } from "react-redux";
-import {Header} from 'semantic-ui-react'
+import {Header, Statistic} from 'semantic-ui-react'
 
 
 function Details() {
