@@ -44,5 +44,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^4.3.0",
+    "moment": "^2.29.1",
+    "react-big-calendar": "^0.33.2",
+    "style-loader": "^1.3.0"
   }
 }

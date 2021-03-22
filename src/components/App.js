@@ -10,7 +10,7 @@ import {showUser} from "../redux/userSlice"
 import Header from "./Header"
 import Login from "./Login"
 import SignUp from "./Signup"
-import Calendar from "./Calendar"
+import MyCalendar from "./Calendar"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
 import ProjectPage from "./ProjectPage"
@@ -85,7 +85,7 @@ function App() {
               <Projects singleSelected={singleSelected} setSingleSelected={setSingleSelected}/>
             </Route>
             <Route path="/calendar">
-              <Calendar />
+              <MyCalendar />
             </Route>
             </> : <>
             <Route path="/signup">
