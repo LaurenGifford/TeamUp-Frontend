@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom";
-import {Item, Rail, Segment, Grid} from "semantic-ui-react"
+import {Item, Rail, Segment, Grid, Sidebar, Icon } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
@@ -10,6 +10,7 @@ import ProjectPage from "./ProjectPage"
 function Projects({singleSelected, setSingleSelected}) {
     const allProjects = useSelector((state) => state.projects)
     const currentUser = useSelector(state => state.user)
+    const [formVisible, setFormVisible] = useState(false)
     // const [singleSelected, setSingleSelected] = useState(false)
     const match = useRouteMatch()
     const dispatch = useDispatch();
@@ -42,8 +43,24 @@ function Projects({singleSelected, setSingleSelected}) {
                         {renderProjects}
                     </Item.Group>
                 </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column width={6}>
+{/* 
+                    <Sidebar 
+                        as={Segment}
+                        vertical
+                        animation='overlay'
+                        direction='right'
+                        visible={formVisible}
+                        inverted
+                    > */}
                     <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
+                    {/* </Sidebar>
+                    <Sidebar.Pusher dimmed={formVisible}>
+                        <h3 onClick={() => setFormVisible(!formVisible)} >
+                            ADD PROJECT <Icon name='arrow alternate circle left'/>
+                        </h3>
+                    </Sidebar.Pusher> */}
+
                 </Grid.Column>
             </Grid.Row>
         </Grid>

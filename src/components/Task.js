@@ -11,6 +11,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
     const [complete, setComplete] = useState(completed)
     const [showDropdown, setShowDropdown] = useState(false)
     const [confirmOpen, setConfirmOpen] = useState(false)
+    const [popOpen, setPopOpen] = useState(false)
     const currentUser = useSelector(state => state.user)
     
     const {id, title, description, due_date, teammates, ur_tasks} = task
@@ -122,6 +123,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
         return (
             <Form onSubmit={() => addUserTask(selectedUser)}>
                 <Dropdown
+                    floating
                     selection
                     fluid
                     placeholder="Select Teammate to assign"
@@ -137,7 +139,10 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
     function TaskOptionsDropdown() {
 
         return (
-            <Dropdown trigger={<Icon name='ellipsis horizontal'/>}>
+            <Dropdown 
+            fluid
+            floating 
+            trigger={<Icon name='ellipsis horizontal'/>}>
                 <Dropdown.Menu >
                     <Dropdown.Item text='Remove from teammate' onClick={() => onDelete(id)} />
                     {canAssign &&
@@ -151,6 +156,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
         )
     }
 
+
     return (
         <li>
             <Popup trigger={
@@ -160,10 +166,17 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
                 </span> 
             }
                 on={['hover', 'click']}
+                eventsEnabled={true}
+                onClose={() => setPopOpen(false)}
+                onOpen={() => setPopOpen(true)}
+                open={popOpen}
                 flowing
                 hoverable
                 mouseEnterDelay={300}
-                offset={[0, 50]}
+                mouseLeaveDelay={600}
+                offset={[0, 10]}
+                wide
+                size='large'
                 position='right center'
             >
                 <Header as='h3' content={title} subheader={!complete && <Icon name='exclamation'/>}>
