@@ -44,27 +44,25 @@ function Login() {
         });
     }
 
-        // function handleGoogleLogin(response) {
-    //   // we'll get a tokenId back from Google on successful login that we'll send to our server to find/create a user
-    //   if (response.tokenId) {
-    //     console.log(tokenId)
-    //     fetch("http://localhost:3000/google_login", {
-    //       method: "POST",
-    //       credentials: "include",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${response.tokenId}`,
-    //       },
-    //     })
-    //       .then((r) => r.json())
-    //       .then((data) => {
-    //         console.log(data);
-    //         const { teammate, token } = data;
-    //         dispatch(showUser(teammate))
-    //         localStorage.token = token;
-    //       });
-    //   }
-    // };
+      function handleGoogleLogin(response) {
+      if (response.tokenId) {
+        fetch("http://localhost:3000/google_login", {
+          method: "POST",
+          // credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${response.tokenId}`,
+          },
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            console.log(data);
+            const { teammate, token } = data;
+            dispatch(showUser(teammate))
+            localStorage.token = token;
+          });
+      }
+    };
 
     const { name, password,} = formData;
 
@@ -94,21 +92,17 @@ function Login() {
             <br />
             </Form.Group>
             <Form.Button content="Submit" />
-          {/* {errors.length !== 0 && errors.map((error) => (
-            <p key={error} style={{ color: "red" }}>
-              {error}
-            </p>
-          ))} */}
+
         </Form>
         <hr />
         <div>
           <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+            clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
             buttonText="Login"
-            // onSuccess={handleGoogleLogin}
-            // onFailure={handleGoogleLogin}
+            onSuccess={handleGoogleLogin}
+            onFailure={handleGoogleLogin}
             cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
+            // isSignedIn={true}
           />
         </div>
       </div>

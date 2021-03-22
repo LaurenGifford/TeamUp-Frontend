@@ -99,11 +99,6 @@ function Signup() {
             </select>
             <br />
             <Form.Button content="Submit" />
-          {/* {errors.length !== 0 && errors.map((error) => (
-            <p key={error} style={{ color: "red" }}>
-              {error}
-            </p>
-          ))} */}
         </Form>
       </div>
     )
