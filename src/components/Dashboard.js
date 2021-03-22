@@ -49,7 +49,7 @@ function Dashboard({setSingleSelected}) {
                     <i>These are projects you are currently assigned to.</i>
                     <Card.Group >
                         {tasks.length !== 0 ? 
-                        {renderProjects}  : 
+                        renderProjects  : 
                         <p>Go to the projects page to see your team's projects!</p> }
                     </Card.Group>
                 </Grid.Column>

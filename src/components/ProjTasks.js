@@ -20,7 +20,7 @@ function ProjTasks({project, home, setSingleSelected}) {
             task={task}
             upcoming={false}
             completed={task.completed}
-            // completed={task.status === "completed" ? true : false}
+            canAssign={false}
         />
     ))
 

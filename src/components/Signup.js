@@ -94,8 +94,9 @@ function Signup() {
                 placeholder="Select Department"
                 name="team_id"
                 value={team_id}
-                onChange={handleChange}>{departmentOptions}</select>
-
+                onChange={handleChange}>
+                  {departmentOptions}
+            </select>
             <br />
             <Form.Button content="Submit" />
           {/* {errors.length !== 0 && errors.map((error) => (

@@ -21,6 +21,7 @@ function Upcoming() {
             points={points}
             upcoming={true} 
             completed={task.completed}
+            canAssign={false}
         />
     ))
 

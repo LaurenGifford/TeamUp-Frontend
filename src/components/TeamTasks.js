@@ -1,7 +1,11 @@
 import {Grid, Card} from "semantic-ui-react"
 import Task from "./Task"
+import {getTasks} from "../api/tasks"
+import {showTasks} from "../redux/tasksSlice"
+import { useDispatch, useSelector } from "react-redux";
 
 function TeamTasks({member, tasks}) {
+    const dispatch = useDispatch()
     const {id, name, points} = member
     
     const myTasks = tasks.filter(task => {
@@ -15,9 +19,32 @@ function TeamTasks({member, tasks}) {
             key={task.id}
             task={task}
             upcoming={false}
+            canAssign={true}
             completed={task.completed}
+            onDelete={deleteUrTask}
         />
     ))
+
+    function deleteUrTask(taskId) {
+        console.log(myTasks)
+        const allUrTasks = myTasks.map(task => task.ur_tasks)
+        const thisUrTask = allUrTasks.find(urTasks => {
+            // debugger
+            if (urTasks.find(ur => {
+                if (ur.task_id === taskId && ur.teammate_id === id) {
+                    return ur
+            }
+            })) {return urTasks}
+        })
+        console.log(allUrTasks, thisUrTask)
+        fetch(`http://localhost:3000/ur_tasks/${thisUrTask[0].id}`, {
+            method: "DELETE"
+        })
+        getTasks()
+        .then(data => {
+            dispatch(showTasks(data))
+        })
+    }
 
     
     return (

@@ -22,6 +22,7 @@ function Unassigned({projectId}) {
             key={task.id}
             task={task}
             upcoming={false}
+            canAssign={true}
             completed={task.completed}
         />
     ))

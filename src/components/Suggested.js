@@ -55,7 +55,8 @@ function Suggested({tasks}) {
                     <Task 
                     task={suggested} 
                     upcoming={false} 
-                    completed={suggested.completed}/>
+                    completed={suggested.completed}
+                    canAssign={false}/>
                 </Segment>
             {/* </Rail> */}
         </div>

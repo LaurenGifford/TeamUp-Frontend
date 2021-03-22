@@ -13,7 +13,6 @@ function ProjectPage() {
     const tasks = useSelector(state => state.tasks)
     const project = allProjects.find(p => p.id === parseInt(projectId))
     const projectTasks = tasks.filter(task => task.project.id === parseInt(projectId))
-    // console.log(tasks)
 
     
     const renderTeamTasks = project.team.teammates.map(member => (
@@ -23,10 +22,6 @@ function ProjectPage() {
             tasks={projectTasks}
         />
         ))
-
-        function handleAddTask(task) {
-            console.log(task)
-        }
 
     return (
         <div id="project-page">
@@ -43,7 +38,7 @@ function ProjectPage() {
                         </Card.Group>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <AddTask project={project} onTaskAdd={handleAddTask} />
+                        <AddTask project={project}/>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

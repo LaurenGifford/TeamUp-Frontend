@@ -3,55 +3,58 @@ import { useDispatch, useSelector } from "react-redux";
 import {editUser, editUserTask, deleteUserTask} from "../redux/userSlice"
 import {addToTasks, editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
-import {Checkbox, Popup, Button, Header, Icon, Confirm} from 'semantic-ui-react'
+import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
 
 
-function Task({task, upcoming, completed}) {
+function Task({task, upcoming, completed, canAssign, onDelete}) {
+    const dispatch = useDispatch()
     const [complete, setComplete] = useState(completed)
+    const [showDropdown, setShowDropdown] = useState(false)
     const [confirmOpen, setConfirmOpen] = useState(false)
+    const currentUser = useSelector(state => state.user)
+    
     const {id, title, description, due_date, teammates, ur_tasks} = task
     const tmIds = task.teammates.map(tm => tm.id)
-    const currentUser = useSelector(state => state.user)
-    const dispatch = useDispatch()
-
+    
     
     
     function handleVolunteer() {
-        addUserTask()
+        addUserTask(currentUser.id)
         handleUserPoints(200)
     }
-
+    
     function handleComplete() {
         setComplete(!complete)
+        const pointsAmount = complete ? 100 : -100
         
         // if (!!complete) {
             handleTaskEdit()
-            handleUserPoints(100)
-        // }
+            handleUserPoints(pointsAmount)
+            // }
     }
-
-    function addUserTask() {
-        fetch(`http://localhost:3000/ur_tasks`, {
-            method: "POST",
-            headers: {
-                "Content-Type" : 'application/json'
-            },
-            body: JSON.stringify({teammate_id: currentUser.id, task_id: id})
-        })
-        .then(r => r.json())
-        .then(data => {
-            console.log(data.task)
+        
+        function addUserTask(teammate_id) {
+            fetch(`http://localhost:3000/ur_tasks`, {
+                method: "POST",
+                headers: {
+                    "Content-Type" : 'application/json'
+                },
+                body: JSON.stringify({teammate_id: teammate_id, task_id: id})
+            })
+            .then(r => r.json())
+            .then(data => {
+                console.log(data.task)
             dispatch(editTask(data.task))
         })
     }
-
+    
     function handleTaskEdit() {
         fetch(`http://localhost:3000/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : 'application/json'
             },
-            body: JSON.stringify({completed: true})
+            body: JSON.stringify({completed: complete})
         })
         .then(r => r.json())
         .then(data => {
@@ -59,9 +62,9 @@ function Task({task, upcoming, completed}) {
             dispatch(editTask(data))
         })
     }
-
+    
     function handleUserPoints(morePoints) {
-
+        
         fetch(`http://localhost:3000/teammates/${currentUser.id}`, {
             method: "PATCH",
             headers: {
@@ -74,47 +77,80 @@ function Task({task, upcoming, completed}) {
             dispatch(editUser(data.points))
         })
     }
-
-    function handleDelete() {
+    
+    function handleMyDelete() {
         setConfirmOpen(false)
         const urTask = ur_tasks.find(ur => ur.task_id === id)
-        console.log(urTask)
         fetch(`http://localhost:3000/ur_tasks/${urTask.id}`, {
             method: "DELETE"
         })
         dispatch(deleteUserTask(urTask.task_id))
     }
-
-    const handleCancel = () => setConfirmOpen(false)
     
-    function VolunteerButton() {
-        if (teammates.length > 2){
-            return <Button disabled>Volunteer</Button>
-         } 
-        else if (tmIds.includes(currentUser.id)) {
-            return null
-         } 
-         else {
-             return <Button onClick={handleVolunteer}>Volunteer</Button>
-            } 
-    }
+    const handleCancel = () => setConfirmOpen(false)
+
 
     function CheckboxOrIcon() {
         if (!complete && upcoming) {
             return (
-                <Checkbox onChange={handleComplete} />
-                )
+            <Checkbox onChange={handleComplete} />
+            )
         }
         if (complete && upcoming){
             return (
-                <Checkbox onChange={handleComplete} defaultChecked />
+            <Checkbox onChange={handleComplete} defaultChecked />
             )
         }
         if (!upcoming) {
             return (
                 <MdDescription/>
+                )
+            }
+    }
+
+                
+    function AssignmentDropdown() {
+        const [selectedUser, setSelectedUser] = useState('')
+        const teammateOptions = currentUser.team.teammates.map(tm =>({
+            value: tm.id, key: tm.id, text: tm.name})
             )
-        }
+            
+            function handleSelectChange(e, data) {
+                console.log(e, data)
+                setSelectedUser(data.value)
+                console.log(selectedUser)
+            }
+
+        return (
+            <Form onSubmit={() => addUserTask(selectedUser)}>
+                <Dropdown
+                    selection
+                    fluid
+                    placeholder="Select Teammate to assign"
+                    value={selectedUser}
+                    options={teammateOptions}
+                    onChange={(e, data) => handleSelectChange(e, data)}>
+                </Dropdown>
+                    <Form.Button>Assign Task</Form.Button>
+            </Form>
+       )
+    }
+
+    function TaskOptionsDropdown() {
+
+        return (
+            <Dropdown trigger={<Icon name='ellipsis horizontal'/>}>
+                <Dropdown.Menu >
+                    <Dropdown.Item text='Remove from teammate' onClick={() => onDelete(id)} />
+                    {canAssign &&
+                    <Dropdown.Item text='Assign to new Teammate' 
+                    onClick={() => setShowDropdown(!showDropdown)} />
+                    }
+                    <Dropdown.Item text='Volunteer' onClick={handleVolunteer} 
+                    disabled={tmIds.includes(currentUser.id) ? true : false} />
+                </Dropdown.Menu>
+            </Dropdown>
+        )
     }
 
     return (
@@ -132,11 +168,14 @@ function Task({task, upcoming, completed}) {
                 offset={[0, 50]}
                 position='right center'
             >
-                <Header as='h3' content={title} subheader={due_date}></Header>
+                <Header as='h3' content={title} subheader={!complete && <Icon name='exclamation'/>}>
+                </Header>
                 <Popup.Content >
-                    <p>{completed}</p>
+                    {due_date}
+                    <p>{complete}</p>
                     <p>{description}</p>
-                    <VolunteerButton />
+                    <TaskOptionsDropdown />
+                    {showDropdown && <AssignmentDropdown />}
                 </Popup.Content>
             </Popup>
             {upcoming &&
@@ -151,7 +190,7 @@ function Task({task, upcoming, completed}) {
                 cancelButton='Never mind'
                 confirmButton="Yes Please"
                 onCancel={handleCancel}
-                onConfirm={handleDelete}
+                onConfirm={handleMyDelete}
                 size='small'
             />
             </span>
@@ -163,8 +202,3 @@ function Task({task, upcoming, completed}) {
 
 
 export default Task
-
-
-{/* {task.teammates ? 
-{showTeammates} : 
-<p>No teammates for this task</p>} */}
