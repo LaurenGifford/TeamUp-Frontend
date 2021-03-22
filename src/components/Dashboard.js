@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-import {Item, Rail, Segment, Grid, Card} from "semantic-ui-react"
+import {Item, Rail, Segment, Grid, Card, Header} from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import Details from "./Details"
 import Upcoming from "./Upcoming"
@@ -45,8 +45,8 @@ function Dashboard({setSingleSelected}) {
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
                 <Grid.Column width={10}>
-                    <h2>My Projects</h2>
-                    <i>These are projects you are currently assigned to.</i>
+                    <Header as='h2'>My Projects </Header>
+                    <p><i>These are projects you are currently assigned to.</i></p>
                     <Card.Group >
                         {tasks.length !== 0 ? 
                         renderProjects  : 

@@ -115,11 +115,9 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
             value: tm.id, key: tm.id, text: tm.name})
             )
             
-            function handleSelectChange(e, data) {
-                console.log(e, data)
-                setSelectedUser(data.value)
-                console.log(selectedUser)
-            }
+            // function handleSelectChange(e, data) {
+            //     setSelectedUser(data.value)
+            // }
 
         return (
             <Form onSubmit={() => addUserTask(selectedUser)}>
@@ -129,7 +127,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
                     placeholder="Select Teammate to assign"
                     value={selectedUser}
                     options={teammateOptions}
-                    onChange={(e, data) => handleSelectChange(e, data)}>
+                    onChange={(e, data) => setSelectedUser(data.value)}>
                 </Dropdown>
                     <Form.Button>Assign Task</Form.Button>
             </Form>

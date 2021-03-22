@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Form, Label} from 'semantic-ui-react'
+import {Form, Label, Dropdown} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
@@ -10,24 +10,25 @@ import {showUser} from "../redux/userSlice"
 function Signup() {
   const dispatch = useDispatch()
   const history = useHistory()
-    const [formData, setFormData] = useState({
-        name: "",
-        password: "",
-        team_id: "",
-        points: 0
-    })
-    const [teams, setTeams] = useState([])
+  const [department, setDepartment] = useState(0)
+  const [formData, setFormData] = useState({
+      name: "",
+      password: "",
+      team_id: "",
+      points: 0
+  })
+  const [teams, setTeams] = useState([])
 
-    useEffect(() => {
-      fetch(`http://localhost:3000/teams`)
-      .then(r => r.json())
-      .then(data => {
-        setTeams(data)})
-    }, [])
+  useEffect(() => {
+    fetch(`http://localhost:3000/teams`)
+    .then(r => r.json())
+    .then(data => {
+      setTeams(data)})
+  }, [])
 
-    const departmentOptions = teams.map(team => (
-      <option value={team.id} key={team.id} >{team.department}</option>
-    ))
+  const departmentOptions = teams.map(team => ({
+    value: team.id, key: team.id, text: team.department}
+  ))
 
 
     function handleChange(e) {
@@ -41,7 +42,7 @@ function Signup() {
       e.preventDefault()
       const formattedData = {
         ...formData,
-        team_id: parseInt(team_id)
+        team_id: department
       }
 
     fetch("http://localhost:3000/teammates", {
@@ -56,7 +57,7 @@ function Signup() {
       const { teammate, token } = data;
       dispatch(showUser(teammate));
       localStorage.token = token;
-      // history.push("/home");
+      history.push("/home");
     });
 
   }
@@ -88,15 +89,15 @@ function Signup() {
                 onChange={handleChange}
             />
             </Form.Group>
-            <Label >Department</Label>
-            <select
-                label="Department"
+            <Label >Choose Your Department</Label>
+            <Dropdown
+                selection
+                fluid
                 placeholder="Select Department"
-                name="team_id"
-                value={team_id}
-                onChange={handleChange}>
-                  {departmentOptions}
-            </select>
+                value={department}
+                options={departmentOptions}
+                onChange={(e, data) => setDepartment(data.value)}>
+            </Dropdown>
             <br />
             <Form.Button content="Submit" />
         </Form>

@@ -1,22 +1,34 @@
 
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
-import {Form} from 'semantic-ui-react'
+import {Form, Dropdown, Label} from 'semantic-ui-react'
 
 
 function Login() {
   const dispatch = useDispatch()
   const history = useHistory()
-    const [formData, setFormData] = useState({
-        name: "",
-        password: ""
-    })
+  const [departmentSelected, setDepartmentSelected] = useState(false)
+  const [department, setDepartment] = useState(0)
+  const [formData, setFormData] = useState({
+      name: "",
+      password: ""
+  })
+  const [teams, setTeams] = useState([])
 
-    
+  useEffect(() => {
+    fetch(`http://localhost:3000/teams`)
+    .then(r => r.json())
+    .then(data => {
+      setTeams(data)})
+  }, [])
+
+  const departmentOptions = teams.map(team => ({
+    value: team.id, key: team.id, text: team.department}
+  ))
 
     function handleChange(e) {
         setFormData({
@@ -45,32 +57,52 @@ function Login() {
     }
 
       function handleGoogleLogin(response) {
-      if (response.tokenId) {
-        fetch("http://localhost:3000/google_login", {
-          method: "POST",
-          // credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${response.tokenId}`,
-          },
-        })
-          .then((r) => r.json())
-          .then((data) => {
-            console.log(data);
-            const { teammate, token } = data;
-            dispatch(showUser(teammate))
-            localStorage.token = token;
-          });
-      }
+        console.log(department)
+        if (response.tokenId) {
+          fetch("http://localhost:3000/google_login", {
+            method: "POST",
+            // credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${response.tokenId}`,
+            },
+            body: JSON.stringify({team_id: department, points: 0})
+          })
+            .then((r) => r.json())
+            .then((data) => {
+              console.log(data);
+              const { teammate, token } = data;
+              dispatch(showUser(teammate))
+              localStorage.token = token;
+              history.push("/home");
+            });
+        }
     };
 
     const { name, password,} = formData;
 
     return (
         <div className="login-form">
-        <Form onSubmit={handleSubmit} autoComplete="off">
           <h1>Login</h1>
-
+          {!departmentSelected ?
+          <Form onSubmit={() => setDepartmentSelected(true)}>
+            <Label >Choose Your Department</Label>
+            <Dropdown
+                selection
+                fluid
+                placeholder="Select Department"
+                value={department}
+                options={departmentOptions}
+                onChange={(e, data) =>{
+                  console.log(e, data, department)
+                  setDepartment(data.value)
+                  // console.log(data, department)
+                  }}>
+            </Dropdown>
+            <Form.Button >Confirm</Form.Button>
+          </Form>
+          : <>
+        <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Group>
             <Form.Input
                 label="Name"
@@ -94,17 +126,18 @@ function Login() {
             <Form.Button content="Submit" />
 
         </Form>
-        <hr />
-        <div>
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
-            buttonText="Login"
-            onSuccess={handleGoogleLogin}
-            onFailure={handleGoogleLogin}
-            cookiePolicy={"single_host_origin"}
-            // isSignedIn={true}
-          />
-        </div>
+        <br />
+          <div>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
+              buttonText="Login"
+              onSuccess={handleGoogleLogin}
+              onFailure={handleGoogleLogin}
+              cookiePolicy={"single_host_origin"}
+              // isSignedIn={true}
+            />
+          </div>
+        </> }
       </div>
     )
 }
