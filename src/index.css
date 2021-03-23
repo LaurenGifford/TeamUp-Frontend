@@ -85,3 +85,7 @@ li {
 .completed {
   text-decoration: line-through;
 }
+
+.task {
+  cursor: pointer;
+}

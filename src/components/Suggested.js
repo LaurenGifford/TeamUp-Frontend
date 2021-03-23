@@ -10,14 +10,12 @@ function Suggested({tasks}) {
     .sort((task1, task2) => task2.score - task1.score)
 
     const suggested = editedTasks[0]
-    // setDoIt(suggested[0])
-    // console.log(suggested)
     
     function taskScores(tasks){
         let edited = []
         let i = 0
         while ( i < tasks.length) {
-            let thisScore = getDateScore(tasks[i]) * tasks[i].priority
+            let thisScore = getDateScore(tasks[i]) + tasks[i].priority
             // debugger
             edited.push({...tasks[i], score: thisScore});
             i++
@@ -25,23 +23,14 @@ function Suggested({tasks}) {
         return edited
     }
         
-        // console.log(taskScores(tasks))
-        
-    // function getStatusScore(task) {
-    //     let score = 0
-    //     if (task.completed) {
-    //         return score += 0
-    //     }
-    //     if (!task.completed) {
-    //         return score += 10
-    //     }
-    //     return score
-    // }
         
     function getDateScore(task) {
-        console.log(task.due_date, new Date().toUTCString())
+        let due = new Date(task.due_date)
+        let today = new Date()
+        let score = due.getMonth() - today.getMonth()
+        // score +=  due.getDate() - today.getDate()
         // debugger
-        // convert dueDate new Date().toUTCString()
+        return score
     }
 
 

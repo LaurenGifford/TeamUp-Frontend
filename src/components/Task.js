@@ -14,7 +14,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
     const [popOpen, setPopOpen] = useState(false)
     const currentUser = useSelector(state => state.user)
     
-    const {id, title, description, due_date, teammates, ur_tasks} = task
+    const {id, title, description, due_on, teammates, ur_tasks, project} = task
     const tmIds = task.teammates.map(tm => tm.id)
     
     
@@ -109,17 +109,14 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
             }
     }
 
-                
+     
     function AssignmentDropdown() {
         const [selectedUser, setSelectedUser] = useState('')
+
         const teammateOptions = currentUser.team.teammates.map(tm =>({
             value: tm.id, key: tm.id, text: tm.name})
             )
             
-            // function handleSelectChange(e, data) {
-            //     setSelectedUser(data.value)
-            // }
-
         return (
             <Form onSubmit={() => addUserTask(selectedUser)}>
                 <Dropdown
@@ -144,12 +141,12 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
             floating 
             trigger={<Icon name='ellipsis horizontal'/>}>
                 <Dropdown.Menu >
-                    <Dropdown.Item text='Remove from teammate' onClick={() => onDelete(id)} />
+                    <Dropdown.Item icon='remove' text='Remove from Teammate' onClick={() => onDelete(id)} />
                     {canAssign &&
-                    <Dropdown.Item text='Assign to new Teammate' 
+                    <Dropdown.Item icon='user' text='Assign to new Teammate' 
                     onClick={() => setShowDropdown(!showDropdown)} />
                     }
-                    <Dropdown.Item text='Volunteer' onClick={handleVolunteer} 
+                    <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
                 </Dropdown.Menu>
             </Dropdown>
@@ -158,7 +155,8 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
 
 
     return (
-        <li>
+        <li className='task'>
+            {/* <AssignmentDropdown /> */}
             <Popup trigger={
                 <span>
                     <CheckboxOrIcon />
@@ -179,21 +177,20 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
                 size='large'
                 position='right center'
             >
-                <Header as='h3' content={title} subheader={!complete && <Icon name='exclamation'/>}>
+                <Header as='h3' content={title} 
+                    subheader={!complete ? <Icon name='warning circle'/>: <Icon name='check circle' />}>
                 </Header>
                 <Popup.Content >
-                    {due_date}
-                    <p>{complete}</p>
+                    <h4>{due_on}</h4>
+                    <p>Project: {project.title} </p>
                     <p>{description}</p>
-                    <TaskOptionsDropdown />
+                    {canAssign && <TaskOptionsDropdown />}
                     {showDropdown && <AssignmentDropdown />}
                 </Popup.Content>
             </Popup>
             {upcoming &&
             <span >
-            <Button icon onClick={() => setConfirmOpen(true)} size='mini'>
-                <Icon name='delete' />
-            </Button>
+            <Icon name='delete' onClick={() => setConfirmOpen(true)}/>
             <Confirm 
                 header='Wait!'
                 content='Are you sure you want to delete this task from your current tasks?'
