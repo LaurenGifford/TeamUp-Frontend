@@ -6,7 +6,7 @@ import {MdDescription} from "react-icons/md"
 import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
 
 
-function Task({task, upcoming, completed, canAssign, onDelete}) {
+function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     const dispatch = useDispatch()
     const [complete, setComplete] = useState(completed)
     const [showDropdown, setShowDropdown] = useState(false)
@@ -14,25 +14,47 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
     const [popOpen, setPopOpen] = useState(false)
     const currentUser = useSelector(state => state.user)
     
-    const {id, title, description, due_on, teammates, ur_tasks, project} = task
+    const {id, title, description, due_on, teammates, ur_tasks, project, priority} = task
     const tmIds = task.teammates.map(tm => tm.id)
+
+    function getColors() {
+        let today = new Date()
+        let due = new Date(task.due_date)
+        let moScore = due.getMonth() - today.getMonth()
+        let dayScore = (moScore * 30) + (due.getDate() - today.getDate())
+        let hourScore = (dayScore * 24) + (due.getHours() - today.getHours())
+        // debugger
+        if (!!complete) {
+            return 'ForestGreen'
+        } else {
+            if (hourScore < 24) {
+                return 'FireBrick'
+            }
+            if (hourScore > 24 && hourScore < 48) {
+                return 'GoldenRod'
+            }
+            if (hourScore > 48) {
+                return 'DodgerBlue'
+            }
+    }
+    }
     
-    
+    getColors()
     
     function handleVolunteer() {
         addUserTask(currentUser.id)
         handleUserPoints(200)
     }
     
-    function handleComplete() {
-        setComplete(!complete)
-        const pointsAmount = complete ? 100 : -100
+    // function handleComplete() {
+    //     setComplete(complete => !complete)
+    //     const pointsAmount = complete ? 100 : -100
         
-        // if (!!complete) {
-            handleTaskEdit()
-            handleUserPoints(pointsAmount)
-            // }
-    }
+    //       if (!!complete) {
+    //          handleTaskEdit()
+    //          handleUserPoints(pointsAmount)
+    //         }
+    // }
         
         function addUserTask(teammate_id) {
             fetch(`http://localhost:3000/ur_tasks`, {
@@ -49,13 +71,13 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
         })
     }
     
-    function handleTaskEdit() {
+    function handleTaskEdit(status) {
         fetch(`http://localhost:3000/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : 'application/json'
             },
-            body: JSON.stringify({completed: complete})
+            body: JSON.stringify({completed: status})
         })
         .then(r => r.json())
         .then(data => {
@@ -94,12 +116,20 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
     function CheckboxOrIcon() {
         if (!complete && upcoming) {
             return (
-            <Checkbox onChange={handleComplete} />
+            <Checkbox onChange={() => {
+                handleTaskEdit(true)
+                handleUserPoints(100)
+                setComplete(!complete)
+            }} />
             )
         }
         if (complete && upcoming){
             return (
-            <Checkbox onChange={handleComplete} defaultChecked />
+            <Checkbox onChange={() => {
+                handleTaskEdit(false)
+                handleUserPoints(-100)
+                setComplete(!complete)
+            }} defaultChecked />
             )
         }
         if (!upcoming) {
@@ -141,11 +171,13 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
             floating 
             trigger={<Icon name='ellipsis horizontal'/>}>
                 <Dropdown.Menu >
+                    {canDelete &&
                     <Dropdown.Item icon='remove' text='Remove from Teammate' onClick={() => onDelete(id)} />
-                    {canAssign &&
+                    }
+                    {/* {canAssign && */}
                     <Dropdown.Item icon='user' text='Assign to new Teammate' 
                     onClick={() => setShowDropdown(!showDropdown)} />
-                    }
+                    {/* } */}
                     <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
                 </Dropdown.Menu>
@@ -155,7 +187,7 @@ function Task({task, upcoming, completed, canAssign, onDelete}) {
 
 
     return (
-        <li className='task'>
+        <li className='task' style={{color: getColors()}}>
             {/* <AssignmentDropdown /> */}
             <Popup trigger={
                 <span>

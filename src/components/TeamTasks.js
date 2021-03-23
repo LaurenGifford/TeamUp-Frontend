@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function TeamTasks({member, tasks}) {
     const dispatch = useDispatch()
+    const allTasks = useSelector(state => state.tasks)
     const {id, name, points} = member
     
     const myTasks = tasks.filter(task => {
@@ -19,6 +20,7 @@ function TeamTasks({member, tasks}) {
             key={task.id}
             task={task}
             upcoming={false}
+            canDelete={true}
             canAssign={true}
             completed={task.completed}
             onDelete={deleteUrTask}
@@ -26,18 +28,9 @@ function TeamTasks({member, tasks}) {
     ))
 
     function deleteUrTask(taskId) {
-        console.log(myTasks)
-        const allUrTasks = myTasks.map(task => task.ur_tasks)
-        const thisUrTask = allUrTasks.find(urTasks => {
-            // debugger
-            if (urTasks.find(ur => {
-                if (ur.task_id === taskId && ur.teammate_id === id) {
-                    return ur
-            }
-            })) {return urTasks}
-        })
-        console.log(allUrTasks, thisUrTask)
-        fetch(`http://localhost:3000/ur_tasks/${thisUrTask[0].id}`, {
+        const task = allTasks.find(task => task.id === taskId)
+        const urTask = task.ur_tasks.find(ur => ur.teammate_id === id)            
+        fetch(`http://localhost:3000/ur_tasks/${urTask.id}`, {
             method: "DELETE"
         })
         getTasks()

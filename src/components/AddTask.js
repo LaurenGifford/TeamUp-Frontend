@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
 import {addTaskToProject} from "../redux/ProjectsSlice"
-import {Form, Transition} from 'semantic-ui-react'
+import {Form, Transition, Icon} from 'semantic-ui-react'
 import {AiOutlineArrowDown} from "react-icons/ai"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -65,7 +65,7 @@ function AddTask({project, onTaskAdd}) {
     return (
         <div className="new-task">
             <h3 onClick={() => setShowForm(!showForm)}>
-                ADD TASK <AiOutlineArrowDown/>
+                ADD TASK <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
                 <Form onSubmit={handleSubmit} autoComplete="off">

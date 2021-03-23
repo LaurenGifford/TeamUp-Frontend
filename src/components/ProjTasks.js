@@ -7,22 +7,42 @@ import Task from "./Task"
 function ProjTasks({project, home, setSingleSelected}) {
     const [isHome, setIsHome]  = useState(home)
     const currentUser = useSelector(state => state.user)
+    const allTasks = useSelector(state => state.tasks)
     const {tasks} = currentUser
+    // const tasks = allTasks
     const {id, title, notes, priority} = project
     let projectId = id
+    // console.log(currentUser)
 
 
 
-    const renderTasks = tasks.filter(task => task.project.id === id)
-    .map(task => (
-        <Task 
-            key={task.id}
-            task={task}
-            upcoming={false}
-            completed={task.completed}
-            canAssign={false}
-        />
-    ))
+    // const renderTasks = tasks.filter(task => task.project.id === id)
+    // .map(task => (
+    //     <Task 
+    //         key={task.id}
+    //         task={task}
+    //         upcoming={false}
+    //         completed={task.completed}
+    //         canAssign={false}
+    //     />
+    // ))
+
+    function Tasks() {
+        const toRender = tasks.filter(task => task.project.id === id)
+        if (toRender.length > 0) {
+            return (toRender.map(task => (
+                <Task 
+                    key={task.id}
+                    task={task}
+                    upcoming={false}
+                    completed={task.completed}
+                    canAssign={false}
+                />
+            ))
+            )
+        }
+        else {return null}
+    }
 
 
     return (
@@ -38,7 +58,7 @@ function ProjTasks({project, home, setSingleSelected}) {
                 <Card.Meta>Priority {priority} </Card.Meta>
                 <Card.Description>
                     <strong>{!!isHome ? "Tasks" : "Notes"} </strong>
-                    {!!isHome ? renderTasks : notes}
+                    {!!isHome ? <Tasks /> : notes}
                 </Card.Description>
             </Card.Content>
         </Card>

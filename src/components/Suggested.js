@@ -15,7 +15,7 @@ function Suggested({tasks}) {
         let edited = []
         let i = 0
         while ( i < tasks.length) {
-            let thisScore = getDateScore(tasks[i]) + tasks[i].priority
+            let thisScore = getDateScore(tasks[i]) * tasks[i].priority
             // debugger
             edited.push({...tasks[i], score: thisScore});
             i++
@@ -25,12 +25,13 @@ function Suggested({tasks}) {
         
         
     function getDateScore(task) {
-        let due = new Date(task.due_date)
         let today = new Date()
-        let score = due.getMonth() - today.getMonth()
-        // score +=  due.getDate() - today.getDate()
-        // debugger
-        return score
+        let due = new Date(task.due_date)
+        let moScore = due.getMonth() - today.getMonth()
+        let dayScore = (moScore * 30) + (due.getDate() - today.getDate())
+        let hourScore = (dayScore * 24) + (due.getHours() - today.getHours())
+
+        return hourScore
     }
 
 
@@ -41,11 +42,13 @@ function Suggested({tasks}) {
                 <Segment raised compact>
                     <h4>Suggested Task</h4>
                     <i>It's coming up and high priority!</i>
+                    {suggested ?
                     <Task 
                     task={suggested} 
                     upcoming={false} 
                     completed={suggested.completed}
                     canAssign={false}/>
+                    : <p>None to suggest</p>}
                 </Segment>
             {/* </Rail> */}
         </div>

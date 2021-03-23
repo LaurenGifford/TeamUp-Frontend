@@ -32,7 +32,7 @@ function Dashboard({setSingleSelected}) {
                 <Grid.Column width={11} >
                     <Details currentUser={currentUser} />
                 </Grid.Column>
-                <Grid.Column width={15}>
+                <Grid.Column width={5}>
                     {tasks.length !== 0 ? 
                     <Suggested tasks={tasks}/> : 
                     <p>No Tasks to Show!</p> }

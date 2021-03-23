@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Form, Transition} from 'semantic-ui-react'
+import {Form, Transition, Icon} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineArrowDown} from "react-icons/ai"
 import {addToProjects} from "../redux/ProjectsSlice"
@@ -51,7 +51,7 @@ function AddProj({team, onProjectAdd}) {
     return (
         <div className="new-project">
             <h3 onClick={() => setShowForm(!showForm)} >
-                ADD PROJECT <AiOutlineArrowDown/>
+                ADD PROJECT <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
                 <Form onSubmit={handleSubmit} autoComplete="off">
