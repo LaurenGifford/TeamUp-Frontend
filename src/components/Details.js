@@ -1,5 +1,5 @@
 import {useSelector } from "react-redux";
-import {Header, Statistic} from 'semantic-ui-react'
+import {Header, Statistic, Icon} from 'semantic-ui-react'
 
 
 function Details() {
@@ -8,8 +8,8 @@ function Details() {
     
     return (
         <aside>
-            <Header as='h3' dividing>{name} | 
-                <small>{points}</small>
+            <Header as='h3' dividing>{name}  |  
+                <small> {points}  <Icon name='money' /></small>
             </Header>
             <p>{team.department}</p>
         </aside>

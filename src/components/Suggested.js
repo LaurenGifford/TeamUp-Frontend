@@ -36,21 +36,18 @@ function Suggested({tasks}) {
 
 
     return (
-        // semantic rail
         <div>
-            {/* <Rail size='small' internal position='right'> */}
-                <Segment raised compact>
-                    <h4>Suggested Task</h4>
-                    <i>It's coming up and high priority!</i>
-                    {suggested ?
-                    <Task 
-                    task={suggested} 
-                    upcoming={false} 
-                    completed={suggested.completed}
-                    canAssign={false}/>
-                    : <p>None to suggest</p>}
-                </Segment>
-            {/* </Rail> */}
+            <Segment raised compact>
+                <h4>Suggested Task</h4>
+                <i>It's coming up and high priority!</i>
+                {suggested ?
+                <Task 
+                task={suggested} 
+                upcoming={false} 
+                completed={suggested.completed}
+                canAssign={false}/>
+                : <p>None to suggest</p>}
+            </Segment>
         </div>
     )
 }

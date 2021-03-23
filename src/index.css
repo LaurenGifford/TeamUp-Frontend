@@ -1,8 +1,13 @@
 :root {
   --lt-blue: aliceblue;
   --dk-blue: dodgerblue;
+  background-color: gray; 
   /* --gray: rgb(22, 22, 22);;
   --cream: rgb(242, 243, 243, 0.6); */
+}
+
+html {
+  background-color: gray; 
 }
 
 
@@ -13,6 +18,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: gray; */
 }
 
 code {
@@ -79,6 +85,10 @@ li {
 }
 
 .new-project h3{
+  cursor: pointer;
+}
+
+.new-task h3{
   cursor: pointer;
 }
 

@@ -20,24 +20,25 @@ function ProjectPage() {
             key={member.id}
             member={member} 
             tasks={projectTasks}
+            project={project}
         />
         ))
 
     return (
-        <div id="project-page">
-            <h1>{project.title}</h1>
-            <Grid celled>
+        <div id="project-page" style={{padding: '60px'}}>
+            <h1 style={{paddingBottom: '60px'}}>{project.title}</h1>
+            <Grid >
                 <Grid.Row >
-                    <Grid.Column width={4}>
+                    <Grid.Column width={3}>
                         <Unassigned projectId={parseInt(projectId)} />
                     </Grid.Column>
-                    <Grid.Column width={8}>
-                        <h2>Team</h2>
-                        <Card.Group>
+                    <Grid.Column width={8} style={{paddingLeft: '60px'}}>
+                        <h2>TEAM</h2>
+                        <Card.Group centered>
                             {renderTeamTasks}
                         </Card.Group>
                     </Grid.Column>
-                    <Grid.Column width={4}>
+                    <Grid.Column width={5}>
                         <AddTask project={project}/>
                     </Grid.Column>
                 </Grid.Row>

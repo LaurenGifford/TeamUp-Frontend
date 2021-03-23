@@ -68,7 +68,8 @@ function AddTask({project, onTaskAdd}) {
                 ADD TASK <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
-                <Form onSubmit={handleSubmit} autoComplete="off">
+                <Form onSubmit={handleSubmit} autoComplete="off" 
+                style={{backgroundColor: 'LightSteelBlue', padding: '20px', borderRadius: '10px'}}>
                     <Form.Group widths="equal">
                     <Form.Input fluid
                         label="Title"
@@ -89,7 +90,6 @@ function AddTask({project, onTaskAdd}) {
                         />
                         <Form.Field 
                         label='Due Date'>
-                        {/* control={<DatePicker value={dateValue} onChange={setDateValue} />} */}
                         </Form.Field>
                         <DatePicker 
                         selected={dateValue} 
@@ -98,6 +98,7 @@ function AddTask({project, onTaskAdd}) {
                         onChange={(date) => setDateValue(date)} 
                         onChangeRaw={event => handleChangeRaw(event.target.value)}
                         />
+                        <br />
                     <Form.Button content="Submit" />
                 </Form>
             </Transition>

@@ -4,8 +4,6 @@ import {Calendar, momentLocalizer} from 'react-big-calendar'
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import request from "superagent";
-// BigCalendar.momentLocalizer(moment)
-// require('style-loader!css-loader!react-big-calendar/lib/css/react-big-calendar.css')
 
 function MyCalendar() {
     const localizer = momentLocalizer(moment)

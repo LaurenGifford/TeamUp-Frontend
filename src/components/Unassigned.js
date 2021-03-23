@@ -30,7 +30,7 @@ function Unassigned({projectId}) {
 
     return (
         <div>
-            <h3>Unassigned Tasks</h3>
+            <h3>UNASSIGNED</h3>
             <List items={renderTasks} />
         </div>
     )

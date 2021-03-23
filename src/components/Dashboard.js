@@ -10,11 +10,6 @@ function Dashboard({setSingleSelected}) {
     const currentUser = useSelector(state => state.user)
     const {name, points, team_id, tasks, projects} = currentUser
 
-
-    // const setProjects = [...new Set(projects.map(proj => proj.id))]
-    // .map(id => projects.find(proj => proj.id === id))
-
-
     const renderProjects = projects.map(project => (
         <ProjTasks 
             key={project.id}
@@ -27,25 +22,25 @@ function Dashboard({setSingleSelected}) {
 
 
     return (
-        <Grid celled='internally'>
+        <Grid style={{padding: '60px'}}>
             <Grid.Row>
                 <Grid.Column width={11} >
                     <Details currentUser={currentUser} />
                 </Grid.Column>
-                <Grid.Column width={5}>
+                <Grid.Column width={5} style={{paddingLeft: '60px'}}>
                     {tasks.length !== 0 ? 
                     <Suggested tasks={tasks}/> : 
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <Grid.Column width={3}>
+                <Grid.Column width={3} >
                     {tasks.length !== 0 ? 
                     <Upcoming currentUser={currentUser}/>  : 
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
-                <Grid.Column width={10}>
-                    <Header as='h2'>My Projects </Header>
+                <Grid.Column width={10} style={{paddingLeft: '60px'}}>
+                    <Header as='h2'>MY PROJECTS </Header>
                     <p><i>These are projects you are currently assigned to.</i></p>
                     <Card.Group >
                         {tasks.length !== 0 ? 

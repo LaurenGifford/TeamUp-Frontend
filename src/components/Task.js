@@ -23,7 +23,6 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         let moScore = due.getMonth() - today.getMonth()
         let dayScore = (moScore * 30) + (due.getDate() - today.getDate())
         let hourScore = (dayScore * 24) + (due.getHours() - today.getHours())
-        // debugger
         if (!!complete) {
             return 'ForestGreen'
         } else {
@@ -39,36 +38,25 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     }
     }
     
-    getColors()
     
     function handleVolunteer() {
         addUserTask(currentUser.id)
         handleUserPoints(200)
     }
-    
-    // function handleComplete() {
-    //     setComplete(complete => !complete)
-    //     const pointsAmount = complete ? 100 : -100
+
         
-    //       if (!!complete) {
-    //          handleTaskEdit()
-    //          handleUserPoints(pointsAmount)
-    //         }
-    // }
-        
-        function addUserTask(teammate_id) {
-            fetch(`http://localhost:3000/ur_tasks`, {
-                method: "POST",
-                headers: {
-                    "Content-Type" : 'application/json'
-                },
-                body: JSON.stringify({teammate_id: teammate_id, task_id: id})
-            })
-            .then(r => r.json())
-            .then(data => {
-                console.log(data.task)
-            dispatch(editTask(data.task))
+    function addUserTask(teammate_id) {
+        fetch(`http://localhost:3000/ur_tasks`, {
+            method: "POST",
+            headers: {
+                "Content-Type" : 'application/json'
+            },
+            body: JSON.stringify({teammate_id: teammate_id, task_id: id})
         })
+        .then(r => r.json())
+        .then(data => {
+        dispatch(editTask(data.task))
+    })
     }
     
     function handleTaskEdit(status) {
@@ -174,10 +162,8 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     {canDelete &&
                     <Dropdown.Item icon='remove' text='Remove from Teammate' onClick={() => onDelete(id)} />
                     }
-                    {/* {canAssign && */}
                     <Dropdown.Item icon='user' text='Assign to new Teammate' 
                     onClick={() => setShowDropdown(!showDropdown)} />
-                    {/* } */}
                     <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
                 </Dropdown.Menu>
@@ -187,8 +173,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
 
     return (
-        <li className='task' style={{color: getColors()}}>
-            {/* <AssignmentDropdown /> */}
+        <li className='task' style={{backgroundColor: getColors(), color: 'white'}}>
             <Popup trigger={
                 <span>
                     <CheckboxOrIcon />

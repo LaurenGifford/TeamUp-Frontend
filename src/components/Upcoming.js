@@ -10,9 +10,6 @@ function Upcoming() {
     // const tms = tasks.map(task => task.teammates)
     const {id, name, points, team_id, tasks} = currentUser
 
-    
-
-    // debugger
     const renderTasks = tasks.map(task => (
         <Task 
             key={task.id}
@@ -27,7 +24,7 @@ function Upcoming() {
 
     return (
         <div>
-            <h4>Current Tasks</h4>
+            <h4>CURRENT</h4>
             {tasks &&
             <List items={renderTasks} />
             }

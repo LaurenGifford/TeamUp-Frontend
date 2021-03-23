@@ -96,7 +96,6 @@ function Login() {
                 onChange={(e, data) =>{
                   console.log(e, data, department)
                   setDepartment(data.value)
-                  // console.log(data, department)
                   }}>
             </Dropdown>
             <Form.Button >Confirm</Form.Button>

@@ -12,7 +12,19 @@ function ProjTasks({project, home, setSingleSelected}) {
     // const tasks = allTasks
     const {id, title, notes, priority} = project
     let projectId = id
-    // console.log(currentUser)
+
+    const colors = {
+        1 : 'blue',
+        2 : 'blue',
+        3 : 'blue',
+        4 : 'yellow',
+        5 : 'yellow',
+        6 : 'yellow',
+        7 : 'orange',
+        8 : 'orange',
+        9 : 'red',
+        10 : 'red',
+    }
 
 
 
@@ -46,7 +58,7 @@ function ProjTasks({project, home, setSingleSelected}) {
 
 
     return (
-        <Card >
+        <Card color={colors[priority]}>
             <Card.Content >
                 <Card.Header >
                 <Link 

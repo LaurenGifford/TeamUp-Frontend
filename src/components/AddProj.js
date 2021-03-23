@@ -49,12 +49,13 @@ function AddProj({team, onProjectAdd}) {
     const {title, priority, notes} = formData
 
     return (
-        <div className="new-project">
+        <div className="new-project" >
             <h3 onClick={() => setShowForm(!showForm)} >
                 ADD PROJECT <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
-                <Form onSubmit={handleSubmit} autoComplete="off">
+                <Form onSubmit={handleSubmit} autoComplete="off" 
+                style={{backgroundColor: 'LightSteelBlue', padding: '20px', borderRadius: '10px'}}>
                     <Form.Group widths="equal">
                     <Form.Input fluid
                         label="Title"

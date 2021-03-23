@@ -1,13 +1,14 @@
-import {Grid, Card} from "semantic-ui-react"
+import {Grid, Card, Icon} from "semantic-ui-react"
 import Task from "./Task"
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
 import { useDispatch, useSelector } from "react-redux";
 
-function TeamTasks({member, tasks}) {
+function TeamTasks({member, tasks, project}) {
     const dispatch = useDispatch()
     const allTasks = useSelector(state => state.tasks)
     const {id, name, points} = member
+
     
     const myTasks = tasks.filter(task => {
         if (task.teammates.find(tm => tm.id === id)){
@@ -46,11 +47,11 @@ function TeamTasks({member, tasks}) {
                 <Card.Header >
                     {name}
                 </Card.Header>
-                <Card.Meta>{points}</Card.Meta>
+                <Card.Meta>{points}  <Icon name='money' /></Card.Meta>
             </Card.Content>
             <Card.Content >
                 <Card.Description>
-                    <strong>Tasks</strong>
+                    {/* <strong>Tasks</strong> */}
                     {renderTasks}
                 </Card.Description>
             </Card.Content>

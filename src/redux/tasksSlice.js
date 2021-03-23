@@ -14,7 +14,7 @@ const tasksSlice = createSlice({
         editTask(state, action) {
             const index = state.findIndex(task => task.id === action.payload.id)
             state[index] = action.payload
-            console.log(current(state))
+            // console.log(current(state))
         }
     },
 })

@@ -33,13 +33,6 @@ function App() {
   useDocumentTitle("TeamUp!")
 
   // useEffect(() => {
-  //   getUser(1)
-  //   .then(data => {
-  //     dispatch(showUser(data))
-  //   })
-  // }, [])
-
-  // useEffect(() => {
   //   fetch("http://localhost:3000/autologin", {
   //     headers: {
   //       Authorization: `Bearer ${localStorage.token}`,
@@ -72,7 +65,7 @@ function App() {
   return (
     <>
       <Header setSingleSelected={setSingleSelected}/>
-        <main>
+        <main >
           <Switch>
             <Route exact path="/">
               <h1>Welcome to TeamUp!</h1>

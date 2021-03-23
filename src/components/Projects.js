@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom";
-import {Item, Rail, Segment, Grid, Sidebar, Icon } from "semantic-ui-react"
+import {Item, Rail, Segment, Grid, Sidebar, Icon, Card, Form } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
@@ -30,27 +30,28 @@ function Projects({singleSelected, setSingleSelected}) {
 
     function ProjectsList() {
         return (
-            <Grid columns={2} relaxed='very' divided divided="vertically" padded>
+            <Grid columns={2} relaxed='very' style={{padding: '60px'}}>
             <Grid.Row>
-                <Grid.Column width={10}>
-                <h2>Team Projects</h2>
+                <Grid.Column width={10} style={{paddingBottom: '20px'}}>
+                <h2 >Team Projects</h2>
                 <i>All Projects currently assigned to your team.</i>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column width={10}>
-                    <Item.Group >
+                    <Card.Group centered>
                         {renderProjects}
-                    </Item.Group>
+                    </Card.Group>
                 </Grid.Column>
                 <Grid.Column width={6}>
-{/* 
+                {/* <Sidebar.Pushable  >
                     <Sidebar 
-                        as={Segment}
-                        vertical
+                        as={Form}
                         animation='overlay'
+                        duration={400}
                         direction='right'
                         visible={formVisible}
+                        onHide={() => setFormVisible(false)}
                         inverted
                     > */}
                     <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
@@ -59,8 +60,8 @@ function Projects({singleSelected, setSingleSelected}) {
                         <h3 onClick={() => setFormVisible(!formVisible)} >
                             ADD PROJECT <Icon name='arrow alternate circle left'/>
                         </h3>
-                    </Sidebar.Pusher> */}
-
+                    </Sidebar.Pusher>
+                </Sidebar.Pushable> */}
                 </Grid.Column>
             </Grid.Row>
         </Grid>

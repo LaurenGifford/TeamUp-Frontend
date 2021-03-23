@@ -15,7 +15,6 @@ function Header({setCurrentUser, setSingleSelected}) {
 
 
     return (
-        // semantic menu
         <header className="header">
             <h1 id="app-header" className="header-element">TeamUp!</h1>
             {!currentUser ? <>
