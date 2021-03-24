@@ -1,12 +1,15 @@
 import { render } from 'react-dom'
+import { useDispatch, useSelector } from "react-redux";
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
+import { GoogleLogin } from "react-google-login";
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import request from "superagent";
 
 function MyCalendar() {
     const localizer = momentLocalizer(moment)
+    const currentUser = useSelector(state => state.user)
     const [events, setEvents] = useState([])
 
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
@@ -37,14 +40,35 @@ function MyCalendar() {
         });
     }
 
+    function teamGoogleLogin(response) {
+        console.log(response)
+        if (!currentUser.team.calendar_id) {
+            fetch(`https://www.googleapis.com/calendar/v3/calendars`)
+        }
+    }
+
 
     return (
         <div>
-            <Calendar
-                localizer={localizer}
-                style={{height: '420px'}}
-                events={events}
+            <h3>Please login to your Team's google account to view all upcoming tasks!</h3>
+            <div>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
+              buttonText="Login"
+              onSuccess={teamGoogleLogin}
+              onFailure={teamGoogleLogin}
+              cookiePolicy={"single_host_origin"}
+              // isSignedIn={true}
             />
+          </div>
+          <br />
+            <div>
+                <Calendar
+                    localizer={localizer}
+                    style={{height: '420px'}}
+                    events={events}
+                />
+            </div>
         </div>
     )
 }

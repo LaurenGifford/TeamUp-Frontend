@@ -57,7 +57,6 @@ function Login() {
     }
 
       function handleGoogleLogin(response) {
-        console.log(department)
         if (response.tokenId) {
           fetch("http://localhost:3000/google_login", {
             method: "POST",
