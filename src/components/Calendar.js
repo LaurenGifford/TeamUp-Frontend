@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Button} from 'semantic-ui-react'
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
-import ApiCalendar from 'react-google-calendar-api';
+
 import { GoogleLogin } from "react-google-login";
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -19,7 +19,7 @@ function MyCalendar() {
     const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
     const API_KEY = process.env.REACT_APP_API_KEY
-    const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2
+    const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST
 
 
     let GOOGLE_CALENDAR_URL = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
@@ -93,25 +93,6 @@ function MyCalendar() {
 
 export default MyCalendar
 
-
-// function start() {
-//   // 2. Initialize the JavaScript client library.
-//   gapi.client.init({
-//     'apiKey': 'YOUR_API_KEY',
-//     // clientId and scope are optional if auth is not required.
-//     'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-//     'scope': 'profile',
-//   }).then(function() {
-//     // 3. Initialize and make the API request.
-//     return gapi.client.request({
-//       'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
-//     })
-//   }).then(function(response) {
-//     console.log(response.result);
-//   }, function(reason) {
-//     console.log('Error: ' + reason.result.error.message);
-//   });
-// };
 
 
 // <!--Add buttons to initiate auth sequence and sign out-->

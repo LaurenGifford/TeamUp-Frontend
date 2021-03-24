@@ -19,10 +19,10 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
     let gapi = window.gapi
     const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
-    const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+    const SCOPES = "https://www.googleapis.com/auth/calendar";
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
-    const API_KEY = `${process.env.REACT_APP_API_KEY}`
-    const CLIENT_ID = `${process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}`
+    const API_KEY = process.env.REACT_APP_API_KEY
+    const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST
 
     function getColors() {
         let today = new Date()
@@ -84,15 +84,16 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                       ]
                     }
                 }
-
+                console.log(event)
                 const request = gapi.client.calendar.events.insert({
                     'calendarId': 'primary',
                     'resource': event,
-                  })
-
+                })
+                
+                // debugger
                 request.execute(event => {
                 console.log(event)
-                window.open(event.htmlLink)
+                // window.open(event.htmlLink)
                 })  
 
                         // get events
