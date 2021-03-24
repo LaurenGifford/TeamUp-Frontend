@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route, useRouteMatch, useHistory} from "react-router-dom";
+import {Helmet} from "react-helmet"
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
 import {getProjects} from "../api/projects"
@@ -29,6 +30,10 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory()
   const match = useRouteMatch()
+
+  const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
+  const API_KEY = process.env.REACT_APP_API_KEY
+  const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2
 
   useDocumentTitle("TeamUp!")
 

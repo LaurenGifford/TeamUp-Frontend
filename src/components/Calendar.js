@@ -1,7 +1,9 @@
 import { render } from 'react-dom'
 import { useDispatch, useSelector } from "react-redux";
+import {Button} from 'semantic-ui-react'
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
+import ApiCalendar from 'react-google-calendar-api';
 import { GoogleLogin } from "react-google-login";
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -12,12 +14,20 @@ function MyCalendar() {
     const currentUser = useSelector(state => state.user)
     const [events, setEvents] = useState([])
 
+    let gapi = window.gapi
+    const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+    const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
     const API_KEY = process.env.REACT_APP_API_KEY
-    console.log(CALENDAR_ID, API_KEY)
+    const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2
+
 
     let GOOGLE_CALENDAR_URL = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
     
+  
+
+
+
     useEffect(() => {
         getEvents(events => {
             setEvents(events)
@@ -40,17 +50,25 @@ function MyCalendar() {
         });
     }
 
+    function createGoogleCalendar() {
+        if (!currentUser.team.calendar_id) {
+            request.post(`https://www.googleapis.com/calendar/v3/calendars?key=${API_KEY}`).end((err, resp) => {
+                if (!err) {
+                    console.log(resp)
+                }
+            })
+        }
+    }
+
     function teamGoogleLogin(response) {
         console.log(response)
-        if (!currentUser.team.calendar_id) {
-            fetch(`https://www.googleapis.com/calendar/v3/calendars`)
-        }
     }
 
 
     return (
         <div>
             <h3>Please login to your Team's google account to view all upcoming tasks!</h3>
+            <Button> Create Calendar</Button>
             <div>
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
@@ -74,6 +92,26 @@ function MyCalendar() {
 }
 
 export default MyCalendar
+
+
+// function start() {
+//   // 2. Initialize the JavaScript client library.
+//   gapi.client.init({
+//     'apiKey': 'YOUR_API_KEY',
+//     // clientId and scope are optional if auth is not required.
+//     'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
+//     'scope': 'profile',
+//   }).then(function() {
+//     // 3. Initialize and make the API request.
+//     return gapi.client.request({
+//       'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
+//     })
+//   }).then(function(response) {
+//     console.log(response.result);
+//   }, function(reason) {
+//     console.log('Error: ' + reason.result.error.message);
+//   });
+// };
 
 
 // <!--Add buttons to initiate auth sequence and sign out-->

@@ -14,8 +14,15 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     const [popOpen, setPopOpen] = useState(false)
     const currentUser = useSelector(state => state.user)
     
-    const {id, title, description, due_on, teammates, ur_tasks, project, priority} = task
+    const {id, title, description, due_date, due_on, teammates, ur_tasks, project, priority} = task
     const tmIds = task.teammates.map(tm => tm.id)
+
+    let gapi = window.gapi
+    const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+    const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+    const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
+    const API_KEY = `${process.env.REACT_APP_API_KEY}`
+    const CLIENT_ID = `${process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}`
 
     function getColors() {
         let today = new Date()
@@ -36,6 +43,72 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                 return 'DodgerBlue'
             }
     }
+    }
+
+    function handleCalendarAdd() {
+        gapi.load('client:auth2', () => {
+            console.log('loaded client')
+
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES,
+            })
+
+            gapi.client.load('calendar', 'v3', () => console.log('bam!'))
+
+            gapi.auth2.getAuthInstance().signIn()
+            .then(()=> {
+                const event = {
+                    'summary' : `${title}`,
+                    'description': `${description}`,
+                    'start': {
+                        'dateTime': `${due_date}`,
+                        'timeZone': 'America/New_York'
+                    },
+                    'end': {
+                        'dateTime': `${due_date}`,
+                        'timeZone': 'America/New_York'
+                    },
+                    'recurrence': [
+                      'RRULE:FREQ=DAILY;COUNT=2'
+                    ],
+                    'attendees': [
+                    ],
+                    'reminders': {
+                      'useDefault': false,
+                      'overrides': [
+                        {'method': 'email', 'minutes': 24 * 60},
+                        {'method': 'popup', 'minutes': 10}
+                      ]
+                    }
+                }
+
+                const request = gapi.client.calendar.events.insert({
+                    'calendarId': 'primary',
+                    'resource': event,
+                  })
+
+                request.execute(event => {
+                console.log(event)
+                window.open(event.htmlLink)
+                })  
+
+                        // get events
+                    // gapi.client.calendar.events.list({
+                    //     'calendarId': 'primary',
+                    //     'timeMin': (new Date()).toISOString(),
+                    //     'showDeleted': false,
+                    //     'singleEvents': true,
+                    //     'maxResults': 10,
+                    //     'orderBy': 'startTime'
+                    //   }).then(response => {
+                    //     const events = response.result.items
+                    //     console.log('EVENTS: ', events)
+                    //   })
+            })
+        })
     }
     
     
@@ -166,6 +239,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     onClick={() => setShowDropdown(!showDropdown)} />
                     <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
+                    <Dropdown.Item text='Add to Calendar' onClick={handleCalendarAdd}/>
                 </Dropdown.Menu>
             </Dropdown>
         )

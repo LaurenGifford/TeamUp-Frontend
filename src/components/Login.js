@@ -48,7 +48,6 @@ function Login() {
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
@@ -93,7 +92,6 @@ function Login() {
                 value={department}
                 options={departmentOptions}
                 onChange={(e, data) =>{
-                  console.log(e, data, department)
                   setDepartment(data.value)
                   }}>
             </Dropdown>
@@ -127,8 +125,8 @@ function Login() {
         <br />
           <div>
             <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
-              buttonText="Login"
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}
+              buttonText="Login With Google"
               onSuccess={handleGoogleLogin}
               onFailure={handleGoogleLogin}
               cookiePolicy={"single_host_origin"}
