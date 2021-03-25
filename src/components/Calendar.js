@@ -67,7 +67,7 @@ function MyCalendar() {
 
     return (
         <div>
-            <h3>Please login to your Team's google account to view all upcoming tasks!</h3>
+            <h3>Please login to your google account to view all upcoming tasks!</h3>
             <Button> Create Calendar</Button>
             <div>
             <GoogleLogin

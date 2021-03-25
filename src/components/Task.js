@@ -19,10 +19,10 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
     let gapi = window.gapi
     const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
-    const SCOPES = "https://www.googleapis.com/auth/calendar";
+    const SCOPES = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events"];
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
-    const API_KEY = process.env.REACT_APP_API_KEY
-    const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST
+    const API_KEY = `${process.env.REACT_APP_API_KEY}`
+    const CLIENT_ID = `${process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}`
 
     function getColors() {
         let today = new Date()
@@ -59,7 +59,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
             gapi.client.load('calendar', 'v3', () => console.log('bam!'))
 
             gapi.auth2.getAuthInstance().signIn()
-            .then(()=> {
+            .then((resp)=> {
                 const event = {
                     'summary' : `${title}`,
                     'description': `${description}`,
@@ -84,7 +84,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                       ]
                     }
                 }
-                console.log(event)
+                console.log(event, resp)
                 const request = gapi.client.calendar.events.insert({
                     'calendarId': 'primary',
                     'resource': event,
@@ -92,6 +92,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                 
                 // debugger
                 request.execute(event => {
+
                 console.log(event)
                 // window.open(event.htmlLink)
                 })  
@@ -240,7 +241,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     onClick={() => setShowDropdown(!showDropdown)} />
                     <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
-                    <Dropdown.Item text='Add to Calendar' onClick={handleCalendarAdd}/>
+                    <Dropdown.Item icon='calendar alternate' text='Add to Calendar' onClick={handleCalendarAdd}/>
                 </Dropdown.Menu>
             </Dropdown>
         )
@@ -276,6 +277,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     <h4>{due_on}</h4>
                     <p>Project: {project.title} </p>
                     <p>{description}</p>
+                    {!canAssign && <Icon name='calendar alternate' onClick={handleCalendarAdd} style={{cursor: 'pointer'}}/>}
                     {canAssign && <TaskOptionsDropdown />}
                     {showDropdown && <AssignmentDropdown />}
                 </Popup.Content>
