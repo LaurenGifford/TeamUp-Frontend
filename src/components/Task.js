@@ -4,6 +4,7 @@ import {editUser, editUserTask, deleteUserTask, addTask} from "../redux/userSlic
 import {addToTasks, editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
 import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
+import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 
 
 function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {

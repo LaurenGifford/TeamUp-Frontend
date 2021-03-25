@@ -6,6 +6,7 @@ import { GoogleLogin } from "react-google-login";
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import request from "superagent";
+import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 
 function MyCalendar() {
     const localizer = momentLocalizer(moment)
@@ -40,27 +41,53 @@ function MyCalendar() {
         });
     }
 
-    function teamGoogleLogin(response) {
-        console.log(response)
-        if (!currentUser.team.calendar_id) {
-            fetch(`https://www.googleapis.com/calendar/v3/calendars`)
-        }
+    function googleLogin() {
+        ApiCalendar.initClient()
+        ApiCalendar.handleAuthClick()
+
+        ApiCalendar.setCalendar('primary')
+
+        if (ApiCalendar.sign)
+        ApiCalendar.listUpcomingEvents(10).then(({ result }: any) => {
+            console.log(result.items);
+            const events = [];
+            result.items.map(event => {
+                return events.push({
+                start: new Date(event.start.dateTime.toString()),
+                end: new Date(event.end.dateTime.toString()),
+                title: event.summary
+                });
+            });
+            setEvents(events)
+        });
+    
+        // if (ApiCalendar.sign){
+        // ApiCalendar.listEvents({
+        //     timeMin: new Date().toISOString(),
+        //     timeMax: new Date().addDays(10).toISOString(),
+        //     showDeleted: true,
+        //     maxResults: 10,
+        //     orderBy: 'updated'
+        // }).then(({ result }: any) => {
+        //     console.log(result.items);
+        // });}
     }
 
 
     return (
         <div>
-            <h3>Please login to your Team's google account to view all upcoming tasks!</h3>
-            <div>
+            <h3>Please login to your google account to view all upcoming tasks!</h3>
+            <button onClick={googleLogin}>Get tasks</button>
+            {/* <div>
             <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}
               buttonText="Login"
               onSuccess={teamGoogleLogin}
               onFailure={teamGoogleLogin}
               cookiePolicy={"single_host_origin"}
               // isSignedIn={true}
             />
-          </div>
+          </div> */}
           <br />
             <div>
                 <Calendar

@@ -128,7 +128,7 @@ function Login() {
         <br />
           <div>
             <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}
               buttonText="Login"
               onSuccess={handleGoogleLogin}
               onFailure={handleGoogleLogin}
