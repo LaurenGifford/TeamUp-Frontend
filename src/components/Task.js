@@ -14,8 +14,9 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [popOpen, setPopOpen] = useState(false)
     const currentUser = useSelector(state => state.user)
+    let gapi = window.gapi
     
-    const {id, title, description, due_on, teammates, ur_tasks, project, priority} = task
+    const {id, title, description, due_date, due_on, teammates, ur_tasks, project, priority} = task
     const tmIds = task.teammates.map(tm => tm.id)
 
     function getColors() {
@@ -38,7 +39,73 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
             }
     }
     }
+
+    function handleCalendarAdd() {
+        ApiCalendar.initClient()
+        ApiCalendar.handleAuthClick()
+
+        ApiCalendar.setCalendar('primary')
+        const endTime = new Date(new Date(due_date).getTime() + (60000 * 60)).toISOString()
+        // debugger
+        // const formattedEnd = endTime.toISOString()
+        
+        const event = {
+            'summary' : `${title}`,
+            'description': `${description}`,
+            'start': {
+                'dateTime': `${due_date}`,
+                'timeZone': 'America/New_York'
+            },
+            'end': {
+                'dateTime': `${endTime}`,
+                'timeZone': 'America/New_York'
+            },
+            'recurrence': [
+                'RRULE:FREQ=DAILY;COUNT=2'
+            ],
+            'attendees': [
+            ],
+            'reminders': {
+                'useDefault': false,
+                'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10}
+                ]
+            }
+        }
+        console.log(event)
+        const request = gapi.client.calendar.events.insert({
+            'calendarId': 'primary',
+            'resource': event,
+        })
+
+        request.execute(event => {
+        console.log(event)
+        })  
+    }
     
+
+    // function handleCalendarAdd() {
+    //     ApiCalendar.initClient()
+    //     ApiCalendar.handleAuthClick()
+
+    //     ApiCalendar.setCalendar('primary')
+
+    //     const eventFromNow: object = {
+    //         summary: `${description} ${teammates.map(tm => tm.name)}`,
+    //         time: 60,
+    //       };
+    //     const timeZone = 'America/New_York'
+    //     console.log(eventFromNow, timeZone)
+
+    //       ApiCalendar.createEventFromNow(eventFromNow)
+    //         .then((result: object) => {
+    //             console.log(result);
+    //         })
+    //         .catch((error: any) => {
+    //             console.log(error);
+    //         });
+    // }
     
     function handleVolunteer() {
         addUserTask(currentUser.id)
@@ -170,6 +237,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     onClick={() => setShowDropdown(!showDropdown)} />
                     <Dropdown.Item icon='hand paper outline' text='Volunteer' onClick={handleVolunteer} 
                     disabled={tmIds.includes(currentUser.id) ? true : false} />
+                    <Dropdown.Item icon='calendar alternate' text='Add to Calendar' onClick={handleCalendarAdd}/>
                 </Dropdown.Menu>
             </Dropdown>
         )
@@ -205,6 +273,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     <h4>{due_on}</h4>
                     <p>Project: {project.title} </p>
                     <p>{description}</p>
+                    {!canAssign && <Icon name='calendar alternate' onClick={handleCalendarAdd} style={{cursor: 'pointer'}}/>}
                     {canAssign && <TaskOptionsDropdown />}
                     {showDropdown && <AssignmentDropdown />}
                 </Popup.Content>
