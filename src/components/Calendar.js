@@ -16,17 +16,13 @@ function MyCalendar() {
 
     let gapi = window.gapi
     const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
-    const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+    const SCOPES = "https://www.googleapis.com/auth/calendar";
     const CALENDAR_ID = process.env.REACT_APP_CALENDAR_ID
     const API_KEY = process.env.REACT_APP_API_KEY
     const CLIENT_ID = process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST
 
 
     let GOOGLE_CALENDAR_URL = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
-    
-  
-
-
 
     useEffect(() => {
         getEvents(events => {
@@ -50,16 +46,6 @@ function MyCalendar() {
         });
     }
 
-    function createGoogleCalendar() {
-        if (!currentUser.team.calendar_id) {
-            request.post(`https://www.googleapis.com/calendar/v3/calendars?key=${API_KEY}`).end((err, resp) => {
-                if (!err) {
-                    console.log(resp)
-                }
-            })
-        }
-    }
-
     function teamGoogleLogin(response) {
         console.log(response)
     }
@@ -68,7 +54,6 @@ function MyCalendar() {
     return (
         <div>
             <h3>Please login to your google account to view all upcoming tasks!</h3>
-            <Button> Create Calendar</Button>
             <div>
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
