@@ -1,4 +1,4 @@
-import {List} from "semantic-ui-react"
+import {List, Segment} from "semantic-ui-react"
 import Task from "./Task"
 import {useSelector } from "react-redux";
 
@@ -23,12 +23,12 @@ function Upcoming() {
     ))
 
     return (
-        <div>
+        <Segment>
             <h4>CURRENT</h4>
             {tasks &&
             <List items={renderTasks} />
             }
-        </div>
+        </Segment>
     )
 }
 

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { Switch, Route, useRouteMatch, useHistory} from "react-router-dom";
+import { Switch, Route, useRouteMatch, useHistory, Link} from "react-router-dom";
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
 import {getProjects} from "../api/projects"
@@ -14,6 +14,8 @@ import MyCalendar from "./Calendar"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
 import ProjectPage from "./ProjectPage"
+import { Menu, Segment } from "semantic-ui-react";
+import { GoogleLogin } from "react-google-login";
 
 
 
@@ -60,6 +62,51 @@ function App() {
     })
   }, [])
 
+  // function handleGoogleLogin(response) {
+  //   if (response.tokenId) {
+  //     fetch("http://localhost:3000/google_login", {
+  //       method: "POST",
+  //       // credentials: "include",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${response.tokenId}`,
+  //       },
+  //       body: JSON.stringify({team_id: department, points: 0})
+  //     })
+  //       .then((r) => r.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //         const { teammate, token } = data;
+  //         dispatch(showUser(teammate))
+  //         localStorage.token = token;
+  //         history.push("/home");
+  //       });
+  //   }
+  // };
+
+  function Introduction() {
+    return (
+      <div style={{padding: '60px'}}>
+        <Segment raised vertical>
+          <h1>Welcome to TeamUp!</h1>
+          <p>A tasksharing app for teams to track projects, tasks, and teammate assignments. Get started today!</p>
+        </Segment>
+        <Menu vertical>
+          <Menu.Item 
+          name='login'
+          >
+            <Link to="/login">Login</Link>
+          </Menu.Item>
+          <Menu.Item
+          name='signup'>
+            <Link  to="/signup">Signup</Link>
+          </Menu.Item>
+        </Menu>
+      </div>
+    )
+
+  }
+
 
 
   return (
@@ -68,7 +115,7 @@ function App() {
         <main >
           <Switch>
             <Route exact path="/">
-              <h1>Welcome to TeamUp!</h1>
+              <Introduction />
             </Route>
             {!!currentUser ? <>
             <Route path="/home">

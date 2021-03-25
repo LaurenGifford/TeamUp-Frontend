@@ -10,6 +10,7 @@ import {showUser} from "../redux/userSlice"
 function Signup() {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [departmentSelected, setDepartmentSelected] = useState(false)
   const [department, setDepartment] = useState(0)
   const [formData, setFormData] = useState({
       name: "",
@@ -62,45 +63,88 @@ function Signup() {
 
   }
 
+  function handleGoogleLogin(response) {
+    if (response.tokenId) {
+      fetch("http://localhost:3000/google_login", {
+        method: "POST",
+        // credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${response.tokenId}`,
+        },
+        body: JSON.stringify({team_id: department, points: 0})
+      })
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+          const { teammate, token } = data;
+          dispatch(showUser(teammate))
+          localStorage.token = token;
+          history.push("/home");
+        });
+    }
+  };
+
     const { name, password, team_id } = formData;
 
     return (
-        <div className="signup-form">
-        <Form onSubmit={handleSubmit} autoComplete="off">
+        <div className="signup-form" style={{padding: '60px'}}>
           <h1>Signup</h1>
-
-            <Form.Group>
-            <Form.Input
-                label="Name"
-                placeholder="Name"
-                type="text"
-                name="name"
-                value={name}
-                onChange={handleChange}
-            />
-
-            <Form.Input
-                label="Password"
-                placeholder="Password"
-                type="password"
-                name="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={handleChange}
-            />
-            </Form.Group>
-            <Label >Choose Your Department</Label>
+          {!departmentSelected ?
+            <Form onSubmit={() => setDepartmentSelected(true)}>
+            <h4 >Choose Your Department</h4>
             <Dropdown
+                // compact
                 selection
-                fluid
+                closeOnBlur
+                // fluid
                 placeholder="Select Department"
                 value={department}
                 options={departmentOptions}
-                onChange={(e, data) => setDepartment(data.value)}>
+                onChange={(e, data) =>{
+                  console.log(e, data, department)
+                  setDepartment(data.value)
+                  }}>
             </Dropdown>
-            <br />
-            <Form.Button content="Submit" />
-        </Form>
+            <Form.Button >Confirm</Form.Button>
+          </Form>
+          : <>
+          <Form onSubmit={handleSubmit} autoComplete="off">
+              <Form.Group>
+              <Form.Input
+                  label="Name"
+                  placeholder="Name"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={handleChange}
+              />
+
+              <Form.Input
+                  label="Password"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={handleChange}
+              />
+              </Form.Group>
+              <br />
+              <Form.Button content="Submit" />
+          </Form>
+        <br />
+          <div>
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
+              buttonText="Login"
+              onSuccess={handleGoogleLogin}
+              onFailure={handleGoogleLogin}
+              cookiePolicy={"single_host_origin"}
+              // isSignedIn={true}
+            />
+          </div>
+          </>}
       </div>
     )
 }

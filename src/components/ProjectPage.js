@@ -38,7 +38,7 @@ function ProjectPage() {
                             {renderTeamTasks}
                         </Card.Group>
                     </Grid.Column>
-                    <Grid.Column width={5}>
+                    <Grid.Column floated='right' width={5}>
                         <AddTask project={project}/>
                     </Grid.Column>
                 </Grid.Row>

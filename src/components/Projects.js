@@ -43,7 +43,7 @@ function Projects({singleSelected, setSingleSelected}) {
                         {renderProjects}
                     </Card.Group>
                 </Grid.Column>
-                <Grid.Column width={6}>
+                <Grid.Column floated='right' width={6}>
                 {/* <Sidebar.Pushable  >
                     <Sidebar 
                         as={Form}

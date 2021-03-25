@@ -11,7 +11,7 @@ function Details() {
             <Header as='h3' dividing>{name}  |  
                 <small> {points}  <Icon name='money' /></small>
             </Header>
-            <p>{team.department}</p>
+            <p>{team.department} Department</p>
         </aside>
     )
 }

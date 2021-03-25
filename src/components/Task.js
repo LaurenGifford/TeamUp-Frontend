@@ -1,6 +1,6 @@
 import {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import {editUser, editUserTask, deleteUserTask} from "../redux/userSlice"
+import {editUser, editUserTask, deleteUserTask, addTask} from "../redux/userSlice"
 import {addToTasks, editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
 import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
@@ -56,6 +56,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         .then(r => r.json())
         .then(data => {
         dispatch(editTask(data.task))
+        dispatch(addTask(data.task))
     })
     }
     
@@ -141,6 +142,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     floating
                     selection
                     fluid
+                    closeOnBlur
                     placeholder="Select Teammate to assign"
                     value={selectedUser}
                     options={teammateOptions}
@@ -156,6 +158,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         return (
             <Dropdown 
             fluid
+            closeOnBlur
             floating 
             trigger={<Icon name='ellipsis horizontal'/>}>
                 <Dropdown.Menu >

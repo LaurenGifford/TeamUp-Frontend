@@ -81,14 +81,15 @@ function Login() {
     const { name, password,} = formData;
 
     return (
-        <div className="login-form">
+        <div className="login-form" style={{padding: '60px'}}>
           <h1>Login</h1>
           {!departmentSelected ?
           <Form onSubmit={() => setDepartmentSelected(true)}>
-            <Label >Choose Your Department</Label>
+            <h4 >Choose Your Department</h4>
             <Dropdown
                 selection
-                fluid
+                closeOnBlur
+                // fluid
                 placeholder="Select Department"
                 value={department}
                 options={departmentOptions}
