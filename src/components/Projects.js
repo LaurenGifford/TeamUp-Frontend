@@ -30,41 +30,43 @@ function Projects({singleSelected, setSingleSelected}) {
 
     function ProjectsList() {
         return (
-            <Grid columns={2} relaxed='very' style={{padding: '60px'}}>
-            <Grid.Row>
-                <Grid.Column width={10} style={{paddingBottom: '20px'}}>
-                <h2 >Team Projects</h2>
-                <i>All Projects currently assigned to your team.</i>
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column width={10}>
-                    <Card.Group centered>
-                        {renderProjects}
-                    </Card.Group>
-                </Grid.Column>
-                <Grid.Column floated='right' width={6}>
-                {/* <Sidebar.Pushable  >
-                    <Sidebar 
-                        as={Form}
-                        animation='overlay'
-                        duration={400}
-                        direction='right'
-                        visible={formVisible}
-                        onHide={() => setFormVisible(false)}
-                        inverted
-                    > */}
-                    <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
-                    {/* </Sidebar>
-                    <Sidebar.Pusher dimmed={formVisible}>
-                        <h3 onClick={() => setFormVisible(!formVisible)} >
-                            ADD PROJECT <Icon name='arrow alternate circle left'/>
-                        </h3>
-                    </Sidebar.Pusher>
-                </Sidebar.Pushable> */}
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
+            <div id='all-projects'>
+                <Grid centered style={{padding: '60px'}}>
+                <Grid.Row centered>
+                    <Grid.Column width={10} style={{paddingBottom: '20px'}}>
+                    <h2 >TEAM PROJECTS</h2>
+                    <i>All Projects currently assigned to your team.</i>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row centered >
+                    <Grid.Column width={10}>
+                        <Card.Group >
+                            {renderProjects}
+                        </Card.Group>
+                    </Grid.Column>
+                    <Grid.Column floated='right' width={6}>
+                    {/* <Sidebar.Pushable  >
+                        <Sidebar 
+                            as={Form}
+                            animation='overlay'
+                            duration={400}
+                            direction='right'
+                            visible={formVisible}
+                            onHide={() => setFormVisible(false)}
+                            inverted
+                        > */}
+                        <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
+                        {/* </Sidebar>
+                        <Sidebar.Pusher dimmed={formVisible}>
+                            <h3 onClick={() => setFormVisible(!formVisible)} >
+                                ADD PROJECT <Icon name='arrow alternate circle left'/>
+                            </h3>
+                        </Sidebar.Pusher>
+                    </Sidebar.Pushable> */}
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+        </div>
         )
     }
 

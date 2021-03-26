@@ -24,22 +24,20 @@ function Dashboard({setSingleSelected}) {
     return (
         <Grid style={{padding: '60px'}}>
             <Grid.Row>
-                <Grid.Column width={11} >
+                <Grid.Column >
                     <Details currentUser={currentUser} />
-                </Grid.Column>
-                <Grid.Column width={5} style={{paddingLeft: '60px'}}>
-                    {tasks.length !== 0 ? 
-                    <Suggested tasks={tasks}/> : 
-                    <p>No Tasks to Show!</p> }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
                 <Grid.Column width={3} >
-                    {tasks.length !== 0 ? 
-                    <Upcoming currentUser={currentUser}/>  : 
+                    {tasks.length !== 0 ? <>
+                    <Upcoming currentUser={currentUser}/> 
+                    <Suggested tasks={tasks}/>
+                     </> : 
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
                 <Grid.Column width={10} style={{paddingLeft: '60px'}}>
+                    <Segment>
                     <Header as='h2'>MY PROJECTS </Header>
                     <p><i>These are projects you are currently assigned to.</i></p>
                     <Card.Group >
@@ -47,6 +45,7 @@ function Dashboard({setSingleSelected}) {
                         renderProjects  : 
                         <p>Go to the projects page to see your team's projects!</p> }
                     </Card.Group>
+                    </Segment>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

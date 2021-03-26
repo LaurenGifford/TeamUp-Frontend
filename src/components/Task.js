@@ -46,11 +46,9 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
         ApiCalendar.setCalendar('primary')
         const endTime = new Date(new Date(due_date).getTime() + (60000 * 60)).toISOString()
-        // debugger
-        // const formattedEnd = endTime.toISOString()
-        
+
         const event = {
-            'summary' : `${title}`,
+            'summary' : `${title}. Teammates: ${teammates.map(tm => tm.name)}`,
             'description': `${description}`,
             'start': {
                 'dateTime': `${due_date}`,
@@ -83,29 +81,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         console.log(event)
         })  
     }
-    
 
-    // function handleCalendarAdd() {
-    //     ApiCalendar.initClient()
-    //     ApiCalendar.handleAuthClick()
-
-    //     ApiCalendar.setCalendar('primary')
-
-    //     const eventFromNow: object = {
-    //         summary: `${description} ${teammates.map(tm => tm.name)}`,
-    //         time: 60,
-    //       };
-    //     const timeZone = 'America/New_York'
-    //     console.log(eventFromNow, timeZone)
-
-    //       ApiCalendar.createEventFromNow(eventFromNow)
-    //         .then((result: object) => {
-    //             console.log(result);
-    //         })
-    //         .catch((error: any) => {
-    //             console.log(error);
-    //         });
-    // }
     
     function handleVolunteer() {
         addUserTask(currentUser.id)
@@ -270,9 +246,9 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     subheader={!complete ? <Icon name='warning circle'/>: <Icon name='check circle' />}>
                 </Header>
                 <Popup.Content >
-                    <h4>{due_on}</h4>
+                    <h4>{"Due " + due_on}</h4>
                     <p>Project: {project.title} </p>
-                    <p>{description}</p>
+                    <p>Notes: {description}</p>
                     {!canAssign && <Icon name='calendar alternate' onClick={handleCalendarAdd} style={{cursor: 'pointer'}}/>}
                     {canAssign && <TaskOptionsDropdown />}
                     {showDropdown && <AssignmentDropdown />}
@@ -280,7 +256,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
             </Popup>
             {upcoming &&
             <span >
-            <Icon name='delete' onClick={() => setConfirmOpen(true)}/>
+            <Icon name='trash alternate outline' onClick={() => setConfirmOpen(true)}/>
             <Confirm 
                 header='Wait!'
                 content='Are you sure you want to delete this task from your current tasks?'

@@ -13,7 +13,7 @@ import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 function MyCalendar() {
     const localizer = momentLocalizer(moment)
     const currentUser = useSelector(state => state.user)
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState([])   
 
     useEffect(() => {
         googleLogin()
@@ -49,6 +49,8 @@ function MyCalendar() {
                     localizer={localizer}
                     style={{height: '420px'}}
                     events={events}
+                    drilldownView="agenda"
+                    popup='true'
                 />
             </div>
         </div>

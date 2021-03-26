@@ -1,15 +1,13 @@
 :root {
   --lt-blue: aliceblue;
   --dk-blue: dodgerblue;
-  /* background-color: gray;  */
-  /* --gray: rgb(22, 22, 22);;
-  --cream: rgb(242, 243, 243, 0.6); */
+  --light-gray: rgb(228, 228, 228);
 }
 
-html {
-  /* background-color: gray;  */
-}
 
+#all-app {
+  background-color: var(--light-gray);
+}
 
 body {
   margin: 0;
@@ -18,7 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: gray; */
+
 }
 
 code {
@@ -40,6 +38,49 @@ header {
 .app-header {
   font-size: 50px;
   font-weight: bolder;
+}
+
+.app-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 250px;
+  
+}
+
+#welcome {
+  background-color: white;
+  text-align: center;
+  order: 2;
+  padding: 20px;
+  margin-left: 20px;
+  width: 400px;
+  /* height: 120px; */
+}
+
+#login-menu {
+  order: 1;
+  text-align: center;
+  height: 90px;
+}
+
+.login-signup-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 250px;
+  background-color: white;
+  height: 400px;
+  width: 300px;
+  /* justify-content: center; */
+  align-items: baseline;
+  padding: 40px;
 }
 
 /* header a,
@@ -80,8 +121,14 @@ li {
   list-style: none;
 }
 
-#projects-page {
+/* #projects-page {
+  display: flex;
   justify-content: center;
+} */
+
+#all-projects {
+  display: flex;
+
 }
 
 .new-project h3{

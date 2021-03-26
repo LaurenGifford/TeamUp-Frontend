@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Form, Transition, Icon} from 'semantic-ui-react'
+import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineArrowDown} from "react-icons/ai"
 import {addToProjects} from "../redux/ProjectsSlice"
@@ -49,13 +49,13 @@ function AddProj({team, onProjectAdd}) {
     const {title, priority, notes} = formData
 
     return (
-        <div className="new-project" >
+        <Segment className="new-project" >
             <h3 onClick={() => setShowForm(!showForm)} >
-                ADD PROJECT <Icon name='plus' />
+            <Icon name='folder'/> ADD PROJECT <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
                 <Form onSubmit={handleSubmit} autoComplete="off" 
-                style={{backgroundColor: 'LightSteelBlue', padding: '20px', borderRadius: '10px'}}>
+                style={{padding: '20px', borderRadius: '10px'}}>
                     <Form.Group widths="equal">
                     <Form.Input fluid
                         label="Title"
@@ -87,7 +87,7 @@ function AddProj({team, onProjectAdd}) {
                     <Form.Button content="Submit" />
                 </Form>
             </Transition>
-        </div>
+        </Segment>
     )
 }
 

@@ -86,12 +86,12 @@ function App() {
 
   function Introduction() {
     return (
-      <div style={{padding: '60px'}}>
-        <Segment raised vertical>
+      <div id="intro">
+        <Segment id="welcome" raised vertical >
           <h1>Welcome to TeamUp!</h1>
           <p>A tasksharing app for teams to track projects, tasks, and teammate assignments. Get started today!</p>
         </Segment>
-        <Menu vertical>
+        <Menu id='login-menu' vertical>
           <Menu.Item 
           name='login'
           >
@@ -110,9 +110,9 @@ function App() {
 
 
   return (
-    <>
+    <div className='app' >
       <Header setSingleSelected={setSingleSelected}/>
-        <main >
+        <main className="app-body" >
           <Switch>
             <Route exact path="/">
               <Introduction />
@@ -138,7 +138,7 @@ function App() {
             }
           </Switch>
         </main>
-    </>
+    </div>
   );
 }
 

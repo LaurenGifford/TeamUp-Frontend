@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useHistory } from "react-router-dom";
+import { Button, Icon} from 'semantic-ui-react'
 import {showUser} from "../redux/userSlice"
 
 function Header({setCurrentUser, setSingleSelected}) {
@@ -21,12 +22,12 @@ function Header({setCurrentUser, setSingleSelected}) {
                 <NavLink className="header-element" to="/signup">Signup</NavLink>
                 <NavLink className="header-element" to="/login">Login</NavLink>
             </> : <>
-                <NavLink className="header-element" to="/home">Home</NavLink>
+                <NavLink className="header-element" to="/home">Home <Icon name='home'/></NavLink>
                 <NavLink className="header-element" to="/projects" 
                     onClick={() => setSingleSelected(false)}>
-                    Projects
+                    Projects <Icon name='folder'/>
                 </NavLink>
-                <NavLink className="header-element" to="/calendar">Calendar</NavLink>
+                <NavLink className="header-element" to="/calendar">Calendar <Icon name='calendar alternate' /></NavLink>
                 <button className="header-element" id="logout" onClick={handleLogout}>Logout</button>
             </>}
         </header>

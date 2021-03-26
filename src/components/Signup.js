@@ -88,7 +88,7 @@ function Signup() {
     const { name, password, team_id } = formData;
 
     return (
-        <div className="signup-form" style={{padding: '60px'}}>
+        <div className="login-signup-form">
           <h1>Signup</h1>
           {!departmentSelected ?
             <Form onSubmit={() => setDepartmentSelected(true)}>
@@ -110,7 +110,6 @@ function Signup() {
           </Form>
           : <>
           <Form onSubmit={handleSubmit} autoComplete="off">
-              <Form.Group>
               <Form.Input
                   label="Name"
                   placeholder="Name"
@@ -129,7 +128,6 @@ function Signup() {
                   value={password}
                   onChange={handleChange}
               />
-              </Form.Group>
               <br />
               <Form.Button content="Submit" />
           </Form>

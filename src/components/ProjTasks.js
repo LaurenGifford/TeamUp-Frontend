@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {Item, Card} from 'semantic-ui-react'
+import {Item, Card, Icon} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import Task from "./Task"
@@ -26,18 +26,6 @@ function ProjTasks({project, home, setSingleSelected}) {
         10 : 'red',
     }
 
-
-
-    // const renderTasks = tasks.filter(task => task.project.id === id)
-    // .map(task => (
-    //     <Task 
-    //         key={task.id}
-    //         task={task}
-    //         upcoming={false}
-    //         completed={task.completed}
-    //         canAssign={false}
-    //     />
-    // ))
 
     function Tasks() {
         const toRender = tasks.filter(task => task.project.id === id)
@@ -69,7 +57,7 @@ function ProjTasks({project, home, setSingleSelected}) {
                 </Card.Header>
                 <Card.Meta>Priority {priority} </Card.Meta>
                 <Card.Description>
-                    <strong>{!!isHome ? "Tasks" : "Notes"} </strong>
+                    <strong>{!!isHome ? <Icon name='tasks'/> : null} </strong>
                     {!!isHome ? <Tasks /> : notes}
                 </Card.Description>
             </Card.Content>

@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
-import {Form, Dropdown, Label} from 'semantic-ui-react'
+import {Form, Dropdown, Label, Segment} from 'semantic-ui-react'
 
 
 function Login() {
@@ -81,7 +81,7 @@ function Login() {
     const { name, password,} = formData;
 
     return (
-        <div className="login-form" style={{padding: '60px'}}>
+        <div className="login-signup-form" >
           <h1>Login</h1>
           {!departmentSelected ?
           <Form onSubmit={() => setDepartmentSelected(true)}>
@@ -102,7 +102,7 @@ function Login() {
           </Form>
           : <>
         <Form onSubmit={handleSubmit} autoComplete="off">
-            <Form.Group>
+            {/* <Form.Group> */}
             <Form.Input
                 label="Name"
                 placeholder="Name"
@@ -121,7 +121,7 @@ function Login() {
                 onChange={handleChange}
             /> 
             <br />
-            </Form.Group>
+            {/* </Form.Group> */}
             <Form.Button content="Submit" />
 
         </Form>

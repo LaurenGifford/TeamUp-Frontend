@@ -1,4 +1,4 @@
-import {List, Segment} from "semantic-ui-react"
+import {List, Segment, Icon} from "semantic-ui-react"
 import { useSelector } from "react-redux";
 import Task from "./Task"
 
@@ -30,7 +30,7 @@ function Unassigned({projectId}) {
 
     return (
         <Segment>
-            <h3>UNASSIGNED</h3>
+             <h4><Icon name='tasks'/>UNASSIGNED</h4>
             <List items={renderTasks} />
         </Segment>
     )

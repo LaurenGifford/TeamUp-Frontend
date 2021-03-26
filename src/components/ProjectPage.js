@@ -26,22 +26,18 @@ function ProjectPage() {
 
     return (
         <div id="project-page" style={{padding: '60px'}}>
-            <h1 style={{paddingBottom: '60px'}}>{project.title}</h1>
-            <Grid >
-                <Grid.Row >
-                    <Grid.Column width={3}>
-                        <Unassigned projectId={parseInt(projectId)} />
-                    </Grid.Column>
-                    <Grid.Column width={8} style={{paddingLeft: '60px'}}>
-                        <h2>TEAM</h2>
-                        <Card.Group centered>
-                            {renderTeamTasks}
-                        </Card.Group>
-                    </Grid.Column>
-                    <Grid.Column floated='right' width={5}>
-                        <AddTask project={project}/>
-                    </Grid.Column>
-                </Grid.Row>
+            <h1 style={{paddingBottom: '60px', textAlign: 'left'}}>{project.title}</h1>
+            <Grid>
+                <Grid.Column width={3}>
+                    <Unassigned projectId={parseInt(projectId)} />
+                    <AddTask project={project}/>
+                </Grid.Column>
+                <Grid.Column width={12} style={{paddingLeft: '60px'}}>
+                    {/* <h2 style={{textAlign: 'center'}}>TEAM</h2> */}
+                    <Card.Group >
+                        {renderTeamTasks}
+                    </Card.Group>
+                </Grid.Column>
             </Grid>
 
         </div>

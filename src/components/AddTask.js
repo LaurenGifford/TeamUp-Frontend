@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
 import {addTaskToProject} from "../redux/ProjectsSlice"
-import {Form, Transition, Icon} from 'semantic-ui-react'
+import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
 import {AiOutlineArrowDown} from "react-icons/ai"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -63,13 +63,13 @@ function AddTask({project, onTaskAdd}) {
     const {title, description, due_date} = formData
 
     return (
-        <div className="new-task">
+        <Segment className="new-task">
             <h3 onClick={() => setShowForm(!showForm)}>
-                ADD TASK <Icon name='plus' />
+                <Icon name='tasks'/> ADD TASK <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
                 <Form onSubmit={handleSubmit} autoComplete="off" 
-                style={{backgroundColor: 'LightSteelBlue', padding: '20px', borderRadius: '10px'}}>
+                style={{padding: '20px', borderRadius: '10px'}}>
                     <Form.Group widths="equal">
                     <Form.Input fluid
                         label="Title"
@@ -102,7 +102,7 @@ function AddTask({project, onTaskAdd}) {
                     <Form.Button content="Submit" />
                 </Form>
             </Transition>
-    </div>
+    </Segment>
     )
 }
 
