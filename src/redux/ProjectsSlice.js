@@ -11,12 +11,15 @@ const projectsSlice = createSlice({
             state.push(action.payload)
         },
         addTaskToProject(state, action) {
-            console.log(current(state))
             state.tasks.push(action.payload)
-            console.log(current(state))
         },
+        editProject(state, action) {
+            const index = state.findIndex(project => project.id === action.payload.id)
+            state[index] = action.payload
+            // console.log(current(state))
+        }
     },
 })
 
-export const {addToProjects, showProjects, addTaskToProject} = projectsSlice.actions
+export const {addToProjects, showProjects, addTaskToProject, editProject} = projectsSlice.actions
 export default projectsSlice.reducer

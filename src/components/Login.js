@@ -48,7 +48,6 @@ function Login() {
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
@@ -69,7 +68,6 @@ function Login() {
           })
             .then((r) => r.json())
             .then((data) => {
-              console.log(data);
               const { teammate, token } = data;
               dispatch(showUser(teammate))
               localStorage.token = token;
@@ -94,7 +92,6 @@ function Login() {
                 value={department}
                 options={departmentOptions}
                 onChange={(e, data) =>{
-                  console.log(e, data, department)
                   setDepartment(data.value)
                   }}>
             </Dropdown>
