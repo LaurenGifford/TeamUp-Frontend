@@ -44,9 +44,9 @@ function ProjTasks({project, home, setSingleSelected}) {
         else {return null}
     }
 
-
+    // color={colors[priority]}
     return (
-        <Card color={colors[priority]}>
+        <Card id={`${colors[priority]}`}  >
             <Card.Content >
                 <Card.Header >
                 <Link 

@@ -90,6 +90,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
         
     function addUserTask(teammate_id) {
+        console.log(teammate_id)
         fetch(`http://localhost:3000/ur_tasks`, {
             method: "POST",
             headers: {
@@ -100,7 +101,8 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         .then(r => r.json())
         .then(data => {
         dispatch(editTask(data.task))
-        dispatch(addTask(data.task))
+        if (data.teammate_id === currentUser.id){
+        dispatch(addTask(data.task))}
     })
     }
     

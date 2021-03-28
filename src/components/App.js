@@ -127,7 +127,8 @@ function App() {
             <Route path="/calendar">
               <MyCalendar />
             </Route>
-            </> : <>
+            </> 
+            : <>
             <Route path="/signup">
               <SignUp />
             </Route>

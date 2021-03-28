@@ -1,12 +1,14 @@
 :root {
   --lt-blue: aliceblue;
-  --dk-blue: dodgerblue;
-  --light-gray: rgb(228, 228, 228);
+  --dk-blue: rgb(2, 69, 136);
+  --light-gray: rgb(208, 209, 211);
+  --dk-gray: rgb(27, 27, 27);
 }
 
 
 #all-app {
   background-color: var(--light-gray);
+  /* opacity: 0.7; */
 }
 
 body {
@@ -31,9 +33,12 @@ header {
   height: 70px;
   margin-bottom: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--dk-blue);
-  background-color: aliceblue;
+  background-color: var(--dk-gray);
+  border-bottom: 2px solid var(--dk-blue);
+  color: var(--light-gray)
 }
+
+
 
 .app-header {
   font-size: 50px;
@@ -62,6 +67,8 @@ header {
   padding: 20px;
   margin-left: 20px;
   width: 400px;
+  border-radius: 10px;
+  box-shadow: 8px 8px 8px #b6b5b5;
   /* height: 120px; */
 }
 
@@ -69,6 +76,18 @@ header {
   order: 1;
   text-align: center;
   height: 90px;
+  border-radius: 10px;
+  box-shadow: 8px 8px 8px #b6b5b5;
+}
+
+#login-menu a {
+  color: var(--dk-gray);
+  font-weight: bolder;
+  
+}
+
+#login-menu a:hover {
+  color: var(--light-gray)
 }
 
 .login-signup-form {
@@ -78,9 +97,14 @@ header {
   background-color: white;
   height: 400px;
   width: 300px;
-  /* justify-content: center; */
   align-items: baseline;
   padding: 40px;
+  border-radius: 10px;
+  box-shadow: 8px 8px 8px #b6b5b5;
+}
+
+.login-signup-form input:focus{
+  border-color: var(--dk-gray);
 }
 
 /* header a,
@@ -109,6 +133,43 @@ header button {
   color: var(--cream);
   cursor: pointer;
 
+}
+
+#project-cards .ui.card {
+  /* border-color: var(--dk-gray); */
+  /* border-width: 8px; */
+  /* border: 0.10px solid var(--light-gray) */
+}
+
+#project-cards .ui.card:hover {
+  box-shadow: 5px 5px 4px 1px var(--light-gray);
+  border-width: 0.5px;
+}
+
+#project-cards #blue {
+  border-left: 8px solid rgb(30, 79, 240);
+  /* background-color: blue;
+  border-color:rgb(2, 69, 136);
+  border-width: 20px; */
+}
+
+#project-cards #yellow {
+  /* border-bottom: 20px yellow; */
+  /* border-color: yellow;
+  border-width: 20px 20px 20px 20px; */
+  border-left: 8px solid rgb(240, 240, 43);
+}
+
+#project-cards #orange {
+  border-left: 8px solid rgb(248, 173, 12);
+  /* border-color:orange;
+  border-width: 20px; */
+}
+
+#project-cards #red {
+  border-left: 8px solid rgb(177, 5, 5);
+  /* border-color: red;
+  border-width: 50px; */
 }
 
 

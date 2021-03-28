@@ -18,10 +18,12 @@ function Header({setCurrentUser, setSingleSelected}) {
     return (
         <header className="header">
             <h1 id="app-header" className="header-element">TeamUp!</h1>
-            {!currentUser ? <>
-                <NavLink className="header-element" to="/signup">Signup</NavLink>
-                <NavLink className="header-element" to="/login">Login</NavLink>
-            </> : <>
+            {!currentUser ? null
+            // <>
+            //     <NavLink className="header-element" to="/signup">Signup</NavLink>
+            //     <NavLink className="header-element" to="/login">Login</NavLink>
+            // </>
+             : <>
                 <NavLink className="header-element" to="/home">Home <Icon name='home'/></NavLink>
                 <NavLink className="header-element" to="/projects" 
                     onClick={() => setSingleSelected(false)}>

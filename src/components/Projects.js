@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom";
-import {Item, Rail, Segment, Grid, Sidebar, Icon, Card, Form } from "semantic-ui-react"
+import {Item, Rail, Segment, Grid, Sidebar, Icon, Card, Form, Message } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
@@ -11,6 +11,7 @@ function Projects({singleSelected, setSingleSelected}) {
     const allProjects = useSelector((state) => state.projects)
     const currentUser = useSelector(state => state.user)
     const [formVisible, setFormVisible] = useState(false)
+    const [messageVis, setMessageVis] = useState(true)
     // const [singleSelected, setSingleSelected] = useState(false)
     const match = useRouteMatch()
     const dispatch = useDispatch();
@@ -31,8 +32,8 @@ function Projects({singleSelected, setSingleSelected}) {
     function ProjectsList() {
         return (
             <div id='all-projects'>
-                <Grid centered style={{padding: '60px'}}>
-                <Grid.Row centered>
+                <Grid style={{padding: '60px'}}>
+                <Grid.Row >
                     <Grid.Column width={10} style={{paddingBottom: '20px'}}>
                     <h2 >TEAM PROJECTS</h2>
                     <i>All Projects currently assigned to your team.</i>
@@ -40,7 +41,15 @@ function Projects({singleSelected, setSingleSelected}) {
                 </Grid.Row>
                 <Grid.Row centered >
                     <Grid.Column width={10}>
-                        <Card.Group >
+                    {messageVis &&
+                        <Message 
+                        compact
+                        floating info
+                        onDismiss={() => setMessageVis(false)}
+                        header='Curious about the project colors?'
+                        content='Red = Priority 9-10, Orange = Priority 7-8, Yellow = Priority 4-6, Blue = Priority 1-3'
+                        />}
+                        <Card.Group id='project-cards'>
                             {renderProjects}
                         </Card.Group>
                     </Grid.Column>
