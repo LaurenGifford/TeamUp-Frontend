@@ -59,9 +59,14 @@ function Signup() {
       body: JSON.stringify(formattedData),
     })
       .then((r) => {
-              if (!r.ok) throw Error("Could not signup");
-              return r.json();
-            })
+              if (r.ok) {
+                return r.json()
+              } else {return r.json().then(data => {
+                console.log(data)
+                throw data
+              })
+            }
+          })
       .then((data) => {
         const { teammate, token } = data;
         dispatch(showUser(teammate));
@@ -69,15 +74,12 @@ function Signup() {
         getProjectsAndTasks()
         history.push("/home");
       })
-      .catch((err) => setErrors([...errors, err]))
+      .catch((data) => {
+        console.log(data.error)
+        setErrors(data.error);
+      });
   }
 
-    //     .then((r) => {
-  //       if (!r.ok) throw Error("Not logged in!");
-  //       return r.json();
-  //     })
-  //     .then((user) => dispatch(showUser(user)))
-  //     .catch((err) => console.error(err));
 
   function handleGoogleLogin(response) {
     if (response.tokenId) {
@@ -90,7 +92,14 @@ function Signup() {
         },
         body: JSON.stringify({team_id: department, points: 0})
       })
-        .then((r) => r.json())
+        .then((r) => {
+          if (r.ok) {
+            return r.json()
+          } else {return r.json().then(data => {
+            throw data
+          })
+          }
+        })
         .then((data) => {
           console.log(data);
           const { teammate, token } = data;
@@ -98,6 +107,9 @@ function Signup() {
           localStorage.token = token;
           getProjectsAndTasks()
           history.push("/home");
+        })
+        .catch((data) => {
+          setErrors(data.error);
         });
     }
   };
@@ -174,7 +186,7 @@ function Signup() {
           </div>
 
           </>}
-          {errors.length !== 0 && errors.map(err => <p>{err}</p>)}
+          {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
     )
 }

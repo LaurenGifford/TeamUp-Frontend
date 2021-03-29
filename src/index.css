@@ -8,16 +8,16 @@
 
 
 #all-app {
-  /* background-color: var(--light-gray); */
+  font-family: 'Modern Sans', 'Segoe UI';
   background-image: url(TeamUp_BG_1.png)
   /* opacity: 0.7; */
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -227,3 +227,17 @@ li {
   cursor: pointer;
   /* opacity: 0.75; */
 }
+
+#calendar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dk-gray);
+  height: 650px;
+  width: 850px;
+  margin-top: 80px;
+}
+
+/* .rbc-calender#calendar {
+  background-color: var(--dk-gray);
+} */

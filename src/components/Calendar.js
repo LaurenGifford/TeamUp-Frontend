@@ -43,16 +43,15 @@ function MyCalendar() {
 
 
     return (
-        <div>
-            <div>
-                <Calendar
-                    localizer={localizer}
-                    style={{height: '420px'}}
-                    events={events}
-                    drilldownView="agenda"
-                    popup='true'
-                />
-            </div>
+        <div id='calendar-container'>
+            <Calendar
+                id='calendar'
+                localizer={localizer}
+                style={{height: '600px', width: '800px', backgroundColor: 'white'}}
+                events={events}
+                drilldownView="agenda"
+                popup='true'
+            />
         </div>
     )
 }

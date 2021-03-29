@@ -35,72 +35,88 @@ function Login() {
     value: team.id, key: team.id, text: team.department}
   ))
 
-    function handleChange(e) {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    }
+  function handleChange(e) {
+      setFormData({
+          ...formData,
+          [e.target.name]: e.target.value,
+      });
+  }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      fetch("http://localhost:3000/login", {
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+    .then((r) => {
+      if (r.ok) {
+        return r.json()
+      } else {return r.json().then(data => {
+        throw data
+      })
+      }
+    })
+    .then((data) => {
+      const { teammate, token } = data;
+      dispatch(showUser(teammate))
+      localStorage.token = token;
+      getProjectsAndTasks()
+      history.push("/home")
+    })
+    .catch((data) => {
+      setErrors(data.error);
+    });
+  }
+
+  function handleGoogleLogin(response) {
+    if (response.tokenId) {
+      fetch("http://localhost:3000/google_login", {
         method: "POST",
+        // credentials: "include",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${response.tokenId}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({team_id: department, points: 0})
       })
-        .then((r) => {
-          if (!r.ok) throw Error("Could not signup");
-          return r.json();
+      .then((r) => {
+        if (r.ok) {
+          return r.json()
+        } else {return r.json().then(data => {
+          throw data
         })
+        }
+      })
         .then((data) => {
+          console.log(data)
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
           getProjectsAndTasks()
-          history.push("/home")
+          history.push("/home");
         })
-        .catch((err) => setErrors([...errors, err]))
+        .catch((data) => {
+          setErrors(data.error);
+        });
     }
+  };
 
-      function handleGoogleLogin(response) {
-        if (response.tokenId) {
-          fetch("http://localhost:3000/google_login", {
-            method: "POST",
-            // credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${response.tokenId}`,
-            },
-            body: JSON.stringify({team_id: department, points: 0})
-          })
-            .then((r) => r.json())
-            .then((data) => {
-              console.log(data)
-              const { teammate, token } = data;
-              dispatch(showUser(teammate))
-              localStorage.token = token;
-              getProjectsAndTasks()
-              history.push("/home");
-            });
-        }
-    };
+  function getProjectsAndTasks() {
+    getTasks()
+    .then(data => {
+        dispatch(showTasks(data))
+    })
 
-    function getProjectsAndTasks() {
-      getTasks()
-      .then(data => {
-          dispatch(showTasks(data))
-      })
-  
-      getProjects()
-      .then(data => {
-          dispatch(showProjects(data))
-      })
-    }
+    getProjects()
+    .then(data => {
+        dispatch(showProjects(data))
+    })
+  }
 
-    const { name, password,} = formData;
+  const { name, password,} = formData;
 
     return (
         <div className="login-signup-form" >
@@ -158,7 +174,7 @@ function Login() {
             />
           </div>
         </> }
-        {errors.length !== 0 && errors.map(err => <p>{err}</p>)}
+        {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
     )
 }
