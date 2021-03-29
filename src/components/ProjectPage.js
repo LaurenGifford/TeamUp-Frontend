@@ -63,7 +63,7 @@ function ProjectPage() {
                     </Header.Content>
                     <Header.Subheader>
                     {notes}
-                        <Modal
+                        <Modal id='project-notes-modal'
                             as={Form}
                             onClose={() => setShowModal(false)}
                             onOpen={() => setShowModal(true)}
@@ -79,7 +79,7 @@ function ProjectPage() {
                                     value={newNotes} />
                                 </Modal.Content>
                                 <Modal.Actions>
-                                    <Button onClick={(e) => {
+                                    <Button color='grey' onClick={(e) => {
                                         setShowModal(false);
                                         handleEditProject(e)
                                     }}

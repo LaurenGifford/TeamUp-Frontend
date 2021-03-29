@@ -223,7 +223,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
 
     return (
-        <li className='task' style={{backgroundColor: getColors(), color: 'white'}}>
+        <li className='task' style={{backgroundColor: getColors(), color: 'white', }}>
             <Popup trigger={
                 <span>
                     <CheckboxOrIcon />
@@ -251,7 +251,9 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     <h4>{"Due " + due_on}</h4>
                     <p>Project: {project.title} </p>
                     <p>Notes: {description}</p>
-                    {!canAssign && <Icon name='calendar alternate' onClick={handleCalendarAdd} style={{cursor: 'pointer'}}/>}
+                    {!canAssign && <Icon name='calendar alternate' 
+                    onClick={handleCalendarAdd} style={{cursor: 'pointer'}}
+                    />}
                     {canAssign && <TaskOptionsDropdown />}
                     {showDropdown && <AssignmentDropdown />}
                 </Popup.Content>

@@ -23,7 +23,7 @@ function Upcoming() {
     ))
 
     return (
-        <Segment>
+        <Segment className='section-background'>
             <h4><Icon name='tasks'/>CURRENT</h4>
             {tasks &&
             <List items={renderTasks} />

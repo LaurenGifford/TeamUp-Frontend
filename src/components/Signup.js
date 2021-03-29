@@ -90,6 +90,7 @@ function Signup() {
     return (
         <div className="login-signup-form">
           <h1><Icon name='signup'/> Signup</h1>
+          <br></br>
           {!departmentSelected ?
             <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>
@@ -106,12 +107,12 @@ function Signup() {
                   setDepartment(data.value)
                   }}>
             </Dropdown>
-            <Form.Button >Confirm</Form.Button>
+            <Form.Button color='grey' >Confirm</Form.Button>
           </Form>
           : <>
           <Form onSubmit={handleSubmit} autoComplete="off">
               <Form.Input
-                  label="Name"
+                  // label="Name"
                   placeholder="Name"
                   type="text"
                   name="name"
@@ -120,7 +121,7 @@ function Signup() {
               />
 
               <Form.Input
-                  label="Password"
+                  // label="Password"
                   placeholder="Password"
                   type="password"
                   name="password"
@@ -128,11 +129,11 @@ function Signup() {
                   value={password}
                   onChange={handleChange}
               />
-              <br />
-              <Form.Button content="Submit" />
+              <Form.Button color='grey' content="Submit" />
           </Form>
         <br />
           <div>
+          <h2>-------- OR -------- </h2>
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_2}
               buttonText="Login"

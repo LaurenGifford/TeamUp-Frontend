@@ -84,7 +84,7 @@ function AddProj({team, onProjectAdd}) {
                         value={notes}
                         onChange={handleChange}
                         />
-                    <Form.Button content="Submit" />
+                    <Form.Button color='grey' content="Submit" />
                 </Form>
             </Transition>
         </Segment>

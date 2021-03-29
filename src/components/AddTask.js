@@ -99,7 +99,7 @@ function AddTask({project, onTaskAdd}) {
                         onChangeRaw={event => handleChangeRaw(event.target.value)}
                         />
                         <br />
-                    <Form.Button content="Submit" />
+                    <Form.Button color='grey' content="Submit" />
                 </Form>
             </Transition>
     </Segment>

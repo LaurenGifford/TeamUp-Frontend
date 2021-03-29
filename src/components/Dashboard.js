@@ -37,8 +37,8 @@ function Dashboard({setSingleSelected}) {
                      </> : 
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
-                <Grid.Column width={10} style={{paddingLeft: '60px'}}>
-                    <Segment>
+                <Grid.Column  width={10} style={{paddingLeft: '60px'}}>
+                    <Segment className='section-background'>
                     <Header as='h2'>MY PROJECTS </Header>
                     <p><i>These are the projects you are currently assigned to.</i></p>
                     <Card.Group id='project-cards'>

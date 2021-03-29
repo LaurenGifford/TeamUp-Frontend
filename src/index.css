@@ -3,6 +3,7 @@
   --dk-blue: rgb(2, 69, 136);
   --light-gray: rgb(208, 209, 211);
   --dk-gray: rgb(27, 27, 27);
+  --gold: rgb(192, 156, 13);
 }
 
 
@@ -79,6 +80,10 @@ header {
 
 }
 
+.header-element:hover {
+  color: var(--gold);
+}
+
 .app-body {
   display: flex;
   align-items: center;
@@ -95,7 +100,7 @@ header {
 }
 
 #welcome {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
   text-align: center;
   order: 2;
   padding: 20px;
@@ -111,6 +116,7 @@ header {
   height: 90px;
   border-radius: 10px;
   box-shadow: 8px 8px 8px #b6b5b5;
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 #login-menu a {
@@ -127,7 +133,7 @@ header {
   display: flex;
   flex-direction: column;
   margin-top: 250px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
   height: 400px;
   width: 300px;
   align-items: baseline;
@@ -140,9 +146,18 @@ header {
   border-color: var(--dk-gray);
 }
 
+.ui.segment.section-background{
+  /* background-color: pink; */
+  background-color: rgba(255, 255, 255, 0.6);
+}
 
-#project-cards .ui.card {
+.ten.wide.column > .ui.cards#project-cards {
+  background-color: rgba(255, 255, 255, 0.6);
+}
 
+
+.ui.card a {
+  color: var(--dk-gray);
 }
 
 #project-cards .ui.card:hover {
@@ -151,22 +166,25 @@ header {
 }
 
 #project-cards #blue {
-  border-left: 8px solid rgb(30, 79, 240);
+  border-left: 8px solid rgb(30, 79, 240, .6);
 
 }
 
 #project-cards #yellow {
-  border-left: 8px solid rgb(240, 240, 43);
+  border-left: 8px solid rgb(240, 240, 43, .6);
 }
 
 #project-cards #orange {
-  border-left: 8px solid rgb(248, 173, 12);
+  border-left: 8px solid rgb(248, 173, 12, .6);
 }
 
 #project-cards #red {
-  border-left: 8px solid rgb(177, 5, 5);
+  border-left: 8px solid rgb(177, 5, 5, .6);
 }
 
+#points {
+  color: var(--gold);
+}
 
 ul {
   list-style: none;
@@ -177,18 +195,24 @@ li {
   list-style: none;
 }
 
-/* #projects-page {
-  display: flex;
-  justify-content: center;
-} */
+#project-notes-modal {
+  background-color: var(--light-gray);
+}
 
 #all-projects {
   display: flex;
 
 }
+.ui.segment.new-project{
+  background-color: rgba(255, 255, 255, 0.6);
+}
 
 .new-project h3{
   cursor: pointer;
+}
+
+.ui.segment.new-task {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .new-task h3{
@@ -201,4 +225,5 @@ li {
 
 .task {
   cursor: pointer;
+  /* opacity: 0.75; */
 }

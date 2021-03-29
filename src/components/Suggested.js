@@ -37,7 +37,7 @@ function Suggested({tasks}) {
 
     return (
         <div>
-            <Segment raised compact>
+            <Segment raised compact className='section-background'>
                 <h4>Suggested Task</h4>
                 <i>It's coming up and high priority!</i>
                 {suggested ?

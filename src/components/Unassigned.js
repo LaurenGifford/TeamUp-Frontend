@@ -29,7 +29,7 @@ function Unassigned({projectId}) {
 
 
     return (
-        <Segment>
+        <Segment className='section-background'>
              <h4><Icon name='tasks'/>UNASSIGNED</h4>
             <List items={renderTasks} />
         </Segment>

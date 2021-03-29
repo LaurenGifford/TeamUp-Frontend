@@ -68,6 +68,7 @@ function Login() {
           })
             .then((r) => r.json())
             .then((data) => {
+              console.log(data)
               const { teammate, token } = data;
               dispatch(showUser(teammate))
               localStorage.token = token;
@@ -81,6 +82,7 @@ function Login() {
     return (
         <div className="login-signup-form" >
           <h1> <Icon name='sign in'/> Login</h1>
+          <br />
           {!departmentSelected ?
           <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>
@@ -95,13 +97,13 @@ function Login() {
                   setDepartment(data.value)
                   }}>
             </Dropdown>
-            <Form.Button >Confirm</Form.Button>
+            <br />
+            <Form.Button color='grey'>Confirm</Form.Button>
           </Form>
           : <>
         <Form onSubmit={handleSubmit} autoComplete="off">
-            {/* <Form.Group> */}
             <Form.Input
-                label="Name"
+                // label="Name"
                 placeholder="Name"
                 type="text"
                 name="name"
@@ -109,7 +111,7 @@ function Login() {
                 onChange={handleChange}
             />
             <Form.Input
-                label="Password"
+                // label="Password"
                 placeholder="Password"
                 type="password"
                 name="password"
@@ -117,13 +119,12 @@ function Login() {
                 value={password}
                 onChange={handleChange}
             /> 
-            <br />
-            {/* </Form.Group> */}
-            <Form.Button content="Submit" />
+            <Form.Button color='grey' content="Submit" />
 
         </Form>
         <br />
           <div>
+            <h2>-------- OR -------- </h2>
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID_TEST}
               buttonText="Login"

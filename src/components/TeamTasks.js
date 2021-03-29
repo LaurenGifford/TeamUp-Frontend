@@ -47,7 +47,7 @@ function TeamTasks({member, tasks, project}) {
                 <Card.Header >
                     {name}
                 </Card.Header>
-                <Card.Meta>{points}  <Icon name='money' /></Card.Meta>
+                <Card.Meta id='points'>{points}  <Icon name='money' /></Card.Meta>
             </Card.Content>
             <Card.Content >
                 <Card.Description>
