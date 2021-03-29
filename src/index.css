@@ -46,7 +46,8 @@ header {
 }
 
 #app-logo {
-  width: 110px;
+  align-self: center;
+  width: 120px;
   height: 50px;
   background-image: url(TeamUp_Logo.png);
   background-size: 110px 50px;
@@ -56,7 +57,9 @@ header {
 }
 
 #link-container {
-  width: 600px;
+  height: 50px;
+  width: 800px;
+  margin-bottom: 1rem;
   /* display: flex; */
   display: inline-block;
   flex-direction: row;
@@ -69,12 +72,12 @@ header {
 
 .header-element {
   font-size: 1rem;
-  display: inline-block;
-  background-color: var(--gray);
   border: 1px solid var(--blue);
   margin: 1rem;
   padding-bottom: 1rem;
-  text-decoration: none;
+  text-decoration: none; 
+  display: inline-block;
+  background-color: var(--dark-gray);
   color: var(--light-gray);
   cursor: pointer;
 
@@ -236,8 +239,9 @@ li {
   height: 650px;
   width: 850px;
   margin-top: 80px;
+  border-radius: 10px;
 }
 
-/* .rbc-calender#calendar {
-  background-color: var(--dk-gray);
-} */
+#calender-container > .rbc-calender#calendar {
+  border-radius: 10px;
+}

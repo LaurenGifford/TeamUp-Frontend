@@ -1,10 +1,10 @@
 import React, {useState} from "react"
-import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
+import {Form, Transition, Icon, Segment, Header, Button, Modal} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {AiOutlineArrowDown} from "react-icons/ai"
 import {addToProjects} from "../redux/ProjectsSlice"
 
-function AddProj({team, onProjectAdd}) {
+function AddProj({team,}) {
     const [formData, setFormData] = useState({
         title: "",
         priority: "",
@@ -12,6 +12,7 @@ function AddProj({team, onProjectAdd}) {
         team_id: parseInt(team.id),
     })
     const [showForm, setShowForm] = useState(false)
+    // const [formModal, setFormModal]  = useState(false)
     const dispatch = useDispatch()
 
     function handleChange(e) {
@@ -21,13 +22,13 @@ function AddProj({team, onProjectAdd}) {
         });
     }
 
-    function handleSubmit(e) {
+    function handleAddProject(e) {
         e.preventDefault()
         const formattedData = {
             ...formData,
             priority: parseInt(priority)
         }
-        console.log(formattedData)
+        // onProjectAdd(formattedData)
 
         fetch(`http://localhost:3000/projects`, {
             method: "POST",
@@ -54,8 +55,9 @@ function AddProj({team, onProjectAdd}) {
             <Icon name='folder'/> ADD PROJECT <Icon name='plus' />
             </h3>
             <Transition visible={showForm} animation='fade' duration={600}>
-                <Form onSubmit={handleSubmit} autoComplete="off" 
+                <Form onSubmit={handleAddProject} autoComplete="off" 
                 style={{padding: '20px', borderRadius: '10px'}}>
+
                     <Form.Group widths="equal">
                     <Form.Input fluid
                         label="Title"
@@ -87,7 +89,7 @@ function AddProj({team, onProjectAdd}) {
                     <Form.Button color='grey' content="Submit" />
                 </Form>
             </Transition>
-        </Segment>
+         </Segment> 
     )
 }
 
