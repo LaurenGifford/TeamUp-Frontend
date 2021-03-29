@@ -5,11 +5,16 @@ import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
+import {getTasks} from "../api/tasks"
+import {showTasks} from "../redux/tasksSlice"
+import {getProjects} from "../api/projects"
+import {showProjects} from "../redux/ProjectsSlice"
 
 
 function Signup() {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [errors, setErrors] = useState([])
   const [departmentSelected, setDepartmentSelected] = useState(false)
   const [department, setDepartment] = useState(0)
   const [formData, setFormData] = useState({
@@ -46,22 +51,33 @@ function Signup() {
         team_id: department
       }
 
-    fetch("http://localhost:3000/teammates", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formattedData),
-  })
-    .then((r) => r.json())
-    .then((data) => {
-      const { teammate, token } = data;
-      dispatch(showUser(teammate));
-      localStorage.token = token;
-      history.push("/home");
-    });
-
+      fetch("http://localhost:3000/teammates", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formattedData),
+    })
+      .then((r) => {
+              if (!r.ok) throw Error("Could not signup");
+              return r.json();
+            })
+      .then((data) => {
+        const { teammate, token } = data;
+        dispatch(showUser(teammate));
+        localStorage.token = token;
+        getProjectsAndTasks()
+        history.push("/home");
+      })
+      .catch((err) => setErrors([...errors, err]))
   }
+
+    //     .then((r) => {
+  //       if (!r.ok) throw Error("Not logged in!");
+  //       return r.json();
+  //     })
+  //     .then((user) => dispatch(showUser(user)))
+  //     .catch((err) => console.error(err));
 
   function handleGoogleLogin(response) {
     if (response.tokenId) {
@@ -80,10 +96,23 @@ function Signup() {
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
+          getProjectsAndTasks()
           history.push("/home");
         });
     }
   };
+
+  function getProjectsAndTasks() {
+    getTasks()
+    .then(data => {
+        dispatch(showTasks(data))
+    })
+
+    getProjects()
+    .then(data => {
+        dispatch(showProjects(data))
+    })
+  }
 
     const { name, password, team_id } = formData;
 
@@ -143,7 +172,9 @@ function Signup() {
               // isSignedIn={true}
             />
           </div>
+
           </>}
+          {errors.length !== 0 && errors.map(err => <p>{err}</p>)}
       </div>
     )
 }

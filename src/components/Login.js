@@ -3,14 +3,19 @@ import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import {Form, Dropdown, Label, Segment, Icon} from 'semantic-ui-react'
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
-import {Form, Dropdown, Label, Segment, Icon} from 'semantic-ui-react'
+import {getTasks} from "../api/tasks"
+import {showTasks} from "../redux/tasksSlice"
+import {getProjects} from "../api/projects"
+import {showProjects} from "../redux/ProjectsSlice"
 
 
 function Login() {
   const dispatch = useDispatch()
   const history = useHistory()
+  const [errors, setErrors] = useState([])
   const [departmentSelected, setDepartmentSelected] = useState(false)
   const [department, setDepartment] = useState(0)
   const [formData, setFormData] = useState({
@@ -46,13 +51,18 @@ function Login() {
         },
         body: JSON.stringify(formData),
       })
-        .then((r) => r.json())
+        .then((r) => {
+          if (!r.ok) throw Error("Could not signup");
+          return r.json();
+        })
         .then((data) => {
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
+          getProjectsAndTasks()
           history.push("/home")
-        });
+        })
+        .catch((err) => setErrors([...errors, err]))
     }
 
       function handleGoogleLogin(response) {
@@ -72,10 +82,23 @@ function Login() {
               const { teammate, token } = data;
               dispatch(showUser(teammate))
               localStorage.token = token;
+              getProjectsAndTasks()
               history.push("/home");
             });
         }
     };
+
+    function getProjectsAndTasks() {
+      getTasks()
+      .then(data => {
+          dispatch(showTasks(data))
+      })
+  
+      getProjects()
+      .then(data => {
+          dispatch(showProjects(data))
+      })
+    }
 
     const { name, password,} = formData;
 
@@ -135,6 +158,7 @@ function Login() {
             />
           </div>
         </> }
+        {errors.length !== 0 && errors.map(err => <p>{err}</p>)}
       </div>
     )
 }

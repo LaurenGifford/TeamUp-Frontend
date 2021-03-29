@@ -23,9 +23,12 @@ const userSlice = createSlice({
         addTask(state, action) {
             state.tasks.push(action.payload)
             console.log(current(state))
+        },
+        addProject(state, action) {
+            state.projects.push(action.payload)
         }
     }
 })
 
-export const {showUser, editUser, editUserTask, deleteUserTask, addTask} = userSlice.actions
+export const {showUser, editUser, editUserTask, deleteUserTask, addTask, addProject} = userSlice.actions
 export default userSlice.reducer

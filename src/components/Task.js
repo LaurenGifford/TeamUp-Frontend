@@ -1,6 +1,6 @@
 import {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import {editUser, editUserTask, deleteUserTask, addTask} from "../redux/userSlice"
+import {editUser, editUserTask, deleteUserTask, addTask, addProject} from "../redux/userSlice"
 import {addToTasks, editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
 import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
@@ -58,9 +58,9 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                 'dateTime': `${endTime}`,
                 'timeZone': 'America/New_York'
             },
-            'recurrence': [
-                'RRULE:FREQ=DAILY;COUNT=2'
-            ],
+            // 'recurrence': [
+            //     'RRULE:FREQ=DAILY;COUNT=2'
+            // ],
             'attendees': [
             ],
             'reminders': {
@@ -100,9 +100,12 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         })
         .then(r => r.json())
         .then(data => {
+            console.log(data)
         dispatch(editTask(data.task))
         if (data.teammate_id === currentUser.id){
-        dispatch(addTask(data.task))}
+        dispatch(addTask(data.task))
+        dispatch(addProject(data.task.project))
+    }
     })
     }
     

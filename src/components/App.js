@@ -48,41 +48,19 @@ function App() {
   //     .catch((err) => console.error(err));
   // }, []);
 
-  useEffect(() => {
-    getTasks()
-    .then(data => {
-        dispatch(showTasks(data))
-    })
-}, [])
+//   useEffect(() => {
+//     getTasks()
+//     .then(data => {
+//         dispatch(showTasks(data))
+//     })
+// }, [])
 
-  useEffect(() => {
-    getProjects()
-    .then(data => {
-        dispatch(showProjects(data))
-    })
-  }, [])
-
-  // function handleGoogleLogin(response) {
-  //   if (response.tokenId) {
-  //     fetch("http://localhost:3000/google_login", {
-  //       method: "POST",
-  //       // credentials: "include",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${response.tokenId}`,
-  //       },
-  //       body: JSON.stringify({team_id: department, points: 0})
-  //     })
-  //       .then((r) => r.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //         const { teammate, token } = data;
-  //         dispatch(showUser(teammate))
-  //         localStorage.token = token;
-  //         history.push("/home");
-  //       });
-  //   }
-  // };
+//   useEffect(() => {
+//     getProjects()
+//     .then(data => {
+//         dispatch(showProjects(data))
+//     })
+//   }, [])
 
   function Introduction() {
     return (
