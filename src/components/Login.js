@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
-import {Form, Dropdown, Label, Segment} from 'semantic-ui-react'
+import {Form, Dropdown, Label, Segment, Icon} from 'semantic-ui-react'
 
 
 function Login() {
@@ -80,7 +80,7 @@ function Login() {
 
     return (
         <div className="login-signup-form" >
-          <h1>Login</h1>
+          <h1> <Icon name='sign in'/> Login</h1>
           {!departmentSelected ?
           <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>

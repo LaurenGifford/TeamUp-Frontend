@@ -7,7 +7,8 @@
 
 
 #all-app {
-  background-color: var(--light-gray);
+  /* background-color: var(--light-gray); */
+  background-image: url(TeamUp_BG_1.png)
   /* opacity: 0.7; */
 }
 
@@ -28,21 +29,54 @@ code {
 
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   align-items: center;
   height: 70px;
-  margin-bottom: 1rem;
-  padding: 1rem;
+  /* margin-bottom: 1rem; */
+  padding-top: 1rem;
+  padding-left: 2rem;
+  /* padding-bottom: 2rem; */
   background-color: var(--dk-gray);
-  border-bottom: 2px solid var(--dk-blue);
   color: var(--light-gray)
 }
 
+#app-logo {
+  width: 110px;
+  height: 50px;
+  background-image: url(TeamUp_Logo.png);
+  background-size: 110px 50px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  order: 1;
+}
 
+#link-container {
+  width: 600px;
+  /* display: flex; */
+  display: inline-block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  order: 2;
+}
 
-.app-header {
-  font-size: 50px;
-  font-weight: bolder;
+.header-element {
+  font-size: 1rem;
+  display: inline-block;
+  background-color: var(--gray);
+  border: 1px solid var(--blue);
+  margin: 1rem;
+  padding-bottom: 1rem;
+  text-decoration: none;
+  color: var(--light-gray);
+  cursor: pointer;
+
 }
 
 .app-body {
@@ -69,7 +103,6 @@ header {
   width: 400px;
   border-radius: 10px;
   box-shadow: 8px 8px 8px #b6b5b5;
-  /* height: 120px; */
 }
 
 #login-menu {
@@ -107,38 +140,9 @@ header {
   border-color: var(--dk-gray);
 }
 
-/* header a,
-header button {
-  font-size: 1rem;
-  display: inline-block;
-  background-color: var(--gray);
-  border: 1px solid var(--blue);
-  margin: 1rem;
-  padding: 1rem;
-  text-decoration: none;
-  color: var(--cream);
-  cursor: pointer;
-  border-radius: 20px;
-} */
-
-.header-element {
-  font-size: 1rem;
-  display: inline-block;
-  background-color: var(--gray);
-  border: 1px solid var(--blue);
-  /* border: none; */
-  margin: 1rem;
-  padding-bottom: .5rem;
-  text-decoration: none;
-  color: var(--cream);
-  cursor: pointer;
-
-}
 
 #project-cards .ui.card {
-  /* border-color: var(--dk-gray); */
-  /* border-width: 8px; */
-  /* border: 0.10px solid var(--light-gray) */
+
 }
 
 #project-cards .ui.card:hover {
@@ -148,28 +152,19 @@ header button {
 
 #project-cards #blue {
   border-left: 8px solid rgb(30, 79, 240);
-  /* background-color: blue;
-  border-color:rgb(2, 69, 136);
-  border-width: 20px; */
+
 }
 
 #project-cards #yellow {
-  /* border-bottom: 20px yellow; */
-  /* border-color: yellow;
-  border-width: 20px 20px 20px 20px; */
   border-left: 8px solid rgb(240, 240, 43);
 }
 
 #project-cards #orange {
   border-left: 8px solid rgb(248, 173, 12);
-  /* border-color:orange;
-  border-width: 20px; */
 }
 
 #project-cards #red {
   border-left: 8px solid rgb(177, 5, 5);
-  /* border-color: red;
-  border-width: 50px; */
 }
 
 

@@ -17,21 +17,24 @@ function Header({setCurrentUser, setSingleSelected}) {
 
     return (
         <header className="header">
-            <h1 id="app-header" className="header-element">TeamUp!</h1>
+            <div id="app-logo" >
+            {/* <img src="TeamUp_Logo.png"/> */}
+            </div>
+            {/* <h1 id="app-header" className="header-element">TeamUp!</h1> */}
             {!currentUser ? null
             // <>
             //     <NavLink className="header-element" to="/signup">Signup</NavLink>
             //     <NavLink className="header-element" to="/login">Login</NavLink>
             // </>
-             : <>
+             : <div id='link-container'>
                 <NavLink className="header-element" to="/home">Home <Icon name='home'/></NavLink>
                 <NavLink className="header-element" to="/projects" 
                     onClick={() => setSingleSelected(false)}>
                     Projects <Icon name='folder'/>
                 </NavLink>
                 <NavLink className="header-element" to="/calendar">Calendar <Icon name='calendar alternate' /></NavLink>
-                <button className="header-element" id="logout" onClick={handleLogout}>Logout</button>
-            </>}
+                <button className="header-element" id="logout" onClick={handleLogout}>Logout <Icon name='sign out'/></button>
+            </div>}
         </header>
     )
 }

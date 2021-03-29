@@ -41,6 +41,9 @@ function Projects({singleSelected, setSingleSelected}) {
                 </Grid.Row>
                 <Grid.Row centered >
                     <Grid.Column width={10}>
+                    <Card.Group id='project-cards'>
+                            {renderProjects}
+                    </Card.Group>
                     {messageVis &&
                         <Message 
                         compact
@@ -49,9 +52,6 @@ function Projects({singleSelected, setSingleSelected}) {
                         header='Curious about the project colors?'
                         content='Red = Priority 9-10, Orange = Priority 7-8, Yellow = Priority 4-6, Blue = Priority 1-3'
                         />}
-                        <Card.Group id='project-cards'>
-                            {renderProjects}
-                        </Card.Group>
                     </Grid.Column>
                     <Grid.Column floated='right' width={6}>
                     {/* <Sidebar.Pushable  >

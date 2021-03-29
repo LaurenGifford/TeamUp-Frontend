@@ -8,10 +8,10 @@ function Details() {
     
     return (
         <aside>
-            <Header as='h3' dividing>{name}  |  
+            <Header as='h1' >{name}  |  
                 <small> {points}  <Icon name='money' /></small>
+                <Header sub >{team.department} Department</Header>
             </Header>
-            <p>{team.department} Department</p>
         </aside>
     )
 }

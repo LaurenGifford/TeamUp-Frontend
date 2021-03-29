@@ -14,7 +14,7 @@ import MyCalendar from "./Calendar"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
 import ProjectPage from "./ProjectPage"
-import { Menu, Segment } from "semantic-ui-react";
+import { Menu, Segment, Icon } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 
 
@@ -32,7 +32,7 @@ function App() {
   const history = useHistory()
   const match = useRouteMatch()
 
-  useDocumentTitle("TeamUp!")
+  useDocumentTitle("TeamUp")
 
   // useEffect(() => {
   //   fetch("http://localhost:3000/autologin", {
@@ -95,11 +95,11 @@ function App() {
           <Menu.Item 
           name='login'
           >
-            <Link to="/login">Login</Link>
+            <Link to="/login">Login <Icon name='sign in'/></Link>
           </Menu.Item>
           <Menu.Item
           name='signup'>
-            <Link  to="/signup">Signup</Link>
+            <Link  to="/signup">Signup <Icon name='signup'/></Link>
           </Menu.Item>
         </Menu>
       </div>

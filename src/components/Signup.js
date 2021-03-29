@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Form, Label, Dropdown} from 'semantic-ui-react'
+import {Form, Label, Dropdown, Icon} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
@@ -89,7 +89,7 @@ function Signup() {
 
     return (
         <div className="login-signup-form">
-          <h1>Signup</h1>
+          <h1><Icon name='signup'/> Signup</h1>
           {!departmentSelected ?
             <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>

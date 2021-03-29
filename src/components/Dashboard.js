@@ -27,12 +27,6 @@ function Dashboard({setSingleSelected}) {
             <Grid.Row>
                 <Grid.Column >
                     <Details currentUser={currentUser} />
-                    {messageVis &&
-                    <Message compact floating info
-                    onDismiss={() => setMessageVis(false)}
-                    header='Curious about the project colors?'
-                    content='Red = Priority 9-10, Orange = Priority 7-8, Yellow = Priority 4-6, Blue = Priority 1-3'
-                    /> }
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -52,7 +46,14 @@ function Dashboard({setSingleSelected}) {
                         renderProjects  : 
                         <p>Go to the projects page to see all of your team's projects and volunteer for tasks!</p> }
                     </Card.Group>
+
                     </Segment>
+                    {messageVis &&
+                    <Message compact floating info
+                    onDismiss={() => setMessageVis(false)}
+                    header='Curious about the project colors?'
+                    content='Red = Priority 9-10, Orange = Priority 7-8, Yellow = Priority 4-6, Blue = Priority 1-3'
+                    /> }
                 </Grid.Column>
             </Grid.Row>
         </Grid>
