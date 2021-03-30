@@ -67,7 +67,9 @@ function Login() {
       history.push("/home")
     })
     .catch((data) => {
-      setErrors(data.error);
+      console.log(data.error)
+      setErrors([...errors, data.error]);
+      console.log(errors)
     });
   }
 
@@ -75,12 +77,10 @@ function Login() {
     if (response.tokenId) {
       fetch("http://localhost:3000/google_login", {
         method: "POST",
-        // credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${response.tokenId}`,
         },
-        body: JSON.stringify({team_id: department, points: 0})
       })
       .then((r) => {
         if (r.ok) {
@@ -92,14 +92,19 @@ function Login() {
       })
         .then((data) => {
           console.log(data)
-          const { teammate, token } = data;
-          dispatch(showUser(teammate))
-          localStorage.token = token;
-          getProjectsAndTasks()
-          history.push("/home");
+          if (data.teammate.id){
+            const { teammate, token } = data;
+            dispatch(showUser(teammate))
+            localStorage.token = token;
+            getProjectsAndTasks()
+            history.push("/home")
+        }
+          else {
+            setErrors([...errors, "Account not found. You may need to signup!"])
+          }
         })
         .catch((data) => {
-          setErrors(data.error);
+          setErrors([...errors, data.error]);
         });
     }
   };
@@ -122,24 +127,6 @@ function Login() {
         <div className="login-signup-form" >
           <h1> <Icon name='sign in'/> Login</h1>
           <br />
-          {/* {!departmentSelected ?
-          <Form onSubmit={() => setDepartmentSelected(true)}>
-            <h4 >Choose Your Department</h4>
-            <Dropdown
-                selection
-                closeOnBlur
-                // fluid
-                placeholder="Select Department"
-                value={department}
-                options={departmentOptions}
-                onChange={(e, data) =>{
-                  setDepartment(data.value)
-                  }}>
-            </Dropdown>
-            <br />
-            <Form.Button color='grey'>Confirm</Form.Button>
-          </Form>
-          : <> */}
         <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Input
                 // label="Name"
@@ -159,7 +146,6 @@ function Login() {
                 onChange={handleChange}
             /> 
             <Form.Button color='grey' content="Submit" />
-
         </Form>
         <br />
           <div>
@@ -170,10 +156,8 @@ function Login() {
               onSuccess={handleGoogleLogin}
               onFailure={handleGoogleLogin}
               cookiePolicy={"single_host_origin"}
-              // isSignedIn={true}
             />
           </div>
-        {/* </> } */}
         {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
     )
