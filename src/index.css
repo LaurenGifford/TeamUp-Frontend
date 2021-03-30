@@ -31,7 +31,7 @@ code {
 }
 
 header {
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -51,10 +51,11 @@ header {
   align-self: center;
   width: 120px;
   height: 50px;
+  margin-left: 50px;
   background-image: url(TeamUp_Logo.png);
   background-size: 110px 45px;
   background-repeat: no-repeat;
-  display: inline-block;
+  display: inline-flex;
   order: 1;
   cursor: pointer;
 }
@@ -62,24 +63,24 @@ header {
 #link-container {
   height: 50px;
   width: 800px;
-  margin-bottom: 1rem;
-  /* display: flex; */
-  display: inline-block;
+  margin-bottom: 3rem;
+  padding-bottom: 4rem;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
   align-items: center;
   align-content: center;
   order: 2;
 }
 
 .header-element {
+  align-self: center;
   font-size: 1rem;
   border: 1px solid var(--blue);
   margin: 1rem;
   padding-bottom: 1rem;
   text-decoration: none; 
-  display: inline-block;
+  display: inline-flex;
   background-color: var(--dark-gray);
   color: var(--light-gray);
   cursor: pointer;
@@ -237,6 +238,18 @@ li {
 .task {
   cursor: pointer;
   /* opacity: 0.75; */
+}
+
+#project-info {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#complete-project {
+  height: 45px;
+  align-self: flex-end;
 }
 
 #calendar-container {

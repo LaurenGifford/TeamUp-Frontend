@@ -17,6 +17,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     let gapi = window.gapi
     
     const {id, title, description, due_date, due_on, teammates, ur_tasks, project, priority} = task
+    let currentUserProjects = currentUser.projects.map(project => project.id)
     const tmIds = task.teammates.map(tm => tm.id)
 
     function getColors() {
@@ -101,12 +102,14 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         .then(r => r.json())
         .then(data => {
             console.log(data)
-        dispatch(editTask(data.task))
-        if (data.teammate_id === currentUser.id){
-        dispatch(addTask(data.task))
-        dispatch(addProject(data.task.project))
-    }
-    })
+            dispatch(editTask(data.task))
+            if (data.teammate_id === currentUser.id){
+                dispatch(addTask(data.task))
+                if (!currentUserProjects.includes(project.id)){
+                dispatch(addProject(data.task.project))
+                }
+            }
+        })
     }
     
     function handleTaskEdit(status) {

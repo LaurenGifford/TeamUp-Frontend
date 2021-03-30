@@ -68,8 +68,8 @@ function ProjectPage({setSingleSelected}) {
 
     return (
         <div id="project-page" style={{padding: '60px'}}>
-            <div id="project-info">
-                <Header as='h1' style={{paddingBottom: '60px'}}>
+            <div id="project-info" style={{paddingBottom: '60px'}}>
+                <Header as='h1'>
                     <Header.Content>
                         {title}
                         <Priority />
@@ -103,7 +103,8 @@ function ProjectPage({setSingleSelected}) {
                                 </Modal.Actions>
                         </Modal>
                     </Header.Subheader>
-                    <Button color="grey" onClick={() => setConfirmOpen(true)}>Complete Project</Button>
+                </Header>
+                    <Button id='complete-project' color="grey" onClick={() => setConfirmOpen(true)}>Complete Project</Button>
                     <Confirm 
                     header='Wait!'
                     content="Are you sure the project is complete and you would like to remove it from your TeamUp?"
@@ -114,7 +115,6 @@ function ProjectPage({setSingleSelected}) {
                     onConfirm={handleProjectDelete}
                     size='small'
                 />
-                </Header>
 
             </div>
             <Grid>
