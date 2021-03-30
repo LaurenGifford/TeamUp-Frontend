@@ -120,7 +120,7 @@ function Projects({singleSelected, setSingleSelected}) {
         <div id="projects-page">
             <Switch>
                 <Route path={`${match.url}/:projectId`}>
-                    <ProjectPage />
+                    <ProjectPage setSingleSelected={setSingleSelected}/>
                 </Route>
             </Switch>
             {!singleSelected && <ProjectsList />}

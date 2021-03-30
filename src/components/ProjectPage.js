@@ -1,15 +1,16 @@
 import {useState, useEffect} from "react"
-import {useParams} from "react-router-dom"
-import {Item, Form, TextArea, Grid, Card, Icon, Header, Modal, Button, Input} from "semantic-ui-react"
+import {useParams, useHistory} from "react-router-dom"
+import {Item, Form, TextArea, Grid, Card, Icon, Header, Modal, Button, Input, Confirm} from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import Unassigned from "./Unassigned"
 import AddTask from "./AddTask"
 import TeamTasks from "./TeamTasks"
-import {editProject} from "../redux/ProjectsSlice"
+import {editProject, deleteProject} from "../redux/ProjectsSlice"
 
-function ProjectPage() {
+function ProjectPage({setSingleSelected}) {
     let {projectId} = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
     const allProjects = useSelector((state) => state.projects)
     const tasks = useSelector(state => state.tasks)
     const project = allProjects.find(p => p.id === parseInt(projectId))
@@ -17,6 +18,7 @@ function ProjectPage() {
     const {id, title, notes, priority} = project
     const [showModal, setShowModal] = useState(false)
     const [newNotes, setNewNotes] = useState(notes)
+    const [confirmOpen, setConfirmOpen] = useState(false)
 
     
     const renderTeamTasks = project.team.teammates.map(member => (
@@ -42,6 +44,17 @@ function ProjectPage() {
         .then(r => r.json())
         .then(data => dispatch(editProject(data)))
     }
+
+    function handleProjectDelete() {
+        console.log("delete?", id)
+        dispatch(deleteProject(id))
+        fetch(`http://localhost:3000/projects/${id}`, {
+            method: "DELETE"})
+        history.push('/projects')
+        setSingleSelected(false)
+    }
+
+    const handleCancel = () => setConfirmOpen(false)
 
     function Priority() {
             if (priority >= 7){
@@ -90,6 +103,17 @@ function ProjectPage() {
                                 </Modal.Actions>
                         </Modal>
                     </Header.Subheader>
+                    <Button color="grey" onClick={() => setConfirmOpen(true)}>Complete Project</Button>
+                    <Confirm 
+                    header='Wait!'
+                    content="Are you sure the project is complete and you would like to remove it from your TeamUp?"
+                    open={confirmOpen}
+                    cancelButton='Never mind'
+                    confirmButton="Yes Please"
+                    onCancel={handleCancel}
+                    onConfirm={handleProjectDelete}
+                    size='small'
+                />
                 </Header>
 
             </div>

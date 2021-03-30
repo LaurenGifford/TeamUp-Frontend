@@ -4,6 +4,8 @@
   --light-gray: rgb(208, 209, 211);
   --dk-gray: rgb(27, 27, 27);
   --gold: rgb(192, 156, 13);
+  /* display: inline-flex
+ */
 }
 
 
@@ -54,6 +56,7 @@ header {
   background-repeat: no-repeat;
   display: inline-block;
   order: 1;
+  cursor: pointer;
 }
 
 #link-container {

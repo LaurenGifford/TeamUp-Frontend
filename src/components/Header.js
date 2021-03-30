@@ -23,7 +23,7 @@ function Header({setCurrentUser, setSingleSelected}) {
 
     return (
         <header className="header">
-            <div id="app-logo" ></div>
+            <div id="app-logo" onClick={() => history.push('/')}><Link to="/"/></div>
             {currentUser &&
             // <>
             //     <NavLink className="header-element" to="/signup">Signup</NavLink>

@@ -17,9 +17,14 @@ const projectsSlice = createSlice({
             const index = state.findIndex(project => project.id === action.payload.id)
             state[index] = action.payload
             // console.log(current(state))
+        },
+        deleteProject(state, action) {
+            let edited = state.filter(project => project.id !== action.payload)
+            console.log(current(state))
+            return edited
         }
     },
 })
 
-export const {addToProjects, showProjects, addTaskToProject, editProject} = projectsSlice.actions
+export const {addToProjects, showProjects, addTaskToProject, editProject, deleteProject} = projectsSlice.actions
 export default projectsSlice.reducer
