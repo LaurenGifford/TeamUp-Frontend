@@ -22,7 +22,8 @@ function Projects({singleSelected, setSingleSelected}) {
     const match = useRouteMatch()
     const dispatch = useDispatch();
 
-    const renderProjects = allProjects.map(project => (
+    const renderProjects = allProjects.filter(proj => proj.team.id === currentUser.team.id)
+    .map(project => (
         <ProjTasks 
             key={project.id}
             project={project}

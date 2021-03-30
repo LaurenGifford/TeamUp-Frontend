@@ -47,13 +47,13 @@ function Header({setCurrentUser, setSingleSelected}) {
             //     </Menu.Item>
             // </Menu>
             <div id='link-container'>
-            <NavLink className="header-element" to="/home">Home <Icon name='home'/></NavLink>
+            <NavLink className="header-element" to="/home">HOME <Icon name='home'/></NavLink>
             <NavLink className="header-element" to="/projects" 
                 onClick={() => setSingleSelected(false)}>
-                Projects <Icon name='folder'/>
+                PROJECTS <Icon name='folder'/>
             </NavLink>
-            <NavLink className="header-element" to="/calendar">Calendar <Icon name='calendar alternate' /></NavLink>
-            <button className="header-element" id="logout" onClick={handleLogout}>Logout <Icon name='sign out'/></button>
+            <NavLink className="header-element" to="/calendar">CALENDAR <Icon name='calendar alternate' /></NavLink>
+            <button className="header-element" id="logout" onClick={handleLogout}>LOGOUT <Icon name='sign out'/></button>
         </div>
             }
         </header>

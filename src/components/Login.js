@@ -122,7 +122,7 @@ function Login() {
         <div className="login-signup-form" >
           <h1> <Icon name='sign in'/> Login</h1>
           <br />
-          {!departmentSelected ?
+          {/* {!departmentSelected ?
           <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>
             <Dropdown
@@ -139,7 +139,7 @@ function Login() {
             <br />
             <Form.Button color='grey'>Confirm</Form.Button>
           </Form>
-          : <>
+          : <> */}
         <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Input
                 // label="Name"
@@ -173,7 +173,7 @@ function Login() {
               // isSignedIn={true}
             />
           </div>
-        </> }
+        {/* </> } */}
         {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
     )

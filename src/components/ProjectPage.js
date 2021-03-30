@@ -94,11 +94,11 @@ function ProjectPage() {
 
             </div>
             <Grid>
-                <Grid.Column width={3}>
+                <Grid.Column width={4}>
                     <Unassigned projectId={parseInt(projectId)} />
                     <AddTask project={project}/>
                 </Grid.Column>
-                <Grid.Column width={12} style={{paddingLeft: '60px'}}>
+                <Grid.Column width={10} style={{paddingLeft: '60px'}}>
                     {/* <h2 style={{textAlign: 'center'}}>TEAM</h2> */}
                     <Card.Group >
                         {renderTeamTasks}
