@@ -7,10 +7,10 @@
 - [Next Steps](#next-steps)
 
 ### Functionality
-After logging into the app, a Casting Director will create a new project by answering a series of project detail questionsa which will impact which models they have access to. Once the project has been created, Casting Directors will answer times questions regarding their desired model attributes. Models will be filtered to fit user preferences and can be hired to the project. Run out of time or have bad luck will the Agent Monster and the Casting Director's budget will suffer! Once all questions have been answered and models are hired, a Casting Director is taken to see all of their projects and models where they can then view and fire models.
+This app allows a team to view all of their current projects, project details, and which tasks the team's memeber's are currently working on. Teammamtes can add projects for their team or tasks to a specific project. They can also volunteer for a task, and assign it to or remove it from another teammate. On their home dashboard, a user will see all of their current tasks organized by project association and can mark tasks as completed to recieve TeamUp points! The dashboard also features a suggested task to get your work started for the day. Teammates can add tasks to their primary Google calendar after logging into their Google account and are able to later view these tasks on the calendar page.
 
 ### Frameworks
-This project was created with a React frontend using JSON Web Token for Authentication. The backend is built witha RESTful Rails API and a Postgresql database.
+This project was created with a React frontend using JSON Web Token for Authentication. It utilizes Google's Calendar API to authenticate users and allow for real time schedule integration and management. The backend is built with a RESTful Rails API and a Postgresql database.
 
 ### Getting Started
 1. Fork and clone this frontend repo and its accompanying [backend](https://github.com/LaurenGifford/TeamUp-Backend) onto your local machine.
@@ -18,9 +18,9 @@ This project was created with a React frontend using JSON Web Token for Authenti
 3. Run `npm start` to start up a server listening on localhost:3001.
 4. Complete backend setup specified in that repository.
 5. Finally, if a browser tab has not already opened up, please visit localhost:3001 in browser to launch the app.
-6. If you would prefer to skip the setup and directly view a running version, please checkout the deployed app on [Netlify](https://bookher.netlify.app/login)! 
+6. If you would prefer to skip the setup and directly view a running version, please checkout the deployed app on Netlify (coming soon)! 
 
 ### Next Steps
-In subsequent versions of this app, we hope to create game prompts to inform the player of actions they should take to avoid penalties.
+In subsequent versions of this app, team leader permissions will be added to allow for more customized project management.
 Feedback and contributions are welcomed.
 
