@@ -9,7 +9,6 @@ function ProjTasks({project, home, setSingleSelected}) {
     const currentUser = useSelector(state => state.user)
     const allTasks = useSelector(state => state.tasks)
     const {tasks} = currentUser
-    // const tasks = allTasks
     const {id, title, notes, priority} = project
     let projectId = id
 
@@ -43,26 +42,24 @@ function ProjTasks({project, home, setSingleSelected}) {
         }
         else {return null}
     }
-
-    // color={colors[priority]}
     return (
         <Transition visible={true} transitionOnMount={true} animation='vertical flip' duration={800}>
-        <Card id={`${colors[priority]}`}  >
-            <Card.Content >
-                <Card.Header >
-                <Link 
-                    to={`/projects/${projectId}`} 
-                    onClick={() => setSingleSelected(true)} >
-                    {title}
-                </Link>
-                </Card.Header>
-                <Card.Meta>Priority {priority} </Card.Meta>
-                <Card.Description>
-                    <strong>{!!isHome ? <Icon name='tasks'/> : null} </strong>
-                    {!!isHome ? <Tasks /> : notes}
-                </Card.Description>
-            </Card.Content>
-        </Card>
+            <Card id={`${colors[priority]}`}  >
+                <Card.Content >
+                    <Card.Header >
+                    <Link 
+                        to={`/projects/${projectId}`} 
+                        onClick={() => setSingleSelected(true)} >
+                        {title}
+                    </Link>
+                    </Card.Header>
+                    <Card.Meta>Priority {priority} </Card.Meta>
+                    <Card.Description>
+                        <strong>{!!isHome ? <Icon name='tasks'/> : null} </strong>
+                        {!!isHome ? <Tasks /> : notes}
+                    </Card.Description>
+                </Card.Content>
+            </Card>
         </Transition>
     )
 }

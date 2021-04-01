@@ -67,9 +67,7 @@ function Login() {
       history.push("/home")
     })
     .catch((data) => {
-      console.log(data.error)
       setErrors([...errors, data.error]);
-      console.log(errors)
     });
   }
 
@@ -130,7 +128,6 @@ function Login() {
           <br />
         <Form onSubmit={handleSubmit} autoComplete="off">
             <Form.Input
-                // label="Name"
                 placeholder="Name"
                 type="text"
                 name="name"
@@ -138,7 +135,6 @@ function Login() {
                 onChange={handleChange}
             />
             <Form.Input
-                // label="Password"
                 placeholder="Password"
                 type="password"
                 name="password"

@@ -6,8 +6,6 @@ import {useSelector } from "react-redux";
 
 function Upcoming() {
     const currentUser = useSelector(state => state.user)
-    // const tasks = useSelector(state => state.tasks)
-    // const tms = tasks.map(task => task.teammates)
     const {id, name, points, team_id, tasks} = currentUser
 
     const renderTasks = tasks.map(task => (

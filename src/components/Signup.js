@@ -62,7 +62,6 @@ function Signup() {
               if (r.ok) {
                 return r.json()
               } else {return r.json().then(data => {
-                console.log(data)
                 throw data
               })
             }
@@ -75,7 +74,6 @@ function Signup() {
         history.push("/home");
       })
       .catch((data) => {
-        console.log(data.error)
         setErrors(data.error);
       });
   }
@@ -85,7 +83,6 @@ function Signup() {
     if (response.tokenId) {
       fetch("http://localhost:3000/google_login", {
         method: "POST",
-        // credentials: "include",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${response.tokenId}`,
@@ -101,7 +98,6 @@ function Signup() {
           }
         })
         .then((data) => {
-          console.log(data);
           const { teammate, token } = data;
           dispatch(showUser(teammate))
           localStorage.token = token;
@@ -144,7 +140,6 @@ function Signup() {
                 value={department}
                 options={departmentOptions}
                 onChange={(e, data) =>{
-                  console.log(e, data, department)
                   setDepartment(data.value)
                   }}>
             </Dropdown>
@@ -153,7 +148,6 @@ function Signup() {
           : <>
           <Form onSubmit={handleSubmit} autoComplete="off">
               <Form.Input
-                  // label="Name"
                   placeholder="Name"
                   type="text"
                   name="name"
@@ -162,7 +156,6 @@ function Signup() {
               />
 
               <Form.Input
-                  // label="Password"
                   placeholder="Password"
                   type="password"
                   name="password"
@@ -181,7 +174,6 @@ function Signup() {
               onSuccess={handleGoogleLogin}
               onFailure={handleGoogleLogin}
               cookiePolicy={"single_host_origin"}
-              // isSignedIn={true}
             />
           </div>
 

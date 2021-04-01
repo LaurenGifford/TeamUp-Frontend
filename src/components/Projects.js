@@ -13,12 +13,6 @@ function Projects({singleSelected, setSingleSelected}) {
     const [formVisible, setFormVisible] = useState(false)
     const [messageVis, setMessageVis] = useState(true)
     const [formModal, setFormModal]  = useState(false)
-    // const [formData, setFormData] = useState({
-    //     title: "",
-    //     priority: "",
-    //     notes: "",
-    //     team_id: parseInt(currentUser.team.id),
-    // })
     const match = useRouteMatch()
     const dispatch = useDispatch();
 
@@ -32,34 +26,8 @@ function Projects({singleSelected, setSingleSelected}) {
         />
     ))
 
-    // function handleAddProject(e) {
-    //     console.log("triggered")
-
-    //     e.preventDefault()
-    //     const formattedData = {
-    //         ...formData,
-    //         priority: parseInt(formData.priority)
-    //     }
-    //     fetch(`http://localhost:3000/projects`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type" : 'application/json'
-    //         },
-    //         body: JSON.stringify(formattedData)
-    //     })
-    //     .then(r => r.json())
-    //     .then(data => dispatch(addToProjects(data)))
-    //     setFormData({
-    //         title: "",
-    //         priority: "",
-    //         notes: "",
-    //         team_id: parseInt(currentUser.team.id),
-    //     })
-    // }
-
     function ProjectsList() {
         return (
-            // <Transition visible={true} transitionOnMount={true} animation='slide down' duration={800}>
             <div id='all-projects'>
                 <Grid style={{padding: '60px'}}>
                 <Grid.Row >
@@ -84,36 +52,10 @@ function Projects({singleSelected, setSingleSelected}) {
                     </Grid.Column>
                     <Grid.Column floated='right' width={6}>
                     <AddProj team={currentUser.team} />
-                                {/* <Header onClick={() => setFormModal(true)}>ADD PROJECT <Icon name='folder'/></Header>
-                            {formModal && <AddProj team={currentUser.team} formModal={formModal} setFormModal={setFormModal}/>} */}
-                        {/* <Modal
-                            as={Form}
-                            onClose={() => setFormModal(false)}
-                            onOpen={() => setFormModal(true)}
-                            open={formModal}
-                            trigger={<h3><Icon name='folder'/> ADD PROJECT</h3>}
-                            > */}
-                                {/* <Modal.Content>
-                                    <AddProj onProjectAdd={handleAddProject} team={currentUser.team} />
-                                </Modal.Content>
-                                <Modal.Actions>
-                                    <Button onClick={(e) => {
-                                        handleAddProject(e)
-                                        setFormModal(false)}} type='submit'>Add</Button>
-                                    <Button onClick={setFormModal(false)}>Never Mind</Button>
-                                </Modal.Actions> */}
-                        {/* </Modal> */}
-                        {/* <Modal as={Form}
-                        trigger={<h3><Icon name='folder'/> ADD PROJECT</h3>}
-                        header='ADD PROJECT'
-                        content={<AddProj onProjectAdd={handleAddProject} team={currentUser.team} formData={formData} setFormData={setFormData} />}
-                        actions={['Never Mind', { key: 'done', content: 'Done', positive: true, type: 'submit', onClick: handleAddProject }]}
-                        /> */}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
         </div>
-        // </Transition>
         )
     }
 

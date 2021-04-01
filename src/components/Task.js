@@ -72,14 +72,12 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                 ]
             }
         }
-        console.log(event)
         const request = gapi.client.calendar.events.insert({
             'calendarId': 'primary',
             'resource': event,
         })
 
         request.execute(event => {
-        console.log(event)
         })  
     }
 
@@ -91,7 +89,6 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
         
     function addUserTask(teammate_id) {
-        console.log(teammate_id)
         fetch(`http://localhost:3000/ur_tasks`, {
             method: "POST",
             headers: {
@@ -228,7 +225,6 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
 
     return (
-        // <Transition visible={true} transitionOnMount={true} animation='bounce' duration={1100}>
         <li className='task' style={{backgroundColor: getColors(), color: 'white', }}>
             <Popup trigger={
                 <span>
@@ -280,7 +276,6 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
             </span>
             }
         </li>
-    // </Transition>
     )
 }
 

@@ -123,7 +123,6 @@ function ProjectPage({setSingleSelected}) {
                     <AddTask project={project}/>
                 </Grid.Column>
                 <Grid.Column width={10} style={{paddingLeft: '60px'}}>
-                    {/* <h2 style={{textAlign: 'center'}}>TEAM</h2> */}
                     <Card.Group >
                         {renderTeamTasks}
                     </Card.Group>

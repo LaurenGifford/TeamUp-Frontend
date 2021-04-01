@@ -1,4 +1,4 @@
-import {Grid, Card, Icon, Transition} from "semantic-ui-react"
+import {Card, Icon, Transition} from "semantic-ui-react"
 import Task from "./Task"
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
@@ -52,7 +52,6 @@ function TeamTasks({member, tasks, project}) {
             </Card.Content>
             <Card.Content >
                 <Card.Description>
-                    {/* <strong>Tasks</strong> */}
                     {renderTasks}
                 </Card.Description>
             </Card.Content>

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
 import {addTaskToProject} from "../redux/ProjectsSlice"
 import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
-import {AiOutlineArrowDown} from "react-icons/ai"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

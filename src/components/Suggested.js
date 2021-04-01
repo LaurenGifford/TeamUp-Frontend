@@ -16,7 +16,6 @@ function Suggested({tasks}) {
         let i = 0
         while ( i < tasks.length) {
             let thisScore = getDateScore(tasks[i]) * tasks[i].priority
-            // debugger
             edited.push({...tasks[i], score: thisScore});
             i++
         }
