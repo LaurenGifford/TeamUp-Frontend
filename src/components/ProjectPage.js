@@ -6,6 +6,7 @@ import Unassigned from "./Unassigned"
 import AddTask from "./AddTask"
 import TeamTasks from "./TeamTasks"
 import {editProject, deleteProject} from "../redux/ProjectsSlice"
+import {deleteUserProject} from "../redux/userSlice"
 
 function ProjectPage({setSingleSelected}) {
     let {projectId} = useParams()
@@ -48,8 +49,11 @@ function ProjectPage({setSingleSelected}) {
     function handleProjectDelete() {
         console.log("delete?", id)
         dispatch(deleteProject(id))
+        dispatch(deleteUserProject(id))
+
         fetch(`http://localhost:3000/projects/${id}`, {
             method: "DELETE"})
+            
         history.push('/projects')
         setSingleSelected(false)
     }

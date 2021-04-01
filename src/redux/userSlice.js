@@ -26,9 +26,13 @@ const userSlice = createSlice({
         },
         addProject(state, action) {
             state.projects.push(action.payload)
+        },
+        deleteUserProject(state, action) {
+            let edited = state.projects.filter(project => project.id !== action.payload)
+            state.projects = edited
         }
     }
 })
 
-export const {showUser, editUser, editUserTask, deleteUserTask, addTask, addProject} = userSlice.actions
+export const {showUser, editUser, editUserTask, deleteUserTask, addTask, addProject, deleteUserProject} = userSlice.actions
 export default userSlice.reducer
