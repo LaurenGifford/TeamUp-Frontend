@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {editUser, editUserTask, deleteUserTask, addTask, addProject} from "../redux/userSlice"
 import {addToTasks, editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
-import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Select, Dropdown} from 'semantic-ui-react'
+import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Transition, Dropdown} from 'semantic-ui-react'
 import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 
 
@@ -101,7 +101,6 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
         })
         .then(r => r.json())
         .then(data => {
-            console.log(data)
             dispatch(editTask(data.task))
             if (data.teammate_id === currentUser.id){
                 dispatch(addTask(data.task))
@@ -200,7 +199,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
                     options={teammateOptions}
                     onChange={(e, data) => setSelectedUser(data.value)}>
                 </Dropdown>
-                    <Form.Button>Assign Task</Form.Button>
+                    <Form.Button color='grey'>Assign Task</Form.Button>
             </Form>
        )
     }
@@ -229,6 +228,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
 
     return (
+        // <Transition visible={true} transitionOnMount={true} animation='bounce' duration={1100}>
         <li className='task' style={{backgroundColor: getColors(), color: 'white', }}>
             <Popup trigger={
                 <span>
@@ -280,7 +280,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
             </span>
             }
         </li>
-
+    // </Transition>
     )
 }
 

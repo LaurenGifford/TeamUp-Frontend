@@ -1,4 +1,4 @@
-import {Rail, Segment, Icon} from "semantic-ui-react"
+import {Rail, Segment, Icon, Transition} from "semantic-ui-react"
 import {useState} from "react"
 import Task from "./Task"
 
@@ -36,8 +36,9 @@ function Suggested({tasks}) {
 
 
     return (
+        <Transition visible={true} transitionOnMount={true} animation='vertical flip' duration={800}>
         <div>
-            <Segment raised compact className='section-background'>
+            <Segment raised className='section-background'>
                 <h4>Suggested Task</h4>
                 <i>It's coming up and high priority!</i>
                 {suggested ?
@@ -49,6 +50,7 @@ function Suggested({tasks}) {
                 : <p>None to suggest</p>}
             </Segment>
         </div>
+        </Transition>
     )
 }
 

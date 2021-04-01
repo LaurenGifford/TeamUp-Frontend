@@ -7,7 +7,7 @@ function Details() {
     const {name, points, team, tasks} = currentUser
     
     return (
-        <aside>
+        <aside id='user-details'>
             <Header as='h1' >{name}  |  
                 <small > {points}  <Icon id='points' name='money' /></small>
                 <Header sub >{team.department} Department</Header>

@@ -51,7 +51,8 @@ header {
   align-self: center;
   width: 120px;
   height: 50px;
-  margin-left: 50px;
+  margin-left: 40px;
+  margin-right: 20px;
   background-image: url(TeamUp_Logo.png);
   background-size: 110px 45px;
   background-repeat: no-repeat;
@@ -63,8 +64,8 @@ header {
 #link-container {
   height: 50px;
   width: 800px;
-  margin-bottom: 3rem;
-  padding-bottom: 4rem;
+  /* margin-bottom: 3rem;
+  padding-bottom: 4rem; */
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -73,21 +74,26 @@ header {
   order: 2;
 }
 
-.header-element {
+#link-container > .header-element {
   align-self: center;
   font-size: 1rem;
-  border: 1px solid var(--blue);
+  /* width: 60px; */
+  border: 1px;
   margin: 1rem;
   padding-bottom: 1rem;
   text-decoration: none; 
   display: inline-flex;
+  justify-content: space-between;
   background-color: var(--dark-gray);
   color: var(--light-gray);
   cursor: pointer;
-
 }
 
-.header-element:hover {
+#link-container > .header-element.active {
+  color: var(--gold)
+}
+
+#link-container > .header-element:hover {
   color: var(--gold);
 }
 
@@ -103,10 +109,10 @@ header {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-  height: 850px;
+  height: 800px;
   width: 800px;
   background-image: url(TeamUp_Logo.png);
-  background-size: 800px 350px;
+  background-size: 800px 320px;
   background-repeat: no-repeat;
   /* opacity: 0.5; */
 }
@@ -141,10 +147,10 @@ header {
   color: var(--light-gray)
 }
 
-.login-signup-form {
+.zoom.login-signup-form.visible.transition {
   display: flex;
   flex-direction: column;
-  margin-top: 250px;
+  margin-top: 150px;
   background-color: rgba(255, 255, 255, 0.6);
   height: 400px;
   width: 300px;
@@ -159,12 +165,13 @@ header {
 }
 
 .ui.segment.section-background{
-  /* background-color: pink; */
   background-color: rgba(255, 255, 255, 0.6);
 }
 
+
 .ten.wide.column > .ui.cards#project-cards {
   background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
 }
 
 
@@ -236,7 +243,12 @@ li {
 }
 
 .task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   cursor: pointer;
+  margin-bottom: .3rem;
+  padding: .2rem;
   /* opacity: 0.75; */
 }
 
@@ -252,8 +264,42 @@ li {
   align-self: flex-end;
 }
 
-#calendar-container {
+#user-details {
+  margin-bottom: 3rem;
+}
+
+#listed-tasks {
   display: flex;
+  flex-direction: column;
+}
+
+#upcoming {
+  order: 2;
+  width: 100%;
+  margin-top: 3rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+}
+
+#suggested {
+  order: 1;
+  width: 100%;
+}
+
+#calendar-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dk-gray);
+  height: 650px;
+  width: 850px;
+  margin-top: 80px;
+  border-radius: 10px;
+}
+
+.zoom.visible.transition {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: var(--dk-gray);

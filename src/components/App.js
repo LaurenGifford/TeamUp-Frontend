@@ -14,7 +14,7 @@ import MyCalendar from "./Calendar"
 import Dashboard from "./Dashboard"
 import Projects from "./Projects"
 import ProjectPage from "./ProjectPage"
-import { Menu, Segment, Icon } from "semantic-ui-react";
+import { Menu, Segment, Icon, Transition } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 
 
@@ -82,7 +82,6 @@ function App() {
         </Menu>
       </div>
     )
-
   }
 
 

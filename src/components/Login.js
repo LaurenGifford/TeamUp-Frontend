@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import {Form, Dropdown, Label, Segment, Icon} from 'semantic-ui-react'
+import {Form, Dropdown, Label, Segment, Icon, Transition} from 'semantic-ui-react'
 import { getUser } from "../api/user";
 import {showUser} from "../redux/userSlice"
 import {getTasks} from "../api/tasks"
@@ -124,6 +124,7 @@ function Login() {
   const { name, password,} = formData;
 
     return (
+      <Transition visible={true} transitionOnMount={true} animation='zoom' duration={800}>
         <div className="login-signup-form" >
           <h1> <Icon name='sign in'/> Login</h1>
           <br />
@@ -160,6 +161,7 @@ function Login() {
           </div>
         {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
+      </Transition>
     )
 }
 

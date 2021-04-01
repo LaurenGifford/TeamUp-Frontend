@@ -1,6 +1,6 @@
 import { render } from 'react-dom'
 import { useDispatch, useSelector } from "react-redux";
-import {Button} from 'semantic-ui-react'
+import {Button, Transition} from 'semantic-ui-react'
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
 import { GoogleLogin } from "react-google-login";
@@ -13,7 +13,8 @@ import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 function MyCalendar() {
     const localizer = momentLocalizer(moment)
     const currentUser = useSelector(state => state.user)
-    const [events, setEvents] = useState([])   
+    const [events, setEvents] = useState([])
+    const [showCal, setShowCal] = useState(true)
 
     useEffect(() => {
         googleLogin()
@@ -43,16 +44,18 @@ function MyCalendar() {
 
 
     return (
-        <div id='calendar-container'>
-            <Calendar
-                id='calendar'
-                localizer={localizer}
-                style={{height: '600px', width: '800px', backgroundColor: 'white'}}
-                events={events}
-                drilldownView="agenda"
-                popup='true'
-            />
-        </div>
+        <Transition visible={showCal} transitionOnMount={true} animation='zoom' duration={800}>
+            <div id='calendar-container'>
+                <Calendar
+                    id='calendar'
+                    localizer={localizer}
+                    style={{height: '600px', width: '800px', padding: '10px', margin: '25px', backgroundColor: 'white'}}
+                    events={events}
+                    drilldownView="agenda"
+                    popup='true'
+                />
+            </div>
+        </Transition>
     )
 }
 

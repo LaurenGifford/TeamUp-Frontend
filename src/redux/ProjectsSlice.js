@@ -16,13 +16,11 @@ const projectsSlice = createSlice({
         editProject(state, action) {
             const index = state.findIndex(project => project.id === action.payload.id)
             state[index] = action.payload
-            // console.log(current(state))
         },
         deleteProject(state, action) {
             let edited = state.filter(project => project.id !== action.payload)
-            console.log(current(state))
             return edited
-        }
+        },
     },
 })
 

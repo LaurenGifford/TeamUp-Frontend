@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {Item, Card, Icon} from 'semantic-ui-react'
+import {Item, Card, Icon, Transition} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import Task from "./Task"
@@ -46,6 +46,7 @@ function ProjTasks({project, home, setSingleSelected}) {
 
     // color={colors[priority]}
     return (
+        <Transition visible={true} transitionOnMount={true} animation='vertical flip' duration={800}>
         <Card id={`${colors[priority]}`}  >
             <Card.Content >
                 <Card.Header >
@@ -62,6 +63,7 @@ function ProjTasks({project, home, setSingleSelected}) {
                 </Card.Description>
             </Card.Content>
         </Card>
+        </Transition>
     )
 }
 

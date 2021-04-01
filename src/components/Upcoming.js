@@ -1,4 +1,4 @@
-import {List, Segment, Icon} from "semantic-ui-react"
+import {List, Segment, Icon, Transition} from "semantic-ui-react"
 import Task from "./Task"
 import {useSelector } from "react-redux";
 
@@ -23,12 +23,14 @@ function Upcoming() {
     ))
 
     return (
-        <Segment className='section-background'>
-            <h4><Icon name='tasks'/>CURRENT</h4>
-            {tasks &&
-            <List items={renderTasks} />
-            }
-        </Segment>
+        <Transition visible={true} transitionOnMount={true} animation='vertical flip' duration={800}>
+            <Segment className='section-background' id='upcoming'>
+                <h4><Icon name='tasks'/>CURRENT</h4>
+                {tasks &&
+                <List items={renderTasks} />
+                }
+            </Segment>
+        </Transition>
     )
 }
 

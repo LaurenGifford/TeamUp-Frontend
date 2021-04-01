@@ -67,7 +67,7 @@ function AddTask({project, onTaskAdd}) {
             <h3 onClick={() => setShowForm(!showForm)}>
                 <Icon name='tasks'/> ADD TASK <Icon name='plus' />
             </h3>
-            <Transition visible={showForm} animation='fade' duration={600}>
+            <Transition visible={showForm} animation='slide down' show={600} hide={600}>
                 <Form onSubmit={handleSubmit} autoComplete="off" 
                 style={{padding: '20px', borderRadius: '10px'}}>
                     <Form.Group widths="equal">

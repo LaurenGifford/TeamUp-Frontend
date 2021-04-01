@@ -1,4 +1,4 @@
-import {Grid, Card, Icon} from "semantic-ui-react"
+import {Grid, Card, Icon, Transition} from "semantic-ui-react"
 import Task from "./Task"
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"
@@ -42,6 +42,7 @@ function TeamTasks({member, tasks, project}) {
 
     
     return (
+        <Transition visible={true} transitionOnMount={true} animation='vertical flip' duration={800}>
         <Card >
             <Card.Content >
                 <Card.Header >
@@ -56,6 +57,7 @@ function TeamTasks({member, tasks, project}) {
                 </Card.Description>
             </Card.Content>
         </Card>
+        </Transition>
     )
 }
 

@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom";
-import {Button, Header, Segment, Grid, Sidebar, Icon, Card, Form, Message, Modal } from "semantic-ui-react"
+import {Button, Header, Segment, Grid, Sidebar, Icon, Card, Form, Message, Transition } from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
@@ -59,6 +59,7 @@ function Projects({singleSelected, setSingleSelected}) {
 
     function ProjectsList() {
         return (
+            // <Transition visible={true} transitionOnMount={true} animation='slide down' duration={800}>
             <div id='all-projects'>
                 <Grid style={{padding: '60px'}}>
                 <Grid.Row >
@@ -112,6 +113,7 @@ function Projects({singleSelected, setSingleSelected}) {
                 </Grid.Row>
             </Grid>
         </div>
+        // </Transition>
         )
     }
 

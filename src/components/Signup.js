@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Form, Label, Dropdown, Icon} from 'semantic-ui-react'
+import {Form, Label, Dropdown, Icon, Transition} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
@@ -129,6 +129,7 @@ function Signup() {
     const { name, password, team_id } = formData;
 
     return (
+      <Transition visible={true} transitionOnMount={true} animation='zoom' duration={800}>
         <div className="login-signup-form">
           <h1><Icon name='signup'/> Signup</h1>
           <br></br>
@@ -136,10 +137,9 @@ function Signup() {
             <Form onSubmit={() => setDepartmentSelected(true)}>
             <h4 >Choose Your Department</h4>
             <Dropdown
-                // compact
                 selection
                 closeOnBlur
-                // fluid
+                fluid
                 placeholder="Select Department"
                 value={department}
                 options={departmentOptions}
@@ -188,6 +188,7 @@ function Signup() {
           </>}
           {errors.map(err => <p style={{ color: "red" }}>{err}</p>)}
       </div>
+      </Transition>
     )
 }
 

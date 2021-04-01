@@ -30,10 +30,10 @@ function Dashboard({setSingleSelected}) {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-                <Grid.Column width={3} >
+                <Grid.Column width={3} id='listed-tasks'>
                     {tasks.length !== 0 ? <>
-                    <Upcoming currentUser={currentUser}/> 
-                    <Suggested tasks={tasks}/>
+                    <Upcoming id='upcoming' currentUser={currentUser}/> 
+                    <Suggested id='suggested' tasks={tasks}/>
                      </> : 
                     <p>No Tasks to Show!</p> }
                 </Grid.Column>
