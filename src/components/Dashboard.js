@@ -35,7 +35,7 @@ function Dashboard({setSingleSelected}) {
                     <Upcoming id='upcoming' currentUser={currentUser}/> 
                     <Suggested id='suggested' tasks={tasks}/>
                      </> : 
-                    <p>No Tasks to Show!</p> }
+                    <strong>No Tasks to Show!</strong> }
                 </Grid.Column>
                 <Grid.Column  width={10} style={{paddingLeft: '60px'}}>
                     <Segment className='section-background'>

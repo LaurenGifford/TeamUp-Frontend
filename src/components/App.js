@@ -65,21 +65,25 @@ function App() {
   function Introduction() {
     return (
       <div id="intro">
-        <Segment id="welcome" raised vertical >
-          <h1>Welcome to TeamUp!</h1>
-          <p>A tasksharing app for teams to track projects, tasks, and teammate assignments. Get started today!</p>
-        </Segment>
-        <Menu id='login-menu' vertical>
-          <Menu.Item 
-          name='login'
-          >
-            <Link to="/login">Login <Icon name='sign in'/></Link>
-          </Menu.Item>
-          <Menu.Item
-          name='signup'>
-            <Link  to="/signup">Signup <Icon name='signup'/></Link>
-          </Menu.Item>
-        </Menu>
+          <Transition visible={true} transitionOnMount={true} animation='fly left' duration={1000}>
+            <Segment id="welcome" raised vertical >
+              <h1>Welcome to TeamUp!</h1>
+              <p>A tasksharing app for teams to track projects, tasks, and teammate assignments. Get started today!</p>
+            </Segment>
+          </Transition>
+          <Transition visible={true} transitionOnMount={true} animation='fly right' duration={1000}>
+            <Menu id='login-menu' vertical>
+              <Menu.Item 
+              name='login'
+              >
+                <Link to="/login">Login <Icon name='sign in'/></Link>
+              </Menu.Item>
+              <Menu.Item
+              name='signup'>
+                <Link  to="/signup">Signup <Icon name='signup'/></Link>
+              </Menu.Item>
+            </Menu>
+          </Transition>
       </div>
     )
   }

@@ -118,7 +118,7 @@ function ProjectPage({setSingleSelected}) {
 
             </div>
             <Grid>
-                <Grid.Column width={4}>
+                <Grid.Column width={3}>
                     <Unassigned projectId={parseInt(projectId)} />
                     <AddTask project={project}/>
                 </Grid.Column>
