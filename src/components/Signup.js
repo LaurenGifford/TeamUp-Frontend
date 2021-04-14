@@ -26,7 +26,7 @@ function Signup() {
   const [teams, setTeams] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/teams`)
+    fetch(`http://teamup-task-app.herokuapp.com/teams`)
     .then(r => r.json())
     .then(data => {
       setTeams(data)})
@@ -51,7 +51,7 @@ function Signup() {
         team_id: department
       }
 
-      fetch("http://localhost:3000/teammates", {
+      fetch("http://teamup-task-app.herokuapp.com/teammates", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ function Signup() {
 
   function handleGoogleLogin(response) {
     if (response.tokenId) {
-      fetch("http://localhost:3000/google_login", {
+      fetch("http://teamup-task-app.herokuapp.com/google_login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

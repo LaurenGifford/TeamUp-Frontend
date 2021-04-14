@@ -35,7 +35,7 @@ function ProjectPage({setSingleSelected}) {
     function handleEditProject(e) {
         e.preventDefault()
 
-        fetch(`http://localhost:3000/projects/${id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/projects/${id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ function ProjectPage({setSingleSelected}) {
         dispatch(deleteProject(id))
         dispatch(deleteUserProject(id))
 
-        fetch(`http://localhost:3000/projects/${id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/projects/${id}`, {
             method: "DELETE"})
             
         history.push('/projects')

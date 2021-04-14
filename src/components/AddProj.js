@@ -30,7 +30,7 @@ function AddProj({team,}) {
         }
         // onProjectAdd(formattedData)
 
-        fetch(`http://localhost:3000/projects`, {
+        fetch(`http://teamup-task-app.herokuapp.com/projects`, {
             method: "POST",
             headers: {
                 "Content-Type" : 'application/json'

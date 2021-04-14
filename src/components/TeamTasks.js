@@ -31,7 +31,7 @@ function TeamTasks({member, tasks, project}) {
     function deleteUrTask(taskId) {
         const task = allTasks.find(task => task.id === taskId)
         const urTask = task.ur_tasks.find(ur => ur.teammate_id === id)            
-        fetch(`http://localhost:3000/ur_tasks/${urTask.id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/ur_tasks/${urTask.id}`, {
             method: "DELETE"
         })
         getTasks()

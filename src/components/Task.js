@@ -89,7 +89,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
 
         
     function addUserTask(teammate_id) {
-        fetch(`http://localhost:3000/ur_tasks`, {
+        fetch(`http://teamup-task-app.herokuapp.com/ur_tasks`, {
             method: "POST",
             headers: {
                 "Content-Type" : 'application/json'
@@ -109,7 +109,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     }
     
     function handleTaskEdit(status) {
-        fetch(`http://localhost:3000/tasks/${id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/tasks/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : 'application/json'
@@ -125,7 +125,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     
     function handleUserPoints(morePoints) {
         
-        fetch(`http://localhost:3000/teammates/${currentUser.id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/teammates/${currentUser.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : 'application/json'
@@ -141,7 +141,7 @@ function Task({task, upcoming, completed, canAssign, onDelete, canDelete}) {
     function handleMyDelete() {
         setConfirmOpen(false)
         const urTask = ur_tasks.find(ur => ur.task_id === id)
-        fetch(`http://localhost:3000/ur_tasks/${urTask.id}`, {
+        fetch(`http://teamup-task-app.herokuapp.com/ur_tasks/${urTask.id}`, {
             method: "DELETE"
         })
         dispatch(deleteUserTask(urTask.task_id))

@@ -1,5 +1,5 @@
 export function getTasks() {
-    return fetch(`http://localhost:3000/tasks`)
+    return fetch(`http://teamup-task-app.herokuapp.com/tasks`)
       .then((r) => {
         return r.json().then((data) => {
           if (r.ok) return data;

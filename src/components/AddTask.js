@@ -34,7 +34,7 @@ function AddTask({project, onTaskAdd}) {
             due_date: dateValue,
         }
 
-        fetch(`http://localhost:3000/tasks`, {
+        fetch(`http://teamup-task-app.herokuapp.com/tasks`, {
             method: "POST",
             headers: {
                 "Content-Type" : 'application/json'
