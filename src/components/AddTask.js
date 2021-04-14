@@ -54,10 +54,6 @@ function AddTask({project, onTaskAdd}) {
         })
     }
 
-    function handleChangeRaw(val) {
-        console.log(val, dateValue)
-    }
-
     const {title, description} = formData
 
     return (
@@ -94,7 +90,6 @@ function AddTask({project, onTaskAdd}) {
                         isClearable
                         closeOnScroll={true}
                         onChange={(date) => setDateValue(date)} 
-                        onChangeRaw={event => handleChangeRaw(event.target.value)}
                         />
                         <br />
                     <Form.Button color='grey' content="Submit" />

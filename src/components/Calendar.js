@@ -1,12 +1,12 @@
 import { render } from 'react-dom'
-import {useSelector } from "react-redux";
+import {useSelector } from "react-redux"
 import { Transition} from 'semantic-ui-react'
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
 import { useEffect, useState } from 'react'
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 // import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
-import ApiCalendar from 'react-google-calendar-api';
+import ApiCalendar from 'react-google-calendar-api'
 
 
 function MyCalendar() {
@@ -28,7 +28,6 @@ function MyCalendar() {
 
         if (ApiCalendar.sign)
         ApiCalendar.listUpcomingEvents(10).then(({ result }: any) => {
-            console.log(result.items);
             const events = [];
             result.items.map(event => {
                 return events.push({

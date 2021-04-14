@@ -88,7 +88,6 @@ function Login() {
         }
       })
         .then((data) => {
-          console.log(data)
           if (data.teammate.id){
             const { teammate, token } = data;
             dispatch(showUser(teammate))

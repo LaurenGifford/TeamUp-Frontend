@@ -47,7 +47,6 @@ function ProjectPage({setSingleSelected}) {
     }
 
     function handleProjectDelete() {
-        console.log("delete?", id)
         dispatch(deleteProject(id))
         dispatch(deleteUserProject(id))
 

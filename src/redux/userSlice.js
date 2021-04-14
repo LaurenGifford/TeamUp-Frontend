@@ -10,7 +10,6 @@ const userSlice = createSlice({
         editUserTask(state, action) {
             let index = state.tasks.findIndex((task) => (task.id === action.payload.id))
             state.tasks[index] = action.payload
-            // console.log(current(state))
         },
         editUser(state, action) {
             state.points = action.payload
@@ -18,11 +17,9 @@ const userSlice = createSlice({
         deleteUserTask(state, action) {
             let edited = state.tasks.filter((task) => (task.id !== action.payload))
             state.tasks = edited
-            // console.log(current(state))
         },
         addTask(state, action) {
             state.tasks.push(action.payload)
-            console.log(current(state))
         },
         addProject(state, action) {
             state.projects.push(action.payload)

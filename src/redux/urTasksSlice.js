@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit"
+import { createSlice} from "@reduxjs/toolkit"
 
 const tasksSlice = createSlice({
     name: "urTasks",
@@ -9,7 +9,6 @@ const tasksSlice = createSlice({
         },
         addToUrTasks(state, action) {
             state.push(action.payload)
-            // console.log(current(state))
         }
     },
 })

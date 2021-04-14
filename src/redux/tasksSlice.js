@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit"
+import { createSlice} from "@reduxjs/toolkit"
 
 const tasksSlice = createSlice({
     name: "tasks",
@@ -9,12 +9,10 @@ const tasksSlice = createSlice({
         },
         addToTasks(state, action) {
             state.push(action.payload)
-            // console.log(current(state))
         },
         editTask(state, action) {
             const index = state.findIndex(task => task.id === action.payload.id)
             state[index] = action.payload
-            // console.log(current(state))
         }
     },
 })
