@@ -2,8 +2,6 @@ import {List, Segment, Icon, Transition} from "semantic-ui-react"
 import Task from "./Task"
 import {useSelector } from "react-redux";
 
-
-
 function Upcoming() {
     const currentUser = useSelector(state => state.user)
     const {id, name, points, team_id, tasks} = currentUser

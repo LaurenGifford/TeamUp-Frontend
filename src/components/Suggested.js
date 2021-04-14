@@ -1,4 +1,4 @@
-import {Rail, Segment, Icon, Transition} from "semantic-ui-react"
+import {Segment, Transition} from "semantic-ui-react"
 import {useState} from "react"
 import Task from "./Task"
 

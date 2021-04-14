@@ -1,9 +1,9 @@
 import {useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {editUser, editUserTask, deleteUserTask, addTask, addProject} from "../redux/userSlice"
-import {addToTasks, editTask} from "../redux/tasksSlice"
+import {editTask} from "../redux/tasksSlice"
 import {MdDescription} from "react-icons/md"
-import {Checkbox, Popup, Button, Header, Icon, Confirm, Form, Transition, Dropdown} from 'semantic-ui-react'
+import {Checkbox, Popup, Header, Icon, Confirm, Form, Dropdown} from 'semantic-ui-react'
 import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 
 
