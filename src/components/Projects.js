@@ -1,8 +1,7 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import {Switch, Route, useRouteMatch} from "react-router-dom";
-import {Button, Header, Segment, Grid, Sidebar, Icon, Card, Form, Message, Transition } from "semantic-ui-react"
+import {Grid, Card, Message} from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
-import {addToProjects, showProjects} from "../redux/ProjectsSlice"
 import ProjTasks from "./ProjTasks"
 import AddProj from "./AddProj"
 import ProjectPage from "./ProjectPage"

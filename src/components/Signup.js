@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
-import {Form, Label, Dropdown, Icon, Transition} from 'semantic-ui-react'
-import { useDispatch, useSelector } from "react-redux";
+import {Form, Dropdown, Icon, Transition} from 'semantic-ui-react'
+import { useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { getUser } from "../api/user";

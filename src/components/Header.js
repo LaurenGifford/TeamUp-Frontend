@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, {useState} from "react"
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { Button, Icon} from 'semantic-ui-react'
+import {Icon} from 'semantic-ui-react'
 import {showUser} from "../redux/userSlice"
 
 function Header({setCurrentUser, setSingleSelected}) {

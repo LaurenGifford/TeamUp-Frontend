@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import {useParams, useHistory} from "react-router-dom"
-import {Item, Form, TextArea, Grid, Card, Icon, Header, Modal, Button, Input, Confirm} from "semantic-ui-react"
+import {Form, TextArea, Grid, Card, Icon, Header, Modal, Button, Confirm} from "semantic-ui-react"
 import { useDispatch, useSelector } from "react-redux";
 import Unassigned from "./Unassigned"
 import AddTask from "./AddTask"

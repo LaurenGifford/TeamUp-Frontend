@@ -1,7 +1,6 @@
 import React, {useState} from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {addToTasks} from "../redux/tasksSlice"
-import {addTaskToProject} from "../redux/ProjectsSlice"
 import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -59,7 +58,7 @@ function AddTask({project, onTaskAdd}) {
         console.log(val, dateValue)
     }
 
-    const {title, description, due_date} = formData
+    const {title, description} = formData
 
     return (
         <Segment className="new-task">

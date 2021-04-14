@@ -1,10 +1,9 @@
 
 import React, {useEffect, useState} from "react"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import {Form, Dropdown, Label, Segment, Icon, Transition} from 'semantic-ui-react'
-import { getUser } from "../api/user";
+import {Form, Icon, Transition} from 'semantic-ui-react'
 import {showUser} from "../redux/userSlice"
 import {getTasks} from "../api/tasks"
 import {showTasks} from "../redux/tasksSlice"

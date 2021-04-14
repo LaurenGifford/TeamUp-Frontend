@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react"
-import {Item, Rail, Segment, Grid, Card, Header, Message} from "semantic-ui-react"
-import { useDispatch, useSelector } from "react-redux";
+import {useState} from "react"
+import {Segment, Grid, Card, Header, Message} from "semantic-ui-react"
+import { useSelector } from "react-redux";
 import Details from "./Details"
 import Upcoming from "./Upcoming"
 import Suggested from "./Suggested"

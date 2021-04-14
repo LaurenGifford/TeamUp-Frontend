@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {Item, Card, Icon, Transition} from 'semantic-ui-react'
+import {Card, Icon, Transition} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import Task from "./Task"

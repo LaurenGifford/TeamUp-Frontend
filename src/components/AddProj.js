@@ -1,6 +1,6 @@
 import React, {useState} from "react"
-import {Form, Transition, Icon, Segment, Header, Button, Modal} from 'semantic-ui-react'
-import { useDispatch, useSelector } from "react-redux";
+import {Form, Transition, Icon, Segment} from 'semantic-ui-react'
+import { useDispatch } from "react-redux";
 import {addToProjects} from "../redux/ProjectsSlice"
 
 function AddProj({team,}) {
