@@ -1,12 +1,10 @@
 import { render } from 'react-dom'
-import { useDispatch, useSelector } from "react-redux";
-import {Button, Transition} from 'semantic-ui-react'
+import {useSelector } from "react-redux";
+import { Transition} from 'semantic-ui-react'
 import moment from 'moment'
 import {Calendar, momentLocalizer} from 'react-big-calendar'
-import { GoogleLogin } from "react-google-login";
 import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import request from "superagent";
 // import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 import ApiCalendar from 'react-google-calendar-api';
 
