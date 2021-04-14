@@ -48,12 +48,12 @@ function Dashboard({setSingleSelected}) {
                     </Card.Group>
 
                     </Segment>
-                    {/* {messageVis &&
+                    {messageVis &&
                     <Message compact floating info
                     onDismiss={() => setMessageVis(false)}
-                    header='Curious about the project colors?'
-                    content='Red = Priority 9-10, Orange = Priority 7-8, Yellow = Priority 4-6, Blue = Priority 1-3'
-                    /> } */}
+                    header='Curious about the task colors? Monitor nearness to task due date!'
+                    content='Red = 24hrs, Yellow = 24-48hrs, Blue = more than 48hrs, Green = complete!'
+                    /> }
                 </Grid.Column>
             </Grid.Row>
         </Grid>

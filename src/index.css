@@ -82,7 +82,7 @@ header {
   margin: 1rem;
   padding-bottom: 1rem;
   text-decoration: none; 
-  display: inline-flex;
+  /* display: flex; */
   justify-content: space-between;
   background-color: var(--dark-gray);
   color: var(--light-gray);
