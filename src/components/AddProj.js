@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import {Form, Transition, Icon, Segment, Header, Button, Modal} from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
-import {AiOutlineArrowDown} from "react-icons/ai"
 import {addToProjects} from "../redux/ProjectsSlice"
 
 function AddProj({team,}) {
