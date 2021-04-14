@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import request from "superagent";
 // import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
-import ApiCalendar from 'react-google-calendar-api/';
+import ApiCalendar from 'react-google-calendar-api';
 
 
 function MyCalendar() {
