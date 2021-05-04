@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {Form, Dropdown, Icon, Transition} from 'semantic-ui-react'
+import {Form, Dropdown, Icon, Transition, Input} from 'semantic-ui-react'
 import { useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
@@ -50,7 +50,7 @@ function Signup() {
         ...formData,
         team_id: department
       }
-
+      console.log(formattedData)
       fetch("http://teamup-task-app.herokuapp.com/teammates", {
       method: "POST",
       headers: {
@@ -131,18 +131,21 @@ function Signup() {
           <br></br>
           {!departmentSelected ?
             <Form onSubmit={() => setDepartmentSelected(true)}>
-            <h4 >Choose Your Department</h4>
+            <h3 >Department</h3>
             <Dropdown
                 selection
                 closeOnBlur
                 fluid
-                placeholder="Select Department"
+                placeholder="Select Existing"
                 value={department}
                 options={departmentOptions}
                 onChange={(e, data) =>{
                   setDepartment(data.value)
                   }}>
             </Dropdown>
+            <br />
+            <Input placeholder="Create New" onChange={e => setDepartment(e.target.value)}/>
+            <br />
             <Form.Button color='grey' >Confirm</Form.Button>
           </Form>
           : <>
