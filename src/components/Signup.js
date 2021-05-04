@@ -17,6 +17,7 @@ function Signup() {
   const [errors, setErrors] = useState([])
   const [departmentSelected, setDepartmentSelected] = useState(false)
   const [department, setDepartment] = useState(0)
+  const [team, setTeam] = useState('')
   const [formData, setFormData] = useState({
       name: "",
       password: "",
@@ -48,7 +49,8 @@ function Signup() {
       e.preventDefault()
       const formattedData = {
         ...formData,
-        team_id: department
+        team_id: department,
+        team_name: team
       }
       console.log(formattedData)
       fetch("http://teamup-task-app.herokuapp.com/teammates", {
@@ -144,7 +146,7 @@ function Signup() {
                   }}>
             </Dropdown>
             <br />
-            <Input placeholder="Create New" onChange={e => setDepartment(e.target.value)}/>
+            <Input placeholder="Create New" onChange={e => setTeam(e.target.value)}/>
             <br />
             <Form.Button color='grey' >Confirm</Form.Button>
           </Form>
