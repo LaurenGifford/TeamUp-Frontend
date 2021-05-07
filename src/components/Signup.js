@@ -30,7 +30,9 @@ function Signup() {
     fetch(`http://teamup-task-app.herokuapp.com/teams`)
     .then(r => r.json())
     .then(data => {
-      setTeams(data)})
+      setTeams(data)
+      setDepartment(data.length + 1)
+    })
   }, [])
 
   const departmentOptions = teams.map(team => ({
@@ -133,7 +135,7 @@ function Signup() {
           <br></br>
           {!departmentSelected ?
             <Form onSubmit={() => setDepartmentSelected(true)}>
-            <h3 >Department</h3>
+            <h3 >Team</h3>
             <Dropdown
                 selection
                 closeOnBlur
